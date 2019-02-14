@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.Set;
 
 
 public class Order {
@@ -11,7 +11,7 @@ public class Order {
     private User user;
     private float total;
     
-    private Map<Product, Integer> products;
+    private Set<Product> products;
     
     public Order() {
 		
@@ -49,11 +49,11 @@ public class Order {
 		this.total = total;
 	}
 
-	public Map<Product, Integer> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Map<Product, Integer> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
     

@@ -2,7 +2,7 @@ package model;
 
 public class Review {
 	
-	private int id;
+	private Long id;
     private User user;
     private Product product;
     private String title;
@@ -13,11 +13,11 @@ public class Review {
     	this.feedback=0;
     }
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
