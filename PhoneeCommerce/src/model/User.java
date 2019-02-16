@@ -166,6 +166,10 @@ public class User {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+	
+	public void getType() {
+		return type;
+	}
 
 
 

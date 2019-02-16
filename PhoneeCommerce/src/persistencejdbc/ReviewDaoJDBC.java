@@ -44,6 +44,7 @@ public class ReviewDaoJDBC implements ReviewDAO {
 			statement.setString(3, r.getTitle());
 			statement.setString(4, r.getText());
 			statement.setString(5, r.getFeedback());
+			statement.setString(5, r.getId());
 			
 			statement.executeUpdate();
 		} catch (SQLException e) {

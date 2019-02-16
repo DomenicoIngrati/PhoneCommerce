@@ -1,4 +1,4 @@
-package persistencejdbc;
+Gpackage persistencejdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,6 +47,7 @@ public class OrderDaoJDBC implements OrderDAO {
 			statement.setDate(1, new java.sql.Date(secs));
 			statement.setString(2, o.getUser().getId());
 			statement.setString(3, o.getTotal());
+			statement.setString(4, o.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

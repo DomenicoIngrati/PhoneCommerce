@@ -21,14 +21,44 @@ public class WishListDaoJDBC implements WhishlistDAO {
 	}
 
 	@Override
-	public int delete(Wishlist wishlist) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(Wishlist w) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String delete = "delete FROM WishList WHERE id = ? ";
+			PreparedStatement statement = connection.prepareStatement(delete);
+			statement.setString(1, w.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 	}
 
 	@Override
-	public void update(Wishlist wishlist) {
-		// TODO Auto-generated method stub
+	public void update(Wishlist w) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update WishList SET title = ?, user_id = ?, products = ? WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, w.getTitle());
+			statement.setString(2, w.getUser().getId());
+			statement.setDate(3, w.getProducts());
+			statement.setString(4, w.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 
 	}
 
