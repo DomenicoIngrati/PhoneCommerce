@@ -5,7 +5,7 @@ import java.util.Set;
 import model.Product;
 import model.Wishlist;
 
-public interface WhishlistDAO {
+public interface WishlistDAO {
 	
 	public int create(Wishlist modelObject);
 

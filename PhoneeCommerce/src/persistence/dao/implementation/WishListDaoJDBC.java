@@ -4,9 +4,9 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 
 import model.Product;
 import model.Wishlist;
-import persistence.dao.WhishlistDAO;
+import persistence.dao.WishlistDAO;
 
-public class WishListDaoJDBC implements WhishlistDAO {
+public class WishListDaoJDBC implements WishlistDAO {
 
 	private DataSource dataSource;
 	

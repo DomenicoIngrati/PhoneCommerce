@@ -5,7 +5,7 @@ import persistence.dao.OrderDAO;
 import persistence.dao.ProductDAO;
 import persistence.dao.ReviewDAO;
 import persistence.dao.UserDAO;
-import persistence.dao.WhishlistDAO;
+import persistence.dao.WishlistDAO;
 
 public class PostgresDAOFactory extends DAOfactory {
 	
@@ -56,7 +56,7 @@ private static  DataSource dataSource;
 	}
 
 	@Override
-	public WhishlistDAO getDipartimentoDAO() {
+	public WishlistDAO getDipartimentoDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}

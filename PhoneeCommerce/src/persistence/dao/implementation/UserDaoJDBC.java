@@ -9,6 +9,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import model.User;
 import persistence.PersistenceException;
 import persistence.dao.UserDAO;
+import persistence.util.DAOUtility;
 
 public class UserDaoJDBC implements UserDAO {
 
@@ -40,12 +41,12 @@ public class UserDaoJDBC implements UserDAO {
 		    e.printStackTrace();
 		} finally {
 		    DAOUtility.close(connection);
-		    DAOUtility.close(statement);
+		    
 		}
 		return false;
 	}
 
-	//NON HO CAPITO COSA DEVE FARE QUESTO METODO!!
+	//NON HO CAPITO COSA DEVE FARE QUESTO METODO!! // Manco iooooo!
 	@Override
 	public User findReview(User user) {
 	}

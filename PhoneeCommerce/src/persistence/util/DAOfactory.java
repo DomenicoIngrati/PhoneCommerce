@@ -54,7 +54,7 @@ public abstract class DAOfactory {
 		
 		public abstract UserDAO getCorsoDiLaureaDAO();
 		
-		public abstract WhishlistDAO getDipartimentoDAO();
+		public abstract WishlistDAO getDipartimentoDAO();
 
 //		public abstract persistence.UtilDao getUtilDAO(); //???
 	

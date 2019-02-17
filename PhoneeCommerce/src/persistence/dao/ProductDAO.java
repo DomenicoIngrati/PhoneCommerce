@@ -21,6 +21,6 @@ public void create(Product modelObject);
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 
-	public int updatePriceProduct(Product product);
+	public void updatePriceProduct(Product product);
 	
 }

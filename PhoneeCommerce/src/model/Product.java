@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Product {
-	private int id;
+	private long id;
 	private String name;
 	private String description;
 	private float prize;
@@ -13,12 +13,12 @@ public class Product {
 		
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 
 	public String getName() {

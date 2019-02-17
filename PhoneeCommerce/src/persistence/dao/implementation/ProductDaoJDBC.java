@@ -4,29 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
+import java.util.Set;
 
 import model.Order;
 import model.Product;
 import model.ProductCategory;
-import model.Scuola;
-import model.Studente;
-import persistence.PersistenceException;
-import persistence.ScuolaDaoJDBC;
-import persistence.dao.Integer;
 import persistence.dao.OrderDAO;
 import persistence.dao.ProductDAO;
-import persistence.dao.ScuolaDao;
-import persistence.dao.Set;
+import persistence.util.*;
 
 public class ProductDaoJDBC implements ProductDAO {
 
 	private DataSource dataSource;
 	
-	public public ProductDaoJDBC(DataSource dataSource) {
+	public ProductDaoJDBC(DataSource dataSource) {
 		this.dataSource=dataSource;
 	}
 	
@@ -36,7 +30,7 @@ public class ProductDaoJDBC implements ProductDAO {
 		try {
 			String delete = "delete FROM Product WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, t.getId());
+			statement.setLong(1, t.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -54,13 +48,12 @@ public class ProductDaoJDBC implements ProductDAO {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
-			String update = "update Product SET name = ?, description = ?, prize = ?, reviews = ? WHERE id=?";
+			String update = "update Product SET name = ?, description = ?, prize = ?, WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, t.getName());
 			statement.setString(2, t.getDescription());
-			statement.setString(3, t.getPrize());
-			statement.setString(4, t.getReviews());
-			statement.setString(5, t.getId());
+			statement.setLong(3, (long) t.getPrize());
+			statement.setLong(5, t.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -80,24 +73,20 @@ public class ProductDaoJDBC implements ProductDAO {
 			PreparedStatement statement;
 			String query = "select * from Product where id = ?";
 			statement = connection.prepareStatement(query);
-			statement.setString(1, id);
+			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				product = new Product();
-				product.setId(result.getString("id"));				
-				product.setNome(result.getString("name"));
+				product.setId(result.getInt("id"));				
+				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrize(result.getString("prize"));
-				product.setReviews(result.getString("reviews"));
+				product.setPrize(result.getFloat("prize"));
+//				product.setReviews(result.getString("reviews"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}	
 		return product;
 	}
@@ -105,21 +94,21 @@ public class ProductDaoJDBC implements ProductDAO {
 	public Set<Product> findByPrice(float price){
 		
 		Connection connection = this.dataSource.getConnection();
-		Set<Product> products = new Set<Product>();
+		Set<Product> products = new HashSet<Product>();
 		try {
 			Product product;
 			PreparedStatement statement;
 			String query = "select * from Product where prize=?";
 			statement = connection.prepareStatement(query);
-			statement.setString(1, price);
+			statement.setFloat(1, price);
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				product = new Product();
-				product.setId(result.getString("id"));				
+				product.setId(result.getLong("id"));				
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrize(result.getString("prize"));
-				product.setReviews(result.getString("review"));
+				product.setPrize(result.getFloat("prize"));
+//				product.setReviews(result.getString("review"));
 				
 				products.add(product);
 			}
@@ -138,56 +127,54 @@ public class ProductDaoJDBC implements ProductDAO {
 	public Set<Product> findByCategory(ProductCategory idCategory,Integer maxRow){
 		
 		Connection connection = this.dataSource.getConnection();
-		Set<Product> products = new Set<Product>();
+		Set<Product> products = new HashSet<Product>();
 		try {
 			Product product;
 			PreparedStatement statement;
 			String query = "select * from Product where idCategory=?";
 			statement = connection.prepareStatement(query);
-			statement.setString(1, idCategory);
+			statement.setLong(1, idCategory.getId());
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				product = new Product();
-				product.setId(result.getString("id"));				
+				product.setId(result.getLong("id"));				
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrize(result.getString("prize"));
-				product.setReviews(result.getString("review"));
+				product.setPrize(result.getFloat("prize"));
+//				product.setReviews(result.getString("review"));
 				
 				products.add(product);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		}	 finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}
 		return products;
 	}
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 
-	public int updatePriceProduct(Product p) {
+	public void updatePriceProduct(Product p) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
 			String update = "update Product SET prize = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, p.getPrize());
-			statement.setString(2, p.getId());
+			statement.setFloat(1, p.getPrize());
+			statement.setLong(2, p.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}
+	}
+
+	@Override
+	public void create(Product modelObject) {
+	// TODO Auto-generated method stub
+	
 	}
 
 }
