@@ -12,6 +12,8 @@ import java.util.Set;
 import model.Order;
 import model.Product;
 import model.ProductCategory;
+import persistence.IdBroker;
+import persistence.PersistenceException;
 import persistence.dao.OrderDAO;
 import persistence.dao.ProductDAO;
 import persistence.util.*;
@@ -173,7 +175,38 @@ public class ProductDaoJDBC implements ProductDAO {
 
 	@Override
 	public void create(Product modelObject) {
-	// TODO Auto-generated method stub
+		
+		Connection connection = this.dataSource.getConnection();
+		try {
+			Long id = IdBroker.getId(connection);
+			corso.setCodice(id); 
+			String insert = "insert into corso(codice, nome) values (?,?)";
+			PreparedStatement statement = connection.prepareStatement(insert);
+			statement.setLong(1, corso.getCodice());
+			statement.setString(2, corso.getNome());
+
+			//connection.setAutoCommit(false);
+			//serve in caso gli studenti non siano stati salvati. Il DAO studente apre e chiude una transazione nuova.
+			//connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);			
+			statement.executeUpdate();
+			// salviamo anche tutti gli studenti del gruppo in CASACATA
+			this.updateStudenti(corso, connection);
+			//connection.commit();
+		} catch (SQLException e) {
+			if (connection != null) {
+				try {
+					connection.rollback();
+				} catch(SQLException excep) {
+					throw new PersistenceException(e.getMessage());
+				}
+			} 
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
 	
 	}
 
