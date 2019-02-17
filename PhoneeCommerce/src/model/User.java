@@ -16,9 +16,9 @@ public class User {
     private Type type;
     private Long coins;
 
-    private Map<Integer, Order> orders;
+    private Set<Order> orders;
     private Set<Wishlist> whishlists;
-    private Map<Integer, Review> reviews;
+    private Set<Review> reviews;
     private Cart cart;
 
     public User() {
@@ -28,8 +28,8 @@ public class User {
 	name = "";
 	surname = "";
 	coins = 0L;
-	orders = new HashMap<>();
-	reviews = new HashMap<>();
+	orders = new HashSet<>();
+	reviews = new HashSet<>();
 	whishlists = new HashSet<>();
 	type = Type.Customer;
 
@@ -121,13 +121,13 @@ public class User {
 
 
 
-	public Map<Integer, Order> getOrders() {
+	public Set<Order> getOrders() {
 		return orders;
 	}
 
 
 
-	public void setOrders(Map<Integer, Order> orders) {
+	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
 
@@ -145,13 +145,13 @@ public class User {
 
 
 
-	public Map<Integer, Review> getReviews() {
+	public Set<Review> getReviews() {
 		return reviews;
 	}
 
 
 
-	public void setReviews(Map<Integer, Review> reviews) {
+	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
 
@@ -167,7 +167,7 @@ public class User {
 		this.cart = cart;
 	}
 	
-	public void getType() {
+	public Type getType() {
 		return type;
 	}
 

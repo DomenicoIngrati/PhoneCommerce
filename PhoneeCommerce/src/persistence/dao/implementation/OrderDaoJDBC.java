@@ -1,25 +1,31 @@
-package persistencejdbc;
+package persistence.dao.implementation;
+Gpackage persistencejdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 
-import model.Review;
-import persistence.dao.ReviewDAO;
+import model.Order;
+import persistence.PersistenceException;
+import persistence.dao.OrderDAO;
 
-public class ReviewDaoJDBC implements ReviewDAO {
-
+public class OrderDaoJDBC implements OrderDAO {
+	
 	private DataSource dataSource;
 	
-	public ReviewDaoJDBC(DataSource dataSource) {
+	public OrderDaoJDBC(DataSource dataSource) {
 		this.dataSource=dataSource;
 	}
-	
+
 	@Override
-	public void delete(Review r) {
+	public void delete(Order o) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM Review WHERE id = ? ";
+			String delete = "delete FROM Order WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, r.getId());
+			statement.setString(1, o.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -33,19 +39,16 @@ public class ReviewDaoJDBC implements ReviewDAO {
 	}
 
 	@Override
-	public void update(Review r) {
+	public void update(Order o) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update Review SET user_id = ?, product_id = ?, title = ?, text = ?, feedback = ?  WHERE id=?";
+			String update = "update studente SET data = ?, user_id = ?, totale = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-
-			statement.setDate(1, r.getUser().getId());
-			statement.setString(2, r.getProduct().getId());
-			statement.setString(3, r.getTitle());
-			statement.setString(4, r.getText());
-			statement.setString(5, r.getFeedback());
-			statement.setString(5, r.getId());
-			
+			long secs = o.getDate().getTime();
+			statement.setDate(1, new java.sql.Date(secs));
+			statement.setString(2, o.getUser().getId());
+			statement.setString(3, o.getTotal());
+			statement.setString(4, o.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -56,7 +59,6 @@ public class ReviewDaoJDBC implements ReviewDAO {
 				throw new PersistenceException(e.getMessage());
 			}
 		}
-
 	}
 
 }

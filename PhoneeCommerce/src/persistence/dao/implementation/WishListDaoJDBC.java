@@ -1,4 +1,4 @@
-package persistencejdbc;
+package persistence.dao.implementation;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 

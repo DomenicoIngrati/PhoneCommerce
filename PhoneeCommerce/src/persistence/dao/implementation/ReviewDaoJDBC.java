@@ -1,30 +1,25 @@
-Gpackage persistencejdbc;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+package persistence.dao.implementation;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 
-import model.Order;
-import persistence.PersistenceException;
-import persistence.dao.OrderDAO;
+import model.Review;
+import persistence.dao.ReviewDAO;
 
-public class OrderDaoJDBC implements OrderDAO {
-	
+public class ReviewDaoJDBC implements ReviewDAO {
+
 	private DataSource dataSource;
 	
-	public OrderDaoJDBC(DataSource dataSource) {
+	public ReviewDaoJDBC(DataSource dataSource) {
 		this.dataSource=dataSource;
 	}
-
+	
 	@Override
-	public void delete(Order o) {
+	public void delete(Review r) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM Order WHERE id = ? ";
+			String delete = "delete FROM Review WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, o.getId());
+			statement.setString(1, r.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -38,16 +33,19 @@ public class OrderDaoJDBC implements OrderDAO {
 	}
 
 	@Override
-	public void update(Order o) {
+	public void update(Review r) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update studente SET data = ?, user_id = ?, totale = ? WHERE id=?";
+			String update = "update Review SET user_id = ?, product_id = ?, title = ?, text = ?, feedback = ?  WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			long secs = o.getDate().getTime();
-			statement.setDate(1, new java.sql.Date(secs));
-			statement.setString(2, o.getUser().getId());
-			statement.setString(3, o.getTotal());
-			statement.setString(4, o.getId());
+
+			statement.setDate(1, r.getUser().getId());
+			statement.setString(2, r.getProduct().getId());
+			statement.setString(3, r.getTitle());
+			statement.setString(4, r.getText());
+			statement.setString(5, r.getFeedback());
+			statement.setString(5, r.getId());
+			
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -58,6 +56,7 @@ public class OrderDaoJDBC implements OrderDAO {
 				throw new PersistenceException(e.getMessage());
 			}
 		}
+
 	}
 
 }
