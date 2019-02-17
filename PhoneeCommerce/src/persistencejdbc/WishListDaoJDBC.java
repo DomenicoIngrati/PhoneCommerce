@@ -16,8 +16,27 @@ public class WishListDaoJDBC implements WhishlistDAO {
 	
 	@Override
 	public int create(Wishlist modelObject) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection connection = null;
+		String query = null;
+		PreparedStatement statement = null;
+		try {
+			
+		    connection = dataSource.getConnection();
+		    query = "insert into Wishlist(Title,User_idUser)  values(?,?)";
+		    statement = connection.prepareStatement(query);
+		    statement.setString(1, modelObject.getTitle());
+		    statement.setInt(2, modelObject.getUser().getId());
+		    return statement.executeUpdate();
+
+		} catch (
+
+		SQLException e) {
+		    e.printStackTrace();
+		    return 0;
+		} finally {
+		    DAOUtility.close(connection);
+		    DAOUtility.close(statement);
+		}
 	}
 
 	@Override
@@ -63,9 +82,8 @@ public class WishListDaoJDBC implements WhishlistDAO {
 	}
 
 	@Override
+	//?????
 	public boolean updateWishProduct(Wishlist wishlist, Product ticket) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

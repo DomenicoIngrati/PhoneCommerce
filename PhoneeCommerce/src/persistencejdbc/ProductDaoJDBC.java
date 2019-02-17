@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 
@@ -97,15 +99,95 @@ public class ProductDaoJDBC implements ProductDAO {
 				throw new PersistenceException(e.getMessage());
 			}
 		}	
-		return studente;
+		return product;
 	}
 	
-	public Set<Product> findByPrice(float price);
+	public Set<Product> findByPrice(float price){
+		
+		Connection connection = this.dataSource.getConnection();
+		Set<Product> products = new Set<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from Product where prize=?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, price);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getString("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrize(result.getString("prize"));
+				product.setReviews(result.getString("review"));
+				
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		}	 finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return products;
+	}
 	
-	public Set<Product> findByCategory(ProductCategory idCategory,Integer maxRow);
+	public Set<Product> findByCategory(ProductCategory idCategory,Integer maxRow){
+		
+		Connection connection = this.dataSource.getConnection();
+		Set<Product> products = new Set<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from Product where idCategory=?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, idCategory);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getString("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrize(result.getString("prize"));
+				product.setReviews(result.getString("review"));
+				
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		}	 finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return products;
+	}
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 
-	public int updatePriceProduct(Product product);
+	public int updatePriceProduct(Product p) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
+			String update = "update Product SET prize = ? WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, p.getPrize());
+			statement.setString(2, p.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
 
 }

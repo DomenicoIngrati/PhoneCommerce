@@ -21,14 +21,33 @@ public class UserDaoJDBC implements UserDAO {
 	
 	@Override
 	public boolean create(User modelObject) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		String query = null;
+		PreparedStatement statement = null;
+		try {
+		    connection = dataSource.getConnection();
+		    query = "insert into User(username, password, email, name, surname, usertype, coins) values(?,?,?,?,?,?,?)";
+		    statement = connection.prepareStatement(query);
+		    statement.setString(1, modelObject.getUsername());
+		    statement.setString(2, modelObject.getPassword());
+		    statement.setString(3, modelObject.getEmail());
+		    statement.setString(4, modelObject.getName());
+		    statement.setString(5, modelObject.getSurname());
+		    statement.setString(6, modelObject.getType().name());
+		    statement.setLong(7, modelObject.getCoins());
+		    return (statement.executeUpdate() > 0) ? true : false;
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		} finally {
+		    DAOUtility.close(connection);
+		    DAOUtility.close(statement);
+		}
 		return false;
 	}
 
+	//NON HO CAPITO COSA DEVE FARE QUESTO METODO!!
 	@Override
 	public User findReview(User user) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
