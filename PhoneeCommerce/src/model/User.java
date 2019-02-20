@@ -7,14 +7,13 @@ import java.util.Set;
 
 public class User {
 
-    private int id;
+    private long id;
     private String username;
     private String password;
     private String email;
     private String name;
     private String surname;
     private Type type;
-    private Long coins;
 
     private Set<Order> orders;
     private Set<Wishlist> whishlists;
@@ -27,7 +26,6 @@ public class User {
 	email = "";
 	name = "";
 	surname = "";
-	coins = 0L;
 	orders = new HashSet<>();
 	reviews = new HashSet<>();
 	whishlists = new HashSet<>();
@@ -37,13 +35,13 @@ public class User {
 
 
 
-    public int getId() {
+    public long getId() {
 		return id;
 	}
 
 
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -108,19 +106,6 @@ public class User {
 	}
 
 
-
-	public Long getCoins() {
-		return coins;
-	}
-
-
-
-	public void setCoins(Long coins) {
-		this.coins = coins;
-	}
-
-
-
 	public Set<Order> getOrders() {
 		return orders;
 	}
@@ -176,7 +161,7 @@ public class User {
 	@Override
     public String toString() {
 	return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", name="
-		+ name + ", surname=" + surname + ", type=" + type + ", coins=" + coins + "]";
+		+ name + ", surname=" + surname + ", type=" + type + ", coins=" + "]";
     }
 
 }

@@ -2,7 +2,7 @@ package model;
 
 public class Review {
 	
-	private Long id;
+	private long id;
     private User user;
     private Product product;
     private String title;
