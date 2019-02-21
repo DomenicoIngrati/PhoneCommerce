@@ -14,7 +14,7 @@ public interface ProductCategoryDAO {
 	
 //	public Set<ProductCategory> findById(Long id);
 	
-	public Set<ProductCategory> findByName(String name);
+	public ProductCategory findByName(String name);
 	
 //	public Set<ProductCategory> showCategory();
 

@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import model.Order;
-import model.Product;
 import persistence.util.*;
 import persistence.dao.OrderDAO;
 
