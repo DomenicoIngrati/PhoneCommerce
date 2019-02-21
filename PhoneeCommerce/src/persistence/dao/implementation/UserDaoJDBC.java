@@ -153,7 +153,7 @@ public class UserDaoJDBC implements UserDAO {
 		User u = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from User where id = ?";
+			String query = "select * from User where email = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, email);
 			ResultSet result = statement.executeQuery();
@@ -165,19 +165,7 @@ public class UserDaoJDBC implements UserDAO {
 				u.setUsername(result.getString("username"));
 				u.setEmail(result.getString("email"));
 				u.setPassword(result.getString("password"));
-				
-				int dbType =  result.getInt("type");
-				if(dbType == 0)
-				{
-					u.setType(Type.Organizer);
-				}
-				else if (dbType == 1)
-				{
-					u.setType(Type.Customer);
-				}
-				
-				
-
+				u.setType(Type.Customer);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
