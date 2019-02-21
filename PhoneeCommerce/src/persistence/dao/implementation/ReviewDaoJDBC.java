@@ -1,7 +1,6 @@
 package persistence.dao.implementation;
 
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-import model.Order;
 import model.Review;
 import model.User;
 import persistence.dao.ReviewDAO;

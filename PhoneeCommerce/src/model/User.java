@@ -142,6 +142,12 @@ public class User {
 
 
 
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+
+
 	public Cart getCart() {
 		return cart;
 	}

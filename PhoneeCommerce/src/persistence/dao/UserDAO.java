@@ -4,22 +4,16 @@ import model.User;
 
 public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
 	
-	 	public boolean create(User modelObject); //Create
+	 	public void create(User user); //Create
 
-	    public User findById(Integer id); //Retrice
+	    public User findById(int id); //Retrice
 
 	    public User findByUsername(String username);
 
 	    public User findByEmail(String email);
 
-	    public User findOrder(Integer id);
+	    public void update(User user); //Update
 
-	    public User findReview(User user);
-	    
-//	    public Integer checkSellTicket(User user, Event event);
-
-	    public boolean update(User modelObject); //Update
-
-	    public void delete(User modelObject); //Delete
+	    public void delete(User user); //Delete
 
 }

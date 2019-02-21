@@ -2,15 +2,16 @@ package persistence.dao.implementation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-
+import model.Type;
 import model.User;
 import persistence.util.PersistenceException;
 import persistence.dao.UserDAO;
 import persistence.util.DAOUtility;
 import persistence.util.DataSource;
+import persistence.util.IdBroker;
 
 public class UserDaoJDBC implements UserDAO {
 
@@ -22,61 +23,34 @@ public class UserDaoJDBC implements UserDAO {
 	}
 	
 	@Override
-	public boolean create(User modelObject) {
+	public void create(User user) {
 		Connection connection = null;
 		String query = null;
 		PreparedStatement statement = null;
 		try {
+			
 		    connection = dataSource.getConnection();
-		    query = "insert into User(username, password, email, name, surname, usertype, coins) values(?,?,?,?,?,?,?)";
+		    
+		    long id = IdBroker.getId(connection);
+			user.setId(id);
+		    
+		    query = "insert into User(username, password, email, name, surname, usertype) values(?,?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
-		    statement.setString(1, modelObject.getUsername());
-		    statement.setString(2, modelObject.getPassword());
-		    statement.setString(3, modelObject.getEmail());
-		    statement.setString(4, modelObject.getName());
-		    statement.setString(5, modelObject.getSurname());
-		    statement.setString(6, modelObject.getType().name());
-//		    statement.setLong(7, modelObject.getCoins());
-		    return (statement.executeUpdate() > 0) ? true : false;
+		    statement.setString(1, user.getUsername());
+		    statement.setString(2, user.getPassword());
+		    statement.setString(3, user.getEmail());
+		    statement.setString(4, user.getName());
+		    statement.setString(5, user.getSurname());
+		    statement.setInt(6, user.getType().ordinal());
+		    statement.executeUpdate();
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		} finally {
 		    DAOUtility.close(connection);
 		    
 		}
-		return false;
 	}
 
-	//NON HO CAPITO COSA DEVE FARE QUESTO METODO!! // Manco iooooo!
-	@Override
-	public User findReview(User user) {
-	}
-
-	@Override
-	public boolean update(User u) {
-		Connection connection = this.dataSource.getConnection();
-		try {
-			String update = "update User SET username = ?, password = ?, email = ?, name = ?, surname = ?, type=?,coins=? WHERE matricola=?";
-			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, u.getUsername());
-			statement.setString(2, u.getPassword());
-			statement.setDate(3, u.getEmail());
-			statement.setString(4, u.getName());
-			statement.setString(5, u.getSurname());
-			statement.setString(6, u.getType());
-			statement.setString(7, u.getCoins());
-			statement.setString(8, u.getId());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
-		}
-	}
 
 	@Override
 	public void delete(User u) {
@@ -84,16 +58,154 @@ public class UserDaoJDBC implements UserDAO {
 		try {
 			String delete = "delete FROM User WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, u.getId());
+			statement.setLong(1, u.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
+			DAOUtility.close(connection);
+		}
+	}
+
+	@Override
+	public User findById(int id) {
+		Connection connection = this.dataSource.getConnection();
+		User u = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from User where id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				u = new User();
+				u.setId(result.getLong("id"));				
+				u.setName(result.getString("name"));
+				u.setSurname(result.getString("surname"));
+				u.setUsername(result.getString("username"));
+				u.setEmail(result.getString("email"));
+				u.setPassword(result.getString("password"));
+				
+				int dbType =  result.getInt("type");
+				if(dbType == 0)
+				{
+					u.setType(Type.Organizer);
+				}
+				else if (dbType == 1)
+				{
+					u.setType(Type.Customer);
+				}
+				
+				
+
 			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return u;
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		Connection connection = this.dataSource.getConnection();
+		User u = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from User where username = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, username);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				u = new User();
+				u.setId(result.getLong("id"));				
+				u.setName(result.getString("name"));
+				u.setSurname(result.getString("surname"));
+				u.setUsername(result.getString("username"));
+				u.setEmail(result.getString("email"));
+				u.setPassword(result.getString("password"));
+				
+				int dbType =  result.getInt("type");
+				if(dbType == 0)
+				{
+					u.setType(Type.Organizer);
+				}
+				else if (dbType == 1)
+				{
+					u.setType(Type.Customer);
+				}
+				
+				
+
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return u;
+	}
+
+	@Override
+	public User findByEmail(String email) {
+		Connection connection = this.dataSource.getConnection();
+		User u = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from User where id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, email);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				u = new User();
+				u.setId(result.getLong("id"));				
+				u.setName(result.getString("name"));
+				u.setSurname(result.getString("surname"));
+				u.setUsername(result.getString("username"));
+				u.setEmail(result.getString("email"));
+				u.setPassword(result.getString("password"));
+				
+				int dbType =  result.getInt("type");
+				if(dbType == 0)
+				{
+					u.setType(Type.Organizer);
+				}
+				else if (dbType == 1)
+				{
+					u.setType(Type.Customer);
+				}
+				
+				
+
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return u;
+	}
+
+	@Override
+	public void update(User user) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update User SET username = ?, name = ?, surname = ?, email = ?, password = ?  WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+
+			statement.setString(1, user.getUsername());
+			statement.setString(2, user.getName());
+			statement.setString(3, user.getSurname());
+			statement.setString(4, user.getEmail());
+			statement.setString(5, user.getPassword());
+			statement.setLong(6, user.getId());
+			
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
 		}
 	}
 

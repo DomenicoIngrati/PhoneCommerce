@@ -5,19 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
-import model.Order;
 import model.Product;
 import model.ProductCategory;
-//import persistence.IdBroker;
 import persistence.util.PersistenceException;
-import persistence.dao.OrderDAO;
 import persistence.dao.ProductDAO;
 import persistence.util.*;
-//import persistence.util.IdBroker;
 
 public class ProductDaoJDBC implements ProductDAO {
 
@@ -105,8 +99,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
-//				product.setReviews(result.getString("review"));
-				//category
 				
 				products.add(product);
 			}
@@ -137,8 +129,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
-//				product.setReviews(result.getString("review"));
-				//category?
 				
 				products.add(product);
 			}
@@ -150,7 +140,6 @@ public class ProductDaoJDBC implements ProductDAO {
 		return products;
 	}
 
-//	public Integer soldProduct(Event e, ProductCategory idCategory);
 
 	public void updatePriceProduct(Product p) {
 		Connection connection = this.dataSource.getConnection();
