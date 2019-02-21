@@ -3,7 +3,7 @@ package model;
 import java.util.Set;
 
 public class Wishlist {
-	private int id;
+	private long id;
     private String title;
     private User user;
     private Set <Product> products;
@@ -12,11 +12,11 @@ public class Wishlist {
 		
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
