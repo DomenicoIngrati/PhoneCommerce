@@ -1,9 +1,15 @@
 package persistence.dao.implementation;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import model.Review;
 import persistence.dao.ReviewDAO;
+import persistence.util.DataSource;
+import persistence.util.PersistenceException;
 
 public class ReviewDaoJDBC implements ReviewDAO {
 
@@ -19,7 +25,7 @@ public class ReviewDaoJDBC implements ReviewDAO {
 		try {
 			String delete = "delete FROM Review WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, r.getId());
+			statement.setLong(1, r.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

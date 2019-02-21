@@ -13,7 +13,7 @@ public void create(Product modelObject);
 	
 	public void update (Product t);
 	
-	public Product findById(Integer id);
+	public Product findById(Long id);
 	
 	public Set<Product> findByPrice(float price);
 	

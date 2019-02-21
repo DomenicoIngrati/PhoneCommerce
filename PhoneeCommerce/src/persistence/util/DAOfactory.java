@@ -46,15 +46,15 @@ public abstract class DAOfactory {
 		 * Method to obtain a DATA ACCESS OBJECT
 		 * for the datatype 'Student'
 		 */
-		public abstract OrderDAO getOrderDao();
+		public abstract OrderDAO getOrderDAO();
 		
-		public abstract ProductDAO getProductDao();
+		public abstract ProductDAO getProductDAO();
 		
-		public abstract ReviewDAO getReviewDao();
+		public abstract ReviewDAO getReviewDAO();
 		
-		public abstract UserDAO getUserDao();
+		public abstract UserDAO getUserDAO();
 		
-		public abstract WishlistDAO getWishlistDao();
+		public abstract WishlistDAO getWishlistDAO();
 
 //		public abstract persistence.UtilDao getUtilDAO(); //???
 	

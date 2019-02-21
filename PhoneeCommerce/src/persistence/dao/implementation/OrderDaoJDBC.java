@@ -74,7 +74,7 @@ public class OrderDaoJDBC implements OrderDAO {
 		    query = " INSERT INTO orders( date, user_id, totalcost) VALUES (?, ?, ?)";
 		    statement = connection.prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
 		    statement.setDate(1, new java.sql.Date(modelObject.getDate().getTime()));
-		    statement.setInt(2, modelObject.getUser().getId());
+		    statement.setLong(2, modelObject.getUser().getId());
 		    statement.setFloat(3, modelObject.getTotal());
 		    statement.executeUpdate();
 		    ResultSet rs = statement.getGeneratedKeys();

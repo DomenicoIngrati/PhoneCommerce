@@ -12,11 +12,12 @@ import java.util.Set;
 import model.Order;
 import model.Product;
 import model.ProductCategory;
-import persistence.IdBroker;
-import persistence.PersistenceException;
+//import persistence.IdBroker;
+import persistence.util.PersistenceException;
 import persistence.dao.OrderDAO;
 import persistence.dao.ProductDAO;
 import persistence.util.*;
+//import persistence.util.IdBroker;
 
 public class ProductDaoJDBC implements ProductDAO {
 
@@ -37,11 +38,7 @@ public class ProductDaoJDBC implements ProductDAO {
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}
 	}
 
@@ -50,25 +47,22 @@ public class ProductDaoJDBC implements ProductDAO {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
-			String update = "update Product SET name = ?, description = ?, prize = ?, WHERE id=?";
+			String update = "update Product SET name = ?, description = ?, price = ?, category = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, t.getName());
 			statement.setString(2, t.getDescription());
-			statement.setLong(3, (long) t.getPrize());
+			statement.setLong(3, (long) t.getPrice());
+			statement.setLong(4, t.getCategory().getId());
 			statement.setLong(5, t.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}
 	}
 	
-	public Product findById(Integer id) {
+	public Product findById(Long id) {
 		Connection connection = this.dataSource.getConnection();
 		Product product = null;
 		try {
@@ -82,7 +76,8 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setId(result.getInt("id"));				
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrize(result.getFloat("prize"));
+				product.setPrice(result.getFloat("prize"));
+				//category??
 //				product.setReviews(result.getString("reviews"));
 			}
 		} catch (SQLException e) {
@@ -100,7 +95,7 @@ public class ProductDaoJDBC implements ProductDAO {
 		try {
 			Product product;
 			PreparedStatement statement;
-			String query = "select * from Product where prize=?";
+			String query = "select * from Product where price=?";
 			statement = connection.prepareStatement(query);
 			statement.setFloat(1, price);
 			ResultSet result = statement.executeQuery();
@@ -109,19 +104,18 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setId(result.getLong("id"));				
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrize(result.getFloat("prize"));
+				product.setPrice(result.getFloat("price"));
 //				product.setReviews(result.getString("review"));
+				//category
 				
 				products.add(product);
 			}
-		} catch (SQLException e) {
+		}
+		catch (SQLException e){
 			throw new PersistenceException(e.getMessage());
-		}	 finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+		}
+		finally {
+			DAOUtility.close(connection);
 		}
 		return products;
 	}
@@ -142,8 +136,9 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setId(result.getLong("id"));				
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrize(result.getFloat("prize"));
+				product.setPrice(result.getFloat("price"));
 //				product.setReviews(result.getString("review"));
+				//category?
 				
 				products.add(product);
 			}
@@ -160,10 +155,10 @@ public class ProductDaoJDBC implements ProductDAO {
 	public void updatePriceProduct(Product p) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
-			String update = "update Product SET prize = ? WHERE id=?";
+			
+			String update = "update Product SET price = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setFloat(1, p.getPrize());
+			statement.setFloat(1, p.getPrice());
 			statement.setLong(2, p.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -174,24 +169,22 @@ public class ProductDaoJDBC implements ProductDAO {
 	}
 
 	@Override
-	public void create(Product modelObject) {
+	public void create(Product p) {
 		
 		Connection connection = this.dataSource.getConnection();
 		try {
 			Long id = IdBroker.getId(connection);
-			corso.setCodice(id); 
-			String insert = "insert into corso(codice, nome) values (?,?)";
+			p.setId(id); 
+			
+			String insert = "insert into Product(id, nome, description, price) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			statement.setLong(1, corso.getCodice());
-			statement.setString(2, corso.getNome());
-
-			//connection.setAutoCommit(false);
-			//serve in caso gli studenti non siano stati salvati. Il DAO studente apre e chiude una transazione nuova.
-			//connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);			
+			statement.setLong(1, p.getId());
+			statement.setString(2, p.getName());
+			statement.setString(3, p.getDescription());
+			statement.setFloat(4, p.getPrice());
+		
 			statement.executeUpdate();
-			// salviamo anche tutti gli studenti del gruppo in CASACATA
-			this.updateStudenti(corso, connection);
-			//connection.commit();
+
 		} catch (SQLException e) {
 			if (connection != null) {
 				try {
@@ -209,5 +202,6 @@ public class ProductDaoJDBC implements ProductDAO {
 		}
 	
 	}
+
 
 }

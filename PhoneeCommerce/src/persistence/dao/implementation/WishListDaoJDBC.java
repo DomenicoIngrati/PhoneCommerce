@@ -1,10 +1,11 @@
 package persistence.dao.implementation;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
+
 
 import model.Product;
 import model.Wishlist;
 import persistence.dao.WishlistDAO;
+import persistence.util.DataSource;
 
 public class WishListDaoJDBC implements WishlistDAO {
 

@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
+
 
 import model.User;
-import persistence.PersistenceException;
+import persistence.util.PersistenceException;
 import persistence.dao.UserDAO;
 import persistence.util.DAOUtility;
+import persistence.util.DataSource;
 
 public class UserDaoJDBC implements UserDAO {
 
@@ -35,7 +36,7 @@ public class UserDaoJDBC implements UserDAO {
 		    statement.setString(4, modelObject.getName());
 		    statement.setString(5, modelObject.getSurname());
 		    statement.setString(6, modelObject.getType().name());
-		    statement.setLong(7, modelObject.getCoins());
+//		    statement.setLong(7, modelObject.getCoins());
 		    return (statement.executeUpdate() > 0) ? true : false;
 		} catch (SQLException e) {
 		    e.printStackTrace();
