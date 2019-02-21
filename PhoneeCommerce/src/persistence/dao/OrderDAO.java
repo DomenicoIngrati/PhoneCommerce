@@ -14,7 +14,7 @@ public interface OrderDAO {
 
     public void update(Order o);
 
-    public Set<Product> findByUser(Integer id, Integer offset, Integer limit); //??
+    public Set<Order> findByUser(long id, Integer offset, Integer limit); //??
 
-    public Order findById(Integer id);
+    public Order findById(long id);
 }

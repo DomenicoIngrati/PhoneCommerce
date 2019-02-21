@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Order {
 	
-	private int id;
+	private long id;
     private Date date;
     private User user;
     private float total;
@@ -17,11 +17,11 @@ public class Order {
 		
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

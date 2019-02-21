@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -31,11 +32,7 @@ public class OrderDaoJDBC implements OrderDAO {
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}
 	}
 
@@ -43,65 +40,109 @@ public class OrderDaoJDBC implements OrderDAO {
 	public void update(Order o) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update studente SET data = ?, user_id = ?, totale = ? WHERE id=?";
+			String update = "update Order SET data = ?, user = ?, total = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			long secs = o.getDate().getTime();
 			statement.setDate(1, new java.sql.Date(secs));
 			statement.setLong(2, o.getUser().getId());
-			statement.setLong(3, (long) o.getTotal());
+			statement.setFloat(3, o.getTotal());
 			statement.setLong(4, o.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
+			DAOUtility.close(connection);
 		}
 	}
 
 	@Override
-	public void create(Order modelObject) {
-		Connection connection = null;
-		String query = null;
-		PreparedStatement statement = null;
-		Integer id=null;
-
+	public void create(Order o) {
+		Connection connection;
+		String query;
+		PreparedStatement statement;
+		connection = dataSource.getConnection();
+		
 		try {
-		    connection = dataSource.getConnection();
-		    query = " INSERT INTO orders( date, user_id, totalcost) VALUES (?, ?, ?)";
-		    statement = connection.prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
-		    statement.setDate(1, new java.sql.Date(modelObject.getDate().getTime()));
-		    statement.setLong(2, modelObject.getUser().getId());
-		    statement.setFloat(3, modelObject.getTotal());
+			
+			long id = IdBroker.getId(connection);
+			o.setId(id); 
+			
+		    
+		    query = " INSERT INTO Order(date, user, total, id) VALUES (?, ?, ?, ?)";
+		    
+		    statement = connection.prepareStatement(query);
+		    
+		    statement.setDate(1, new java.sql.Date(o.getDate().getTime()));
+		    statement.setLong(2, o.getUser().getId());
+		    statement.setFloat(3, o.getTotal());
+		    statement.setLong(4, o.getId());
 		    statement.executeUpdate();
-		    ResultSet rs = statement.getGeneratedKeys();
-	        if(rs.next())
-	        {
-	             id = rs.getInt(1);
-	        }
+		    
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		} finally {
 		    DAOUtility.close(connection);
-		    DAOUtility.close(statement);
 		}
 //		return id;
 		
 	}
 
 	@Override
-	public Set<Product> findByUser(Integer id, Integer offset, Integer limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Order> findByUser(long id, Integer offset, Integer limit) {
+		Connection connection = this.dataSource.getConnection();
+		Set<Order> orders = new HashSet<Order>();
+		try {
+			Order order;
+			PreparedStatement statement;
+			String query = "select * from Order where user=?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				order = new Order();
+				order.setId(result.getLong("id"));				
+				order.setDate(result.getDate("date"));
+				order.setTotal(result.getFloat("total"));
+				
+//				product.setReviews(result.getString("review"));
+				//category
+				
+				orders.add(order);
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return orders;
+
 	}
 
 	@Override
-	public Order findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Order findById(long id) {
+		Connection connection = this.dataSource.getConnection();
+		Order order = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from Order where id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				order = new Order();
+				order.setId(result.getInt("id"));				
+				order.setDate(result.getDate("date"));
+				order.setTotal(result.getFloat("total"));
+
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return order;
 	}
 
 }
