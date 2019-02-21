@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import model.Order;
+import model.Product;
 import persistence.util.*;
 import persistence.dao.OrderDAO;
 
@@ -76,12 +77,23 @@ public class OrderDaoJDBC implements OrderDAO {
 		    statement.setLong(4, o.getId());
 		    statement.executeUpdate();
 		    
+		    for(Product p : o.getProducts())
+		    {
+		    	PreparedStatement statement2;
+		    	String query2 = "INSERT INTO INCLUDE (product, order) VALUES (?, ?)";
+		    	statement2 = connection.prepareStatement(query2);
+		    	statement2.setLong(1, p.getId());
+		    	statement2.setLong(2, o.getId());
+		    	statement2.executeUpdate();
+		    }
+		    
+		    
+		    
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		} finally {
 		    DAOUtility.close(connection);
 		}
-//		return id;
 		
 	}
 
