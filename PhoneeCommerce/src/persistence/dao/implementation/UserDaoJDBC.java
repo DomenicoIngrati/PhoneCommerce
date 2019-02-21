@@ -31,17 +31,16 @@ public class UserDaoJDBC implements UserDAO {
 			
 		    connection = dataSource.getConnection();
 		    
-		    long id = IdBroker.getId(connection);
-			user.setId(id);
+//		    long id = IdBroker.getId(connection);
+//			user.setId(id);
 		    
-		    query = "insert into User(username, password, email, name, surname, usertype) values(?,?,?,?,?,?)";
+		    query = "insert into User (username, password, email, name, surname) values(?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, user.getUsername());
 		    statement.setString(2, user.getPassword());
 		    statement.setString(3, user.getEmail());
 		    statement.setString(4, user.getName());
 		    statement.setString(5, user.getSurname());
-		    statement.setInt(6, user.getType().ordinal());
 		    statement.executeUpdate();
 		} catch (SQLException e) {
 		    e.printStackTrace();
@@ -86,15 +85,7 @@ public class UserDaoJDBC implements UserDAO {
 				u.setEmail(result.getString("email"));
 				u.setPassword(result.getString("password"));
 				
-				int dbType =  result.getInt("type");
-				if(dbType == 0)
-				{
-					u.setType(Type.Organizer);
-				}
-				else if (dbType == 1)
-				{
-					u.setType(Type.Customer);
-				}
+				u.setType(Type.Customer);
 				
 				
 
@@ -125,16 +116,8 @@ public class UserDaoJDBC implements UserDAO {
 				u.setUsername(result.getString("username"));
 				u.setEmail(result.getString("email"));
 				u.setPassword(result.getString("password"));
-				
-				int dbType =  result.getInt("type");
-				if(dbType == 0)
-				{
-					u.setType(Type.Organizer);
-				}
-				else if (dbType == 1)
-				{
-					u.setType(Type.Customer);
-				}
+				u.setType(Type.Customer);
+
 				
 				
 

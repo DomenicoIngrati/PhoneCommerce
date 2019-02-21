@@ -29,16 +29,15 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 		
 		try {
 			
-			long id = IdBroker.getId(connection);
-			o.setId(id); 
+
 			
 		    
-		    query = " INSERT INTO ProductCategory(id, name) VALUES (?, ?)";
+		    query = " INSERT INTO ProductCategory ( name) VALUES ( ?)";
 		    
 		    statement = connection.prepareStatement(query);
 		    
-		    statement.setLong(1, o.getId());
-		    statement.setString(2, o.getName());
+//		    statement.setLong(1, o.getId());
+		    statement.setString(1, o.getName());
 
 		    statement.executeUpdate();
 		    

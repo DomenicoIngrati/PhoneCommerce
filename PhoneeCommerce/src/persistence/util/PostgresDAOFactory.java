@@ -27,7 +27,7 @@ private static  DataSource dataSource;
 			
 			
 			//DA SOSTITUIRE CON I NOSTRI DATI 
-			dataSource=new DataSource("jdbc:postgresql://localhost:5432/Segreteria2019","postgres","postgres");
+			dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
 		} 
 		catch (Exception e) {
 			System.err.println("PostgresDAOFactory.class: failed to load MySQL JDBC driver\n"+e);
