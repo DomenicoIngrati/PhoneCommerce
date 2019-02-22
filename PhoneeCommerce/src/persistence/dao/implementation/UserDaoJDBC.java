@@ -41,7 +41,7 @@ public class UserDaoJDBC implements UserDAO {
 		    statement.setString(3, user.getEmail());
 		    statement.setString(4, user.getName());
 		    statement.setString(5, user.getSurname());
-		    statement.setLong(5, user.getId());
+		    statement.setLong(6, user.getId());
 		    statement.executeUpdate();
 		} catch (SQLException e) {
 		    e.printStackTrace();

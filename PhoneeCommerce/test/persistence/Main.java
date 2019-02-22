@@ -29,20 +29,20 @@ public class Main {
 			user1.setUsername("billu");
 			user1.setPassword("gattuzza");
 			user1.setType(Type.Customer);
-//			userDAO.create(user1);
+			userDAO.create(user1);
 			
 			ProductCategoryDaoJDBC catDAO = new ProductCategoryDaoJDBC(dataSource);
 			ProductCategory xiaomi = new ProductCategory();
 			xiaomi.setName("XIAOMI");
 //			catDAO.create(xiaomi);
 			
-			AdministratorDaoJDBC adminDAO = new AdministratorDaoJDBC(dataSource);
-			User admin = new User();
-			admin.setEmail("admin@admin.it");
-			admin.setPassword("1234");
-			
-			adminDAO.create(admin);
-			
+//			AdministratorDaoJDBC adminDAO = new AdministratorDaoJDBC(dataSource);
+//			User admin = new User();
+//			admin.setEmail("admin@admin.it");
+//			admin.setPassword("1234");
+//			
+//			adminDAO.create(admin);
+//			
 //			Set<User> admins = new HashSet<User>();
 //			admins = adminDAO.findAll();
 //			
