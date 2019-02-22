@@ -43,7 +43,7 @@ public class ReviewDaoJDBC implements ReviewDAO {
 	public void update(Review r) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update Review SET user = ?, product = ?, title = ?, text = ?, feedback = ?  WHERE id=?";
+			String update = "update Review SET users = ?, product = ?, title = ?, text = ?, feedback = ?  WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 
 			statement.setLong(1, r.getUser().getId());
@@ -75,7 +75,7 @@ public class ReviewDaoJDBC implements ReviewDAO {
 			r.setId(id); 
 			
 		    
-		    query = " INSERT INTO Review(title, text, feedback, user, product, id) VALUES (?, ?, ?, ?, ?, ?)";
+		    query = " INSERT INTO Review(title, text, feedback, users, product, id) VALUES (?, ?, ?, ?, ?, ?)";
 		    
 		    statement = connection.prepareStatement(query);
 		    
@@ -128,7 +128,7 @@ public class ReviewDaoJDBC implements ReviewDAO {
 		try {
 			Review r;
 			PreparedStatement statement;
-			String query = "select * from Review where user=?";
+			String query = "select * from Review where users=?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, user.getId());
 			ResultSet result = statement.executeQuery();

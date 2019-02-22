@@ -39,12 +39,28 @@ public class WishListDaoJDBC implements WishlistDAO {
 		    long id = IdBroker.getId(connection);
 			w.setId(id);
 			
-		    query = "insert into Wishlist(title,user,id)  values(?,?,?)";
+		    query = "insert into Wishlist(title,users,id)  values(?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, w.getTitle());
-		    statement.setLong(2, w.getUser().getId());
+		    
+		    UserDaoJDBC userDAO = new UserDaoJDBC(dataSource);
+		    
+		    
+		    statement.setLong(2, userDAO.findByEmail(w.getUser().getEmail()).getId());
 		    statement.setLong(3, w.getId());
 		    statement.executeUpdate();
+		    
+		    if(w.getProducts() != null)
+		    {
+		    	for(Product p : w.getProducts())
+			    {
+			    	this.updateWishProduct(w, p);
+			    }
+		    }
+		    
+		    
+		    
+		    
 
 		} catch (
 
@@ -75,7 +91,7 @@ public class WishListDaoJDBC implements WishlistDAO {
 	public void update(Wishlist w) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update WishList SET title = ?, user = ? WHERE id=?";
+			String update = "update WishList SET title = ?, users = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, w.getTitle());
 			statement.setLong(2, w.getUser().getId());
@@ -121,7 +137,7 @@ public class WishListDaoJDBC implements WishlistDAO {
 		Wishlist w = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from Wishlist where user = ?";
+			String query = "select * from Wishlist where users = ?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
@@ -160,5 +176,25 @@ public class WishListDaoJDBC implements WishlistDAO {
 		}
 		
 	}
+	
+	@Override
+	public void deleteProductInWishlist(Wishlist wishlist, Product p) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "delete from CONTIENE where product = ? and wishlist = ?)";
+			PreparedStatement statement = connection.prepareStatement(update);
+
+			statement.setLong(2, wishlist.getId());
+			statement.setLong(1, p.getId());
+			
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}
+		
+	}
+
 
 }

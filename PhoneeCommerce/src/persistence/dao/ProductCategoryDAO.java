@@ -8,9 +8,13 @@ public interface ProductCategoryDAO {
 	
 	public void create(ProductCategory modelObject);
 	
-	public void delete(ProductCategory tc);
+	public void deleteById(ProductCategory tc);
 	
-	public void update(ProductCategory tc);
+	public void deleteByName(ProductCategory tc);
+	
+	public void updateName(ProductCategory tc);
+	
+	public void updateSubcategory(ProductCategory tc);
 	
 //	public Set<ProductCategory> findById(Long id);
 	

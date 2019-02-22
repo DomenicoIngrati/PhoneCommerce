@@ -15,27 +15,42 @@ public class Main {
 			Class.forName("org.postgresql.Driver").newInstance();
 			DataSource dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
 			
-			if(dataSource == null)
-			{
-				System.out.println("NULLL");
-			}
 			
 			UserDaoJDBC userDAO = new UserDaoJDBC(dataSource);
 			
 			User user1 = new User();
 			user1.setName("Rocco");
 			user1.setSurname("Palermiti");
-			user1.setEmail("gata@bau.it");
+			user1.setEmail("roky@ciao.it");
 			user1.setUsername("billu");
 			user1.setPassword("gattuzza");
 			user1.setType(Type.Customer);
-			userDAO.create(user1);
+//			userDAO.create(user1);
 			
-			ProductCategoryDaoJDBC catDAO = new ProductCategoryDaoJDBC(dataSource);
-			ProductCategory xiaomi = new ProductCategory();
-			xiaomi.setName("XIAOMI");
-//			catDAO.create(xiaomi);
+			WishListDaoJDBC wishDAO = new WishListDaoJDBC(dataSource);
+			Wishlist wish = new Wishlist();
+			wish.setTitle("telefoni");
+			wish.setUser(user1);
+//			wish.setId(25);
 			
+//			wishDAO.delete(wish);
+			
+//			
+//			ProductCategoryDaoJDBC catDAO = new ProductCategoryDaoJDBC(dataSource);
+//			ProductCategory apple = new ProductCategory();
+//			apple.setName("Apple");
+////			catDAO.create(xiaomi);
+//			
+//			ProductDaoJDBC productDAO = new ProductDaoJDBC(dataSource);
+//			Product p = new Product();
+//			p.setCategory(apple);
+//			p.setName("iPhone X");
+//			p.setDescription("telefono");
+//			p.setPrice(950);
+//			productDAO.create(p);
+//			
+//			
+//			
 //			AdministratorDaoJDBC adminDAO = new AdministratorDaoJDBC(dataSource);
 //			User admin = new User();
 //			admin.setEmail("admin@admin.it");
@@ -50,7 +65,9 @@ public class Main {
 //			{
 //				adminDAO.delete(ad);
 //			}
-//////			
+//////		
+			
+			
 					
 			
 			

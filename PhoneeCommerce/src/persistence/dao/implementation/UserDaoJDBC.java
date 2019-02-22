@@ -23,25 +23,25 @@ public class UserDaoJDBC implements UserDAO {
 	}
 	
 	@Override
-	public void create(User user) {
-		Connection connection = null;
-		String query = null;
-		PreparedStatement statement = null;
+	public void create(User u) {
+		Connection connection = dataSource.getConnection();;
+		String query;
+		PreparedStatement statement;
 		try {
 			
-		    connection = dataSource.getConnection();
+		    
 		    
 		    long id = IdBroker.getId(connection);
-			user.setId(id);
-		    
-		    query = "insert into User (username, password, email, name, surname, id) values(?,?,?,?,?,?)";
+			u.setId(id);
+
+		    query = "insert into users (username, password, email, name, surname, id) values (?,?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
-		    statement.setString(1, user.getUsername());
-		    statement.setString(2, user.getPassword());
-		    statement.setString(3, user.getEmail());
-		    statement.setString(4, user.getName());
-		    statement.setString(5, user.getSurname());
-		    statement.setLong(6, user.getId());
+		    statement.setString(1, u.getUsername());
+		    statement.setString(2, u.getPassword());
+		    statement.setString(3, u.getEmail());
+		    statement.setString(4, u.getName());
+		    statement.setString(5, u.getSurname());
+		    statement.setLong(6, u.getId());
 		    statement.executeUpdate();
 		} catch (SQLException e) {
 		    e.printStackTrace();
@@ -56,9 +56,9 @@ public class UserDaoJDBC implements UserDAO {
 	public void delete(User u) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM User WHERE id = ? ";
+			String delete = "delete FROM users WHERE email = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setLong(1, u.getId());
+			statement.setString(1, u.getEmail());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -73,7 +73,7 @@ public class UserDaoJDBC implements UserDAO {
 		User u = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from User where id = ?";
+			String query = "select * from users where id = ?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
@@ -105,7 +105,7 @@ public class UserDaoJDBC implements UserDAO {
 		User u = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from User where username = ?";
+			String query = "select * from users where username = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
@@ -137,7 +137,7 @@ public class UserDaoJDBC implements UserDAO {
 		User u = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from User where email = ?";
+			String query = "select * from users where email = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, email);
 			ResultSet result = statement.executeQuery();
@@ -163,7 +163,7 @@ public class UserDaoJDBC implements UserDAO {
 	public void update(User user) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update User SET username = ?, name = ?, surname = ?, email = ?, password = ?  WHERE id=?";
+			String update = "update users SET username = ?, name = ?, surname = ?, email = ?, password = ?  WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 
 			statement.setString(1, user.getUsername());

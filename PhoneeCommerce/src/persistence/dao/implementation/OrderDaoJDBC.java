@@ -39,7 +39,7 @@ public class OrderDaoJDBC implements OrderDAO {
 	public void update(Order o) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update Order SET data = ?, user = ?, total = ? WHERE id=?";
+			String update = "update Order SET data = ?, users = ?, total = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			long secs = o.getDate().getTime();
 			statement.setDate(1, new java.sql.Date(secs));
@@ -67,7 +67,7 @@ public class OrderDaoJDBC implements OrderDAO {
 			o.setId(id); 
 			
 		    
-		    query = " INSERT INTO Order(date, user, total, id) VALUES (?, ?, ?, ?)";
+		    query = " INSERT INTO Order(date, users, total, id) VALUES (?, ?, ?, ?)";
 		    
 		    statement = connection.prepareStatement(query);
 		    
@@ -108,7 +108,7 @@ public class OrderDaoJDBC implements OrderDAO {
 		try {
 			Order order;
 			PreparedStatement statement;
-			String query = "select * from Order where user=?";
+			String query = "select * from Order where users=?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();

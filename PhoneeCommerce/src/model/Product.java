@@ -6,7 +6,7 @@ public class Product {
 	private long id;
 	private String name;
 	private String description;
-	private float price;
+	private double price;
 	private ArrayList<Review> reviews;
 	private ProductCategory category;
 	
@@ -46,12 +46,12 @@ public class Product {
 		this.description = description;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 
 	public ArrayList<Review> getReviews() {

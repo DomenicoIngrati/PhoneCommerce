@@ -17,6 +17,8 @@ public interface WishlistDAO {
 
     public Set<Wishlist> findByUser(Integer id);
 
-    public void updateWishProduct(Wishlist wishlist, Product ticket);
+    public void updateWishProduct(Wishlist wishlist, Product p);
+    
+    public void deleteProductInWishlist(Wishlist wishlist, Product p);
 
 }

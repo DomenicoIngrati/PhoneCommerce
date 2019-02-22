@@ -45,8 +45,17 @@ public class ProductDaoJDBC implements ProductDAO {
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, t.getName());
 			statement.setString(2, t.getDescription());
-			statement.setFloat(3,  t.getPrice());
-			statement.setLong(4, t.getCategory().getId());
+			statement.setDouble(3,  t.getPrice());
+			
+			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
+			ProductCategory pcat = cat.findByName(t.getCategory().getName());
+			
+			if(pcat == null)
+			{
+				cat.create(t.getCategory());
+			}
+			
+			statement.setLong(4, pcat.getId());
 			statement.setLong(5, t.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -147,7 +156,7 @@ public class ProductDaoJDBC implements ProductDAO {
 			
 			String update = "update Product SET price = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setFloat(1, p.getPrice());
+			statement.setDouble(1, p.getPrice());
 			statement.setLong(2, p.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -165,12 +174,26 @@ public class ProductDaoJDBC implements ProductDAO {
 			Long id = IdBroker.getId(connection);
 			p.setId(id); 
 			
-			String insert = "insert into Product(id, nome, description, price) values (?,?,?,?)";
+			String insert = "insert into Product(id, name, description, price, category) values (?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
+			
+			
+			
 			statement.setLong(1, p.getId());
 			statement.setString(2, p.getName());
 			statement.setString(3, p.getDescription());
-			statement.setFloat(4, p.getPrice());
+			statement.setDouble(4, p.getPrice());
+			
+			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
+			ProductCategory pcat = cat.findByName(p.getCategory().getName());
+			
+			if(pcat == null)
+			{
+				cat.create(p.getCategory());
+				pcat = cat.findByName(p.getCategory().getName());
+			}
+			
+			statement.setLong(5, pcat.getId());
 		
 			statement.executeUpdate();
 

@@ -50,10 +50,10 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 	}
 
 	@Override
-	public void delete(ProductCategory tc) {
+	public void deleteById(ProductCategory tc) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM ProductCategory WHERE id = ? ";
+			String delete = "delete FROM ProductCategory WHERE name = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setLong(1, tc.getId());
 			statement.executeUpdate();
@@ -64,15 +64,59 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 		}
 		
 	}
+	
+	@Override
+	public void deleteByName(ProductCategory tc) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String delete = "delete FROM ProductCategory WHERE name = ? ";
+			PreparedStatement statement = connection.prepareStatement(delete);
+			statement.setString(1, tc.getName());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}
+		
+	}
 
 	@Override
-	public void update(ProductCategory tc) {
+	public void updateName(ProductCategory tc) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String update = "update ProductCategory SET name = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 	
 			statement.setString(1, tc.getName());
+			statement.setLong(2, tc.getId());
+
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}
+		
+	}
+	
+	@Override
+	public void updateSubcategory(ProductCategory tc) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update ProductCategory SET subcategory = ? WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
+			ProductCategory pcat = cat.findByName(tc.getAnchestorCategory().getName());
+			
+			if(pcat == null)
+			{
+				cat.create(tc.getAnchestorCategory());
+				pcat = cat.findByName(tc.getAnchestorCategory().getName());
+			}
+			
+			statement.setLong(1, pcat.getId());
 			statement.setLong(2, tc.getId());
 
 			statement.executeUpdate();
@@ -90,7 +134,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 		ProductCategory category = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from Order where name = ?";
+			String query = "select * from ProductCategory where name = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, name);
 			ResultSet result = statement.executeQuery();
