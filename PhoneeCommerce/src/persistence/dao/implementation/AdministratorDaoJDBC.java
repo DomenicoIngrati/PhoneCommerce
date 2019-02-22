@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 
 import model.Order;
@@ -30,11 +31,12 @@ public class AdministratorDaoJDBC implements AdministratorDAO {
 		String query = null;
 		PreparedStatement statement = null;
 		try {
-			
-			long id = IdBroker.getId(connection);
+
+		    connection = dataSource.getConnection();
+		    
+		    long id = IdBroker.getId(connection);
 			admin.setId(id);
 			
-		    connection = dataSource.getConnection();
 		    query = "insert into Administrator(email, password, id)  values(?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, admin.getEmail());
@@ -193,6 +195,33 @@ public class AdministratorDaoJDBC implements AdministratorDAO {
 			DAOUtility.close(connection);
 		}
 		
+	}
+
+	@Override
+	public Set<User> findAll() {
+		Connection connection = this.dataSource.getConnection();
+		Set<User> admins = new HashSet<User>();
+		try {
+			PreparedStatement statement;
+			String query = "select * from Administrator";
+			statement = connection.prepareStatement(query);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				User u = new User();
+				u.setId(result.getLong("id"));				
+				u.setEmail(result.getString("email"));
+				u.setPassword(result.getString("password"));
+				u.setType(Type.Organizer);
+				
+				admins.add(u);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return admins;
 	}
 
 }

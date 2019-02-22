@@ -18,6 +18,8 @@ public interface AdministratorDAO {
 
     public User findById(long id);
     
+    public Set<User> findAll();
+    
     public void putProduct(User admin, Product product);
     
 //    public void putProducts(Set <Product> product);

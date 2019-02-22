@@ -31,16 +31,17 @@ public class UserDaoJDBC implements UserDAO {
 			
 		    connection = dataSource.getConnection();
 		    
-//		    long id = IdBroker.getId(connection);
-//			user.setId(id);
+		    long id = IdBroker.getId(connection);
+			user.setId(id);
 		    
-		    query = "insert into User (username, password, email, name, surname) values(?,?,?,?,?)";
+		    query = "insert into User (username, password, email, name, surname, id) values(?,?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, user.getUsername());
 		    statement.setString(2, user.getPassword());
 		    statement.setString(3, user.getEmail());
 		    statement.setString(4, user.getName());
 		    statement.setString(5, user.getSurname());
+		    statement.setLong(5, user.getId());
 		    statement.executeUpdate();
 		} catch (SQLException e) {
 		    e.printStackTrace();

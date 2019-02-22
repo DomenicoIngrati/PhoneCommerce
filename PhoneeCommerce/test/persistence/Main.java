@@ -1,5 +1,8 @@
 package persistence;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import model.*;
 import persistence.dao.implementation.*;
 
@@ -11,6 +14,11 @@ public class Main {
 		try {
 			Class.forName("org.postgresql.Driver").newInstance();
 			DataSource dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
+			
+			if(dataSource == null)
+			{
+				System.out.println("NULLL");
+			}
 			
 			UserDaoJDBC userDAO = new UserDaoJDBC(dataSource);
 			
@@ -26,7 +34,26 @@ public class Main {
 			ProductCategoryDaoJDBC catDAO = new ProductCategoryDaoJDBC(dataSource);
 			ProductCategory xiaomi = new ProductCategory();
 			xiaomi.setName("XIAOMI");
-			catDAO.create(xiaomi);
+//			catDAO.create(xiaomi);
+			
+			AdministratorDaoJDBC adminDAO = new AdministratorDaoJDBC(dataSource);
+			User admin = new User();
+			admin.setEmail("admin@admin.it");
+			admin.setPassword("1234");
+			
+			adminDAO.create(admin);
+			
+//			Set<User> admins = new HashSet<User>();
+//			admins = adminDAO.findAll();
+//			
+//			for(User ad : admins)
+//			{
+//				adminDAO.delete(ad);
+//			}
+//////			
+					
+			
+			
 			
 			
 					

@@ -14,6 +14,7 @@ import model.Wishlist;
 import persistence.dao.WishlistDAO;
 import persistence.util.DAOUtility;
 import persistence.util.DataSource;
+import persistence.util.IdBroker;
 import persistence.util.PersistenceException;
 
 public class WishListDaoJDBC implements WishlistDAO {
@@ -31,11 +32,18 @@ public class WishListDaoJDBC implements WishlistDAO {
 		PreparedStatement statement = null;
 		try {
 			
+			
+			
 		    connection = dataSource.getConnection();
-		    query = "insert into Wishlist(title,user)  values(?,?)";
+		    
+		    long id = IdBroker.getId(connection);
+			w.setId(id);
+			
+		    query = "insert into Wishlist(title,user,id)  values(?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, w.getTitle());
 		    statement.setLong(2, w.getUser().getId());
+		    statement.setLong(3, w.getId());
 		    statement.executeUpdate();
 
 		} catch (

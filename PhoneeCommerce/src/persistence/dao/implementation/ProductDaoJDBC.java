@@ -45,7 +45,7 @@ public class ProductDaoJDBC implements ProductDAO {
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, t.getName());
 			statement.setString(2, t.getDescription());
-			statement.setLong(3, (long) t.getPrice());
+			statement.setFloat(3,  t.getPrice());
 			statement.setLong(4, t.getCategory().getId());
 			statement.setLong(5, t.getId());
 			statement.executeUpdate();
@@ -112,7 +112,7 @@ public class ProductDaoJDBC implements ProductDAO {
 		return products;
 	}
 	
-	public Set<Product> findByCategory(ProductCategory idCategory,Integer maxRow){
+	public Set<Product> findByCategory(ProductCategory idCategory){
 		
 		Connection connection = this.dataSource.getConnection();
 		Set<Product> products = new HashSet<Product>();

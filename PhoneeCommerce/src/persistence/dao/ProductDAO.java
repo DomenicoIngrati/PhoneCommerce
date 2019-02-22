@@ -17,7 +17,7 @@ public void create(Product modelObject);
 	
 	public Set<Product> findByPrice(float price);
 	
-	public Set<Product> findByCategory(ProductCategory idCategory,Integer maxRow);
+	public Set<Product> findByCategory(ProductCategory idCategory);
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 

@@ -22,21 +22,20 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 	
 	@Override
 	public void create(ProductCategory o) {
-		Connection connection;
+		Connection connection = dataSource.getConnection();
 		String query;
 		PreparedStatement statement;
-		connection = dataSource.getConnection();
 		
 		try {
 			
-
+			long id = IdBroker.getId(connection);
+			o.setId(id);
 			
-		    
 		    query = " INSERT INTO ProductCategory ( name) VALUES ( ?)";
 		    
 		    statement = connection.prepareStatement(query);
 		    
-//		    statement.setLong(1, o.getId());
+		    statement.setLong(1, o.getId());
 		    statement.setString(1, o.getName());
 
 		    statement.executeUpdate();
@@ -74,6 +73,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 			PreparedStatement statement = connection.prepareStatement(update);
 	
 			statement.setString(1, tc.getName());
+			statement.setLong(2, tc.getId());
 
 			statement.executeUpdate();
 		} catch (SQLException e) {
