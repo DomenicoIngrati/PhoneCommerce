@@ -54,7 +54,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">FAQ</a>
+            <a class="nav-link" href="FAQ.html">FAQ</a>
           </li>
         </ul>
 
@@ -66,10 +66,8 @@
     </nav>
 
   <!-- FINE NAVBAR-->
-  
-  
-  <!-- CAROSELLO -->
-
+ 
+ <!-- CAROSELLO -->
 <div class="bd-example">
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -78,22 +76,25 @@
       <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active"  style="background-image: url(https://source.unsplash.com/category/nature/);">
+      <div class="carousel-item active" style="background-image: url(https://source.unsplash.com/category/nature/);">
+        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>IPHONE XS</h5>
-          <p>Che cazzo campi a fare se non ti compri un Iphone XS nel nostro sito sfigato di merda comprati il nostro telefono</p>
+          <h5>Offerta n1</h5>
+          <p>Desing, potenza e cancioffoli allo stato puro.</p>
         </div>
       </div>
-      <div class="carousel-item"  style="background-image: url(https://source.unsplash.com/category/nature/);">
+      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/nature/);">
+        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>XIAOMI 8</h5>
-          <p>Stupida bitch che minchia di chinese di merda sei se non ti compri lo Xiamo 8 prodotto direttamente dai bimbi schiavi egiziani </p>
+          <h5>Offerta n2</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
-      <div class="carousel-item"  style="background-image: url(https://source.unsplash.com/category/nature/);">
+      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/nature/);">
+        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>SAMSUNG S9</h5>
-          <p>Si quanto cazzo sei British senza il Samsung S9? Siamo qui per farti diventare la persona più sfigata al mondo che compra ancora i Samsung.</p>
+          <h5>Offerta n3</h5>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
         </div>
       </div>
     </div>
@@ -108,46 +109,57 @@
   </div>
 </div>
 
-  <!-- FINE CAROSELLO -->
+ <!-- FINE CAROSELLO -->
   
  
  <div class="container">
  
- <h2 class="newProductString">Scopri i nuovi prodotti</h2>
+ 	<h2 class="newProductString">Scopri i nuovi prodotti</h2>
         
  
+ <!--  RIGA NUOVI PRODOTTI  -->
     <div class="row big-padding">
-
-      <div class="col-md-3 col-sm-6">
-        <h3> Title </h3>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+      <div class="col-md-4 col-sm-4">
+      	<div class="card" style="width: 20rem;">
+			  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <h5 class="card-title">IPHONE XS</h5>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <a href="#" class="btn btn-primary">Scopri di più ></a>
+			  </div>
+		</div>
       </div>
 
 
 
-      <div class="col-md-3 col-sm-6">
-      <h3> Title </h3>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+      <div class="col-md-4 col-sm-4 col-sm-offset-2" >    
+	       	<div class="card" style="width: 20rem;">
+				  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">HUAWEI P15</h5>
+				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				    <a href="#" class="btn btn-primary">Scopri di più ></a>
+				  </div>
+			</div>
       </div>
 
 
-      <div class="col-md-3 col-sm-6">
-      <h3> Title </h3>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+      <div class="col-md-4 col-sm-4 col-sm-offset-2">
+	       	<div class="card" style="width: 20rem;">
+			  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <h5 class="card-title">XIAOMI Mi29</h5>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <a href="#" class="btn btn-primary">Scopri di più ></a>
+			  </div>
+			</div>
       </div>
+	</div>
 
-
-      <div class="col-md-3 col-sm-6">
-      <h3> Title </h3>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-      </div>
-
-    </div>
-    
+<!--FINE RIGA NUOVI PRODOTTI  -->
+	
 </div>
-  
-  
-  
+    
 
     </body>
 </html>
