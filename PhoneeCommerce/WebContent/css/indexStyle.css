@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
-.carousel-inner > .item{
-  min-height: 600px; /* Modifichiamo l'altezza del carosello  */
+.carousel-inner > .carousel-item{
+  min-height: 500px; /* Modifichiamo l'altezza del carosello  */
   background-size: cover; /* Facciamo in modo che le immagini occupino tutto il background del carousel sia in larghezza che in altezza */
   background-position: center center /* Centriamo la posizione del background centrata sia orizzontalmente che verticalmente */
 }

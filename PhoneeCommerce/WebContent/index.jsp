@@ -79,21 +79,18 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active"  style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>IPHONE XS</h5>
           <p>Che cazzo campi a fare se non ti compri un Iphone XS nel nostro sito sfigato di merda comprati il nostro telefono</p>
         </div>
       </div>
       <div class="carousel-item"  style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>XIAOMI 8</h5>
           <p>Stupida bitch che minchia di chinese di merda sei se non ti compri lo Xiamo 8 prodotto direttamente dai bimbi schiavi egiziani </p>
         </div>
       </div>
       <div class="carousel-item"  style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>SAMSUNG S9</h5>
           <p>Si quanto cazzo sei British senza il Samsung S9? Siamo qui per farti diventare la persona più sfigata al mondo che compra ancora i Samsung.</p>
