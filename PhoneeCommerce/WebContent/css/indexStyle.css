@@ -3,15 +3,15 @@
 
 
 .carousel-inner{
-  min-height: 600px; /* Modifichiamo l'altezza del carosello  */
+  min-height: 400px; /* Modifichiamo l'altezza del carosello  */
   background-size: cover; /* Facciamo in modo che le immagini occupino tutto il background del carousel sia in larghezza che in altezza */
-  background-position: center center /* Centriamo la posizione del background centrata sia orizzontalmente che verticalmente */
+  background-position: center center; /* Centriamo la posizione del background centrata sia orizzontalmente che verticalmente */
 }
 
 .carousel-item{
-  min-height: 600px; /* Modifichiamo l'altezza del carosello  */
+  min-height: 400px; /* Modifichiamo l'altezza del carosello  */
   background-size: cover; /* Facciamo in modo che le immagini occupino tutto il background del carousel sia in larghezza che in altezza */
-  background-position: center center /* Centriamo la posizione del background centrata sia orizzontalmente che verticalmente */
+  background-position: center center; /* Centriamo la posizione del background centrata sia orizzontalmente che verticalmente */
 }
 
  

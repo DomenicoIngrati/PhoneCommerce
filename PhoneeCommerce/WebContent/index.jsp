@@ -77,21 +77,21 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active" style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <img src="..." class="d-block w-100" alt="...">
+        <!-- <img src="..." class="d-block w-100" alt="..."> -->
         <div class="carousel-caption d-none d-md-block">
           <h5>Offerta n1</h5>
           <p>Desing, potenza e cancioffoli allo stato puro.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/food/);">
+        <!-- <img src="..." class="d-block w-100" alt="..."> -->
         <div class="carousel-caption d-none d-md-block">
           <h5>Offerta n2</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/car/);">
+        <!-- <img src="..." class="d-block w-100" alt="..."> -->
         <div class="carousel-caption d-none d-md-block">
           <h5>Offerta n3</h5>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
