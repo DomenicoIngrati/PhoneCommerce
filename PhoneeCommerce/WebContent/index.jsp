@@ -76,14 +76,14 @@
       <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="background-image: url(https://source.unsplash.com/category/nature/);">
+      <div class="carousel-item active"   data-interval= "10000" style="background-image: url(https://source.unsplash.com/category/nature/);">
         <!-- <img src="..." class="d-block w-100" alt="..."> -->
         <div class="carousel-caption d-none d-md-block">
           <h5>Offerta n1</h5>
           <p>Desing, potenza e cancioffoli allo stato puro.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/food/);">
+      <div class="carousel-item" data-interval= "10000" style="background-image: url(https://source.unsplash.com/category/food/);">
         <!-- <img src="..." class="d-block w-100" alt="..."> -->
         <div class="carousel-caption d-none d-md-block">
           <h5>Offerta n2</h5>
@@ -118,41 +118,38 @@
         
  
  <!--  RIGA NUOVI PRODOTTI  -->
-    <div class="row big-padding">
-      <div class="col-md-4 col-sm-4">
+  <div class="card-deck">
       	<div class="card" style="width: 20rem;">
 			  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
 			  <div class="card-body">
-			    <h5 class="card-title">IPHONE XS</h5>
+			    <h5 class="card-title">iPhone XS</h5>
+			    <h6 class="card-subtitle mb-2 text-muted">Apple</h6> <!-- category --> 
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 			    <a href="#" class="btn btn-primary">Scopri di più ></a>
 			  </div>
-		</div>
       </div>
 
 
 
-      <div class="col-md-4 col-sm-4 col-sm-offset-2" >    
 	       	<div class="card" style="width: 20rem;">
 				  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
 				  <div class="card-body">
-				    <h5 class="card-title">HUAWEI P15</h5>
+				    <h5 class="card-title">Huawei P15</h5>
+				    <h6 class="card-subtitle mb-2 text-muted">Huawei</h6> <!-- category --> 
 				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				    <a href="#" class="btn btn-primary">Scopri di più ></a>
 				  </div>
-			</div>
       </div>
 
 
-      <div class="col-md-4 col-sm-4 col-sm-offset-2">
 	       	<div class="card" style="width: 20rem;">
 			  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
 			  <div class="card-body">
-			    <h5 class="card-title">XIAOMI Mi29</h5>
+			    <h5 class="card-title">Mi 9</h5>
+			    <h6 class="card-subtitle mb-2 text-muted">Xiaomi</h6> <!-- category --> 
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 			    <a href="#" class="btn btn-primary">Scopri di più ></a>
 			  </div>
-			</div>
       </div>
 	</div>
 

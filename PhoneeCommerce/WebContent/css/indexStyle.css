@@ -12,9 +12,16 @@
   min-height: 400px; /* Modifichiamo l'altezza del carosello  */
   background-size: cover; /* Facciamo in modo che le immagini occupino tutto il background del carousel sia in larghezza che in altezza */
   background-position: center center; /* Centriamo la posizione del background centrata sia orizzontalmente che verticalmente */
-}
-
  
+}
+.card-deck{
+  padding-bottom: 30px;
+
+} 
+
+ .card-img-top{
+ min-height: 50px;
+ }
  
 .btn-outline-success {
     color: #28a745;
