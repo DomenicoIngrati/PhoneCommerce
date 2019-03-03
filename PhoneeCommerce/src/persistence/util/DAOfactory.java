@@ -38,6 +38,8 @@ public abstract class DAOfactory {
 			}
 		}
 		
+	
+		
 		
 		
 		// --- Factory specification: concrete factories implementing this spec must provide this methods! ---
@@ -48,6 +50,10 @@ public abstract class DAOfactory {
 		 */
 		public abstract OrderDAO getOrderDAO();
 		
+		public abstract AdministratorDAO getAdministratorDAO();
+		
+		public abstract ProductCategoryDAO getProductCategoryDAO();
+		
 		public abstract ProductDAO getProductDAO();
 		
 		public abstract ReviewDAO getReviewDAO();
@@ -56,6 +62,6 @@ public abstract class DAOfactory {
 		
 		public abstract WishlistDAO getWishlistDAO();
 
-//		public abstract persistence.UtilDao getUtilDAO(); //???
+//		public abstract  getUtilDAO(); //???
 	
 }

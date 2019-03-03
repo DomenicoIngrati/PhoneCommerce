@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 import model.ProductCategory;
 import persistence.dao.ProductCategoryDAO;
@@ -151,6 +153,31 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 			DAOUtility.close(connection);
 		}	
 		return category;
+	}
+
+	@Override
+	public Set<ProductCategory> findAll() {
+		Connection connection = this.dataSource.getConnection();
+		Set <ProductCategory> categories = new HashSet<ProductCategory>();
+		try {
+			PreparedStatement statement;
+			String query = "select * from ProductCategory";
+			statement = connection.prepareStatement(query);
+
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				ProductCategory cat = new ProductCategory();
+				
+				cat.setId(result.getInt("id"));				
+				cat.setName(result.getString("name"));
+				categories.add(cat);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return categories;
 	}
 
 }
