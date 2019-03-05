@@ -28,7 +28,7 @@ private static  DataSource dataSource;
 			dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
 		} 
 		catch (Exception e) {
-			System.err.println("PostgresDAOFactory.class: failed to load MySQL JDBC driver\n"+e);
+			System.err.println("PostgresDAOFactory.class: failed to load Postres JDBC driver\n"+e);
 			e.printStackTrace();
 		}
 	}

@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.Cart;
 import model.ProductCategory;
 import persistence.dao.ProductCategoryDAO;
 import persistence.util.DatabaseManager;
@@ -37,11 +41,35 @@ public class Home extends HttpServlet {
 		
 		//CARICO LE CATEGORIE NELLA NAVBAR HOME
 		ProductCategoryDAO cat = DatabaseManager.getInstance().getDaoFactory().getProductCategoryDAO();
-		Set<ProductCategory> cats = new HashSet<ProductCategory>();
+
+		List<ProductCategory> cats = new ArrayList<ProductCategory>();
 		cats = cat.findAll();
 		
 		request.setAttribute("brands", cats);
-		request.setAttribute("gatta", "gattuzza");
+		
+		HttpSession session = request.getSession();
+		Cart cart = (Cart) session.getAttribute("cart");
+		if (cart == null) {
+			cart = new Cart();
+			session.setAttribute("cart", cart);
+		}
+		String action = request.getParameter("action");
+
+		action = (action == null) ? "" : action;
+		String page = "";
+		
+		switch (action) {
+		case "user":
+			
+			break;
+
+		default:
+			
+			page="index";
+			
+		}
+		
+		request.setAttribute("page", "content/" + page + ".jsp");
 
 		// this servlet has to forward only to the home.jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/home.jsp");

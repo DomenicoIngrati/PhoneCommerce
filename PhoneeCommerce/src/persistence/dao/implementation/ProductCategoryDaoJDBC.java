@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import model.ProductCategory;
@@ -156,16 +158,16 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 	}
 
 	@Override
-	public Set<ProductCategory> findAll() {
+	public List <ProductCategory> findAll() {
 		Connection connection = this.dataSource.getConnection();
-		Set <ProductCategory> categories = new HashSet<ProductCategory>();
+		List <ProductCategory> categories = new ArrayList<ProductCategory>();
 		try {
 			PreparedStatement statement;
 			String query = "select * from ProductCategory";
 			statement = connection.prepareStatement(query);
 
 			ResultSet result = statement.executeQuery();
-			if (result.next()) {
+			while (result.next()) {
 				ProductCategory cat = new ProductCategory();
 				
 				cat.setId(result.getInt("id"));				

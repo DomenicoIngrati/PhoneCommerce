@@ -16,21 +16,21 @@ public class Main {
 			DataSource dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
 			
 			
-			UserDaoJDBC userDAO = new UserDaoJDBC(dataSource);
-			
-			User user1 = new User();
-			user1.setName("Rocco");
-			user1.setSurname("Palermiti");
-			user1.setEmail("roky@ciao.it");
-			user1.setUsername("billu");
-			user1.setPassword("gattuzza");
-			user1.setType(Type.Customer);
-//			userDAO.create(user1);
-			
-			WishListDaoJDBC wishDAO = new WishListDaoJDBC(dataSource);
-			Wishlist wish = new Wishlist();
-			wish.setTitle("telefoni");
-			wish.setUser(user1);
+//			UserDaoJDBC userDAO = new UserDaoJDBC(dataSource);
+//			
+//			User user1 = new User();
+//			user1.setName("Rocco");
+//			user1.setSurname("Palermiti");
+//			user1.setEmail("roky@ciao.it");
+//			user1.setUsername("billu");
+//			user1.setPassword("gattuzza");
+//			user1.setType(Type.Customer);
+////			userDAO.create(user1);
+//			
+//			WishListDaoJDBC wishDAO = new WishListDaoJDBC(dataSource);
+//			Wishlist wish = new Wishlist();
+//			wish.setTitle("telefoni");
+//			wish.setUser(user1);
 //			wish.setId(25);
 			
 //			wishDAO.delete(wish);
