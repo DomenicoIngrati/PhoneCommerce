@@ -18,7 +18,6 @@ import persistence.util.DatabaseManager;
 /**
  * Servlet implementation class Home
  */
-@WebServlet("/home")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,5 +55,4 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
