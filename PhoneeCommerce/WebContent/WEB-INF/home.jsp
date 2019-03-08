@@ -53,8 +53,8 @@
               Account
             </a>
             <div class="dropdown-menu" aria-labelledby="accountDropdown">
-              <a class="dropdown-item" href="#">Accedi</a>
-              <a class="dropdown-item" href="#">Registrati</a>
+              <a class="dropdown-item" href="accedi.html">Accedi</a>
+              <a class="dropdown-item" href="registrati.html">Registrati</a>
             </div>
           </li>
 
@@ -63,7 +63,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="FAQ.html">FAQ</a>
+            <a class="nav-link" href="#">FAQ</a>
           </li>
         </ul>
 
