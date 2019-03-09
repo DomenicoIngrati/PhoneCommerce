@@ -46,7 +46,7 @@
                            </div>
                            <div class="col-md-12 ">
                               <div class="form-group">
-                                 <p class="text-center">Hai un account? <a href="accedi.html" id="signup">Accedi qui</a></p>
+                                 <p class="text-center">Hai un account? <a href="?action=signin" id="signup">Accedi qui</a></p>
                               </div>
                            </div>
                            

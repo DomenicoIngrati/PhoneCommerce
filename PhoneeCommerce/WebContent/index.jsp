@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- forward to home servlet - it has to do just this thing -->
+	 <!-- forward to home servlet - it has to do just this thing -->
 	 <jsp:forward page="home.jsp"></jsp:forward>
 </body>
 </html>
