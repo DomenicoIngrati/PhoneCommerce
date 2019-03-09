@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
@@ -13,10 +11,9 @@
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 <link rel="stylesheet" href="css/accediStyle.css">
 
-</head>
-<body>
-  <hr>
-  <div class="container">
+
+
+  <div class="container" id="sign-box">
         <div class="row">
 			<div class="col-md-5 mx-auto">
 			<div >
@@ -62,6 +59,3 @@
 			</div>
 		</div>
       </div>   
-
-</body>
-</html>

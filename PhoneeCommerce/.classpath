@@ -11,6 +11,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
-	<classpathentry kind="lib" path="C:/Users/domei/git/PhoneCommerce/PhoneeCommerce/lib/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/RokyMac/git/PhoneCommerce/PhoneeCommerce/lib/postgresql-42.2.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
