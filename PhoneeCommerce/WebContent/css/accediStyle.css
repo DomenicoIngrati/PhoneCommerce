@@ -1,11 +1,10 @@
-    body{
-        padding-top:4.2rem;
+   	    body{
 		padding-bottom:4.2rem;
 		background:rgba(0, 0, 0, 0.76);
-    }
-    a{
+   		}
+    	a{
          text-decoration:none !important;
-     }
+    	 }
          h1,h2,h3{
          font-family: 'Kaushan Script', cursive;
          }

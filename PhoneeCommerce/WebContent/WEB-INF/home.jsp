@@ -53,8 +53,8 @@
               Account
             </a>
             <div class="dropdown-menu" aria-labelledby="accountDropdown">
-              <a class="dropdown-item" href="accedi.html">Accedi</a>
-              <a class="dropdown-item" href="registrati.html">Registrati</a>
+              <a class="dropdown-item" href="?action=signin">Accedi</a>
+              <a class="dropdown-item" href="?action=registration">Registrati</a>
             </div>
           </li>
 

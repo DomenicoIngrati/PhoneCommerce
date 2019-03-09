@@ -53,20 +53,27 @@ public class Home extends HttpServlet {
 			cart = new Cart();
 			session.setAttribute("cart", cart);
 		}
+		
 		String action = request.getParameter("action");
 
 		action = (action == null) ? "" : action;
 		String page = "";
 		
 		switch (action) {
-		case "user":
+		case "index":
+			page="index";
+			break;
 			
+		case "signin":
+			page="login";
+			break;
+		
+		case "registration":
+			page="signup";
 			break;
 
 		default:
-			
 			page="index";
-			
 		}
 		
 		request.setAttribute("page", "content/" + page + ".jsp");
