@@ -23,7 +23,7 @@ public class UserDaoJDBC implements UserDAO {
 	}
 	
 	@Override
-	public void create(User u) {
+	public boolean create(User u) {
 		Connection connection = dataSource.getConnection();;
 		String query;
 		PreparedStatement statement;
@@ -45,8 +45,10 @@ public class UserDaoJDBC implements UserDAO {
 		    statement.executeUpdate();
 		} catch (SQLException e) {
 		    e.printStackTrace();
+		    return false;
 		} finally {
 		    DAOUtility.close(connection);
+		    return true;
 		    
 		}
 	}

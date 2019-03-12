@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
 <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="WEB-INF/js/accediJS.js"></script>
+<script src="js/account.js" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 <link rel="stylesheet" href="css/accediStyle.css">
 
@@ -20,15 +20,21 @@
                               <h1 >Registrati</h1>
                            </div>
                         </div>
-                        <form action="#" name="registration">
+                        <form action="#" name="registration" id="sign-up" method="post">
                            <div class="form-group">
                               <label for="exampleInputEmail1">Nome</label>
-                              <input type="text"  name="firstname" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Enter Firstname">
+                              <input type="text"  name="name" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Enter Firstname">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">Cognome</label>
-                              <input type="text"  name="lastname" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Enter Lastname">
+                              <input type="text"  name="surname" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Enter Lastname">
                            </div>
+                           
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Username</label>
+                              <input type="text"  name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username">
+                           </div>
+                           
                            <div class="form-group">
                               <label for="exampleInputEmail1">Indirizzo email</label>
                               <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">

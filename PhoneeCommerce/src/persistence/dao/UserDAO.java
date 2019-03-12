@@ -4,7 +4,7 @@ import model.User;
 
 public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
 	
-	 	public void create(User user); //Create
+	 	public boolean create(User user); //Create
 
 	    public User findById(int id); //Retrice
 

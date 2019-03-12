@@ -7,8 +7,10 @@
     <head>
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
         <link rel="stylesheet" href="css/indexStyle.css">
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <title>PhoneCommerce</title>

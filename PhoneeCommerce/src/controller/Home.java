@@ -61,6 +61,8 @@ public class Home extends HttpServlet {
 		
 		switch (action) {
 		case "index":
+			
+			// fare le cose relative alla home, come caricare gli ultimi 10 prodotti inseriti nel sito
 			page="index";
 			break;
 			
