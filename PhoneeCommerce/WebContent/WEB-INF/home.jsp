@@ -93,12 +93,16 @@
   
   <div id="login-auto-close-alert" class="alert hidden" role="alert">
   <p id="login-alert-text"> </p>
-	</div>
+  </div>
   
  	<!-- PAGINA CARICATA -->
 	<jsp:include page="${page}" />
-	
-    
+
+
+	<div>
+		<!-- Footer -->
+		<%@ include file="content/footer.html"%>
+	</div>
 
     </body>
 </html>

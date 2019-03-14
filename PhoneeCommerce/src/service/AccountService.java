@@ -62,7 +62,7 @@ public class AccountService {
 			return null;
 		}else{
 			result.addProperty("result", "FAIL");
-			result.addProperty("reason", "Sorry,you have to fil all fields!");
+			result.addProperty("reason", "Sorry,you have to fill all fields!");
 			return null;
 		}
 	}
