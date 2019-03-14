@@ -117,7 +117,9 @@ $( document ).ready(function() {
 	        dataType: "JSON",
 	        data: JSON.stringify(frm),
 	        success: function(result){
-	        	operation_alert(result, window.location.href = "");
+	        	operation_alert(result, function(){
+	        		window.location.href = "?action=index";
+	        	});
 	        },
 	        error: function(){	
 	        	alert("Errore di richiesta al server! Riprovare.");

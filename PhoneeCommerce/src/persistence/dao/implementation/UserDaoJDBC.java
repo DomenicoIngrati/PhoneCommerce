@@ -40,7 +40,7 @@ public class UserDaoJDBC implements UserDAO {
 		    statement.setString(4, u.getName());
 		    statement.setString(5, u.getSurname());
 		    statement.setLong(6, u.getId());
-		    statement.executeUpdate();
+//		    statement.executeUpdate();
 		    return (statement.executeUpdate() > 0) ? true : false;
 		} catch (SQLException e) {
 		    e.printStackTrace();
