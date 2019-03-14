@@ -55,11 +55,9 @@ public class Account extends HttpServlet {
 			User user = AccountService.signIn(json, result);
 			if (user != null) {
 				HttpSession session = request.getSession();				
-				
-				
+
 				session.setAttribute("user", user);
-				
-				
+
 			}
 			break;
 		case "logout":
@@ -71,6 +69,8 @@ public class Account extends HttpServlet {
 			result.addProperty("result", "FAIL");
 			break;
 		}
+		System.out.println(result.toString());
+		
 		response.getWriter().write(result.toString());
 		
 	}

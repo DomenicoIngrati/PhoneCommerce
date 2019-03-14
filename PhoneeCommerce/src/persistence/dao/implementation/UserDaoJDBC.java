@@ -28,9 +28,7 @@ public class UserDaoJDBC implements UserDAO {
 		String query;
 		PreparedStatement statement;
 		try {
-			
-		    
-		    
+
 		    long id = IdBroker.getId(connection);
 			u.setId(id);
 
@@ -43,14 +41,14 @@ public class UserDaoJDBC implements UserDAO {
 		    statement.setString(5, u.getSurname());
 		    statement.setLong(6, u.getId());
 		    statement.executeUpdate();
+		    return (statement.executeUpdate() > 0) ? true : false;
 		} catch (SQLException e) {
 		    e.printStackTrace();
-		    return false;
+
 		} finally {
 		    DAOUtility.close(connection);
-		    return true;
-		    
 		}
+		return false;
 	}
 
 

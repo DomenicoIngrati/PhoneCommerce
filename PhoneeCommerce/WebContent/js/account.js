@@ -100,23 +100,7 @@
 
 function operation_alert(result, callback) {
     $("body").scrollTop(0);
-    $("#login-auto-close-alert").focus();
-    var str = result.result;
-    if ((str.search("SUCCESS")) != -1) {
-        $("#login-alert-text").html("<strong>" + result.message + "</strong>");
-        $("#login-auto-close-alert").removeClass("hidden").addClass("alert-success fade in");
-        $("#login-auto-close-alert").fadeTo(1500, 750).slideUp(600, function() {
-            $(this).removeClass("alert-success fade in");
-            callback();
-        });
-    } else {
-        $("#login-alert-text").html("<strong>" + result.reason + "</strong>");
-        $("#login-auto-close-alert").removeClass("hidden").addClass("alert-danger fade in");
-        $("#login-auto-close-alert").fadeTo(1500, 750).slideUp(600, function() {
-            $(this).removeClass("alert-danger fade in");
-            callback();
-        });
-    }
+    callback();
     
 }
 
@@ -131,15 +115,14 @@ $( document ).ready(function() {
 	        url: "account?action=signup",
 	        type: "POST",
 	        dataType: "JSON",
-	        data: JSON.stringify(frm)
-	    }).done(function(data) {
-	        operation_alert(data, function() {
-	            window.location.href = "?action=index"; //home
-
-	        });
-
-	    }).fail(function(data, status, err) {
-	        alert("error: " + data + " status: " + status + " err: " + err);
+	        data: JSON.stringify(frm),
+	        success: function(result){
+	        	operation_alert(result, window.location.href = "");
+	        },
+	        error: function(){	
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }
+	    	
 	    });
 	});
 });
