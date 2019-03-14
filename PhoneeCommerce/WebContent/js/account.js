@@ -100,7 +100,23 @@
 
 function operation_alert(result, callback) {
     $("body").scrollTop(0);
-    callback();
+    $("#login-auto-close-alert").focus();
+    var str = result.result;
+    if ((str.search("SUCCESS")) != -1) {
+        $("#login-alert-text").html("<strong>" + result.message + "</strong>");
+        $("#login-auto-close-alert").removeClass("hidden").addClass("alert-success fade in");
+        $("#login-auto-close-alert").fadeTo(1500, 750).slideUp(600, function() {
+            $(this).removeClass("alert-success fade in");
+            callback();
+        });
+    } else {
+        $("#login-alert-text").html("<strong>" + result.reason + "</strong>");
+        $("#login-auto-close-alert").removeClass("hidden").addClass("alert-danger fade in");
+        $("#login-auto-close-alert").fadeTo(1500, 750).slideUp(600, function() {
+            $(this).removeClass("alert-danger fade in");
+            callback();
+        });
+    }
     
 }
 
@@ -129,6 +145,41 @@ $( document ).ready(function() {
 	});
 });
 
+$( document ).ready(function() {
+
+	$("#log-in").submit(function(e) {
+	    e.preventDefault();
+	    var frm = $(this).serializeFormJSON();
+	    console.log(frm);
+	    $.ajax({
+	        url: "account?action=signin",
+	        type: "POST",
+	        dataType: "JSON",
+	        data: JSON.stringify(frm),
+	        success: function(data){
+	        	operation_alert(data, function(){
+	        		
+	        		var str = data.result;
+	                if (str.search("ORGANIZER") != -1) {
+	                    operation_alert(data, function() {
+	                        window.location.href = "home?action=index";
+	                    });
+	                } else {
+	                    operation_alert(data, function() {
+	                        window.location.reload();
+	                    });
+	
+	                }
+	        		
+	        		window.location.href = "?action=index";
+	        	});
+	        },
+	        error: function(){	
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }
+	    });
+	});
+});
 
 
 

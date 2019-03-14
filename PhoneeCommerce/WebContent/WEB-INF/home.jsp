@@ -11,6 +11,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
         
+        <script src="js/account.js" type="text/javascript"></script>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <title>PhoneCommerce</title>
@@ -51,13 +53,24 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Account
-            </a>
-            <div class="dropdown-menu" aria-labelledby="accountDropdown">
-              <a class="dropdown-item" href="?action=signin">Accedi</a>
-              <a class="dropdown-item" href="?action=registration">Registrati</a>
-            </div>
+          	<c:if test="${user == null}">
+          		<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account </a>
+		        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+		          <a class="dropdown-item" href="?action=signin">Accedi</a>
+		          <a class="dropdown-item" href="?action=registration">Registrati</a>
+		        </div>
+          	</c:if>
+          	<c:if test="${user != null}">
+          		<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
+		        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+		          <a class="dropdown-item" href="#">Profilo</a>
+		          <a class="dropdown-item" href="#">Ordini</a>
+		          <a class="dropdown-item" href="account?action=logout">Esci</a>
+		          
+		        </div>
+          	</c:if>
+            
+            
           </li>
 
           <li class="nav-item">
@@ -77,6 +90,10 @@
     </nav>
 
   <!-- FINE NAVBAR-->
+  
+  <div id="login-auto-close-alert" class="alert hidden" role="alert">
+  <p id="login-alert-text"> </p>
+	</div>
   
  	<!-- PAGINA CARICATA -->
 	<jsp:include page="${page}" />

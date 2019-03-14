@@ -37,7 +37,7 @@ public class Account extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// read the ajax request
-		System.out.println("GATTAAAA");
+		System.out.println("----");
 		BufferedReader br = new BufferedReader(request.getReader());
 		String json = "";
 		if (br != null) {
@@ -50,6 +50,7 @@ public class Account extends HttpServlet {
 		
 		case "signup":
 			AccountService.signUp(json, result);
+			response.getWriter().write(result.toString());
 			break;
 		case "signin":
 			User user = AccountService.signIn(json, result);
@@ -59,19 +60,22 @@ public class Account extends HttpServlet {
 				session.setAttribute("user", user);
 
 			}
+			response.getWriter().write(result.toString());
 			break;
 		case "logout":
 			request.getSession().invalidate();
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/home.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/");
+//			request.setAttribute("action", "index");
 			dispatcher.forward(request, response);
 			break;
 		default:
 			result.addProperty("result", "FAIL");
+			response.getWriter().write(result.toString());
 			break;
 		}
 		System.out.println(result.toString());
 		
-		response.getWriter().write(result.toString());
+		
 		
 	}
 

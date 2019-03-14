@@ -23,7 +23,7 @@
 							<h1>Accedi</h1>
 						 </div>
 					</div>
-                   <form action="#" method="post" name="login">
+                   <form id="log-in" action="#" method="post" name="login">
                            <div class="form-group">
                               <label for="exampleInputEmail1">Indirizzo email</label>
                               <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">

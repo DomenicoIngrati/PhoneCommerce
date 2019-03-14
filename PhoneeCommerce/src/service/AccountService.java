@@ -42,8 +42,10 @@ public class AccountService {
 		UserDAO dao = factory.getUserDAO();
 		Gson gson = new Gson();
 		User tmp = gson.fromJson(data, User.class);
-		if (!tmp.getUsername().equals("") || !tmp.getPassword().equals("")) {
-			user = dao.findByUsername(tmp.getUsername());
+		System.out.println(tmp);
+		
+		if (!tmp.getEmail().equals("") || !tmp.getPassword().equals("")) {
+			user = dao.findByEmail(tmp.getEmail());
 			if (user != null && user.getPassword().equals(tmp.getPassword()) && user.getType().equals(Type.Customer)) {
 				result.addProperty("result", "SUCCESS");
 				result.addProperty("message", "You have successfully signed-in, will be redirected soon !");
@@ -56,7 +58,7 @@ public class AccountService {
 			}
 
 			result.addProperty("result", "FAIL");
-			result.addProperty("reason", "Sorry, your username/password doesn't exists in our database !");
+			result.addProperty("reason", "Sorry, your email/password doesn't exists in our database !");
 			return null;
 		}else{
 			result.addProperty("result", "FAIL");
