@@ -41,6 +41,10 @@
     text-align: center;
 }
 
+#login-auto-close-alert{
+	display: none;
+}
+
 
 
 

@@ -77,7 +77,6 @@ public class Home extends HttpServlet {
 		default:
 			page="index";
 		}
-		System.out.println("sono QUA");
 		
 		request.setAttribute("page", "content/" + page + ".jsp");
 

@@ -37,7 +37,6 @@ public class Account extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// read the ajax request
-		System.out.println("----");
 		BufferedReader br = new BufferedReader(request.getReader());
 		String json = "";
 		if (br != null) {
@@ -72,7 +71,6 @@ public class Account extends HttpServlet {
 			response.getWriter().write(result.toString());
 			break;
 		}
-		System.out.println(result.toString());
 	}
 
 	/**
