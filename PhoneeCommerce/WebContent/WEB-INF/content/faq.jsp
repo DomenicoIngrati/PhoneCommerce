@@ -2,11 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     
 <!DOCTYPE html>
-
-<link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
 <link rel="stylesheet" href="css/faqStyle.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
 
 <div class="container" id="faq-box">
     <div class="row">
