@@ -78,7 +78,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">FAQ</a>
+            <a class="nav-link" href="home?action=faq">FAQ</a>
           </li>
         </ul>
 
@@ -97,12 +97,10 @@
   
  	<!-- PAGINA CARICATA -->
 	<jsp:include page="${page}" />
+	
+	<!-- Footer -->
+	<%@ include file="content/footer.html"%>
 
+   </body>
 
-	<div>
-		<!-- Footer -->
-		<%@ include file="content/footer.html"%>
-	</div>
-
-    </body>
 </html>

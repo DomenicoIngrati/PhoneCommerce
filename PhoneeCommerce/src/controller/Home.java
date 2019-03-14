@@ -73,6 +73,10 @@ public class Home extends HttpServlet {
 		case "registration":
 			page="signup";
 			break;
+		
+		case "faq":
+			page="faq";
+			break;
 
 		default:
 			page="index";
