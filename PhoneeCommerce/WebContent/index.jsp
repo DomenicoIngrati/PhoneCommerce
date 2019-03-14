@@ -8,6 +8,6 @@
 </head>
 <body>
 	 <!-- forward to home servlet - it has to do just this thing -->
-	 <jsp:forward page="home.jsp"></jsp:forward>
+	 <jsp:forward page="home"></jsp:forward>
 </body>
 </html>

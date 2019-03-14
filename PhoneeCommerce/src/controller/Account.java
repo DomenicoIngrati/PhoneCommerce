@@ -64,8 +64,7 @@ public class Account extends HttpServlet {
 			break;
 		case "logout":
 			request.getSession().invalidate();
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/");
-//			request.setAttribute("action", "index");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home");
 			dispatcher.forward(request, response);
 			break;
 		default:
@@ -74,9 +73,6 @@ public class Account extends HttpServlet {
 			break;
 		}
 		System.out.println(result.toString());
-		
-		
-		
 	}
 
 	/**

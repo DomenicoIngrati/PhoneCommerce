@@ -23,7 +23,7 @@
 <!--NAVBAR-->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="?action=index"> PhoneCommerce </a>
+      <a class="navbar-brand" href="home?action=index"> PhoneCommerce </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,8 +56,8 @@
           	<c:if test="${user == null}">
           		<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account </a>
 		        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-		          <a class="dropdown-item" href="?action=signin">Accedi</a>
-		          <a class="dropdown-item" href="?action=registration">Registrati</a>
+		          <a class="dropdown-item" href="home?action=signin">Accedi</a>
+		          <a class="dropdown-item" href="home?action=registration">Registrati</a>
 		        </div>
           	</c:if>
           	<c:if test="${user != null}">
