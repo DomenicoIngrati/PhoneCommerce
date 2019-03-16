@@ -63,8 +63,8 @@
           	<c:if test="${user != null}">
           		<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
 		        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-		          <a class="dropdown-item" href="#">Profilo</a>
-		          <a class="dropdown-item" href="#">Ordini</a>
+		          <a class="dropdown-item" href="home?action=myAccount">Il mio account</a>
+		          <a class="dropdown-item" href="#">I miei ordini</a>
 		          <a class="dropdown-item" href="account?action=logout">Esci</a>
 		          
 		        </div>
@@ -98,9 +98,9 @@
  	<!-- PAGINA CARICATA -->
 	<jsp:include page="${page}" />
 	
-	<!-- Footer -->
+<%-- 	<!-- Footer -->
 	<%@ include file="content/footer.html"%>
-
+ --%>
    </body>
 
 </html>
