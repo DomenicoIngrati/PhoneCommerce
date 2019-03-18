@@ -158,7 +158,7 @@ $( document ).ready(function() {
 	        data: JSON.stringify(frm),
 	        success: function(data){
 	        	operation_alert(data, function(){
-	        		
+	        		console.log(data);
 	        		var str = data.result;
 	                if (str.search("ORGANIZER") != -1) {
 	                    operation_alert(data, function() {
@@ -171,7 +171,7 @@ $( document ).ready(function() {
 	
 	                }
 	        		
-	        		window.location.href = "?action=index";
+	        		window.location.href = "home?action=index";
 	        	});
 	        },
 	        error: function(){	
