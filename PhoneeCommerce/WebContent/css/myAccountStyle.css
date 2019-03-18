@@ -10,3 +10,40 @@
 .card {
     min-height: 170px;
 }
+.account-button{
+	background-color: #eeeeee;
+	height: auto;
+	border: 1px #ddd solid;
+	border-radius: 10px;
+	
+	padding: 14px 18px;
+	
+	
+}
+
+.account-button:hover{
+	background-color: highlight;
+	
+}
+
+.account-button-box{
+	padding: 15px 20px;
+}
+
+.col-sm{
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+a {
+	color: black;
+}
+
+a:hover{
+	color: black;
+}
+
+a:any-link{
+	text-decoration: none;
+}
+
