@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="model.Type" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
         
-        <script src="js/account.js" type="text/javascript"></script>
+        <!-- <script src="js/account.js" type="text/javascript"></script> -->
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
@@ -53,22 +54,34 @@
           </li>
 
           <li class="nav-item dropdown">
-          	<c:if test="${user == null}">
-          		<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account </a>
-		        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-		          <a class="dropdown-item" href="home?action=signin">Accedi</a>
-		          <a class="dropdown-item" href="home?action=registration">Registrati</a>
-		        </div>
-          	</c:if>
-          	<c:if test="${user != null}">
-          		<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
-		        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-		          <a class="dropdown-item" href="home?action=myAccount">Il mio account</a>
-		          <a class="dropdown-item" href="#">I miei ordini</a>
-		          <a class="dropdown-item" href="account?action=logout">Esci</a>
-		          
-		        </div>
-          	</c:if>
+         
+          	
+          	<c:choose>
+			    <c:when test="${user == null}">
+			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account </a>
+			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+			          <a class="dropdown-item" href="home?action=signin">Accedi</a>
+			          <a class="dropdown-item" href="home?action=registration">Registrati</a>
+			        </div>        
+			    </c:when>
+			    <c:when test="${user.type eq Type.Customer}">
+			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
+			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+			          <a class="dropdown-item" href="home?action=myAccount">Il mio account</a>
+			          <a class="dropdown-item" href="#">I miei ordini</a>
+			          <a class="dropdown-item" href="account?action=logout">Esci</a>
+			          
+			        </div>          
+			    </c:when>
+			    <c:when test="${user.type eq Type.Organizer}">
+			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
+			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+			          <a class="dropdown-item" href="home?action=myAccount">Aggiungi prodotto</a>
+			          <a class="dropdown-item" href="account?action=logout">Esci</a>
+			          
+			        </div>          
+			    </c:when>
+			</c:choose>
             
             
           </li>

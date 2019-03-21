@@ -86,7 +86,10 @@ public class UserDaoJDBC implements UserDAO {
 				u.setEmail(result.getString("email"));
 				u.setPassword(result.getString("password"));
 				
-				u.setType(Type.Customer);
+				if(result.getBoolean("admin"))
+					u.setType(Type.Organizer);
+				else
+					u.setType(Type.Customer);
 				
 				
 
@@ -117,7 +120,11 @@ public class UserDaoJDBC implements UserDAO {
 				u.setUsername(result.getString("username"));
 				u.setEmail(result.getString("email"));
 				u.setPassword(result.getString("password"));
-				u.setType(Type.Customer);
+				
+				if(result.getBoolean("admin"))
+					u.setType(Type.Organizer);
+				else
+					u.setType(Type.Customer);
 
 				
 				
@@ -149,7 +156,11 @@ public class UserDaoJDBC implements UserDAO {
 				u.setUsername(result.getString("username"));
 				u.setEmail(result.getString("email"));
 				u.setPassword(result.getString("password"));
-				u.setType(Type.Customer);
+
+				if(result.getBoolean("admin"))
+					u.setType(Type.Organizer);
+				else
+					u.setType(Type.Customer);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
