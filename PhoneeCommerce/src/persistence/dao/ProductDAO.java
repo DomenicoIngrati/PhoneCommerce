@@ -7,7 +7,7 @@ import model.ProductCategory;
 
 public interface ProductDAO {
 	
-public void create(Product modelObject);
+	public boolean create(Product modelObject);
 	
 	public void delete(Product t);
 	

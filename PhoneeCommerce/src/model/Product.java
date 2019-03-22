@@ -9,7 +9,16 @@ public class Product {
 	private double price;
 	private ArrayList<Review> reviews;
 	private ProductCategory category;
+	private String image;
 	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public ProductCategory getCategory() {
 		return category;
 	}
@@ -61,6 +70,10 @@ public class Product {
 	public void setReviews(ArrayList<Review> reviews) {
 		this.reviews = reviews;
 	}
-
+@Override
+public String toString() {
+	// TODO Auto-generated method stub
+	return "name: " + name + " category: "+ category + " price: "+ price + " descriprion " + description+" image: "+ image;
+}
 
 }

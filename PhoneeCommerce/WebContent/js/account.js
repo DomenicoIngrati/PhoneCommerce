@@ -132,8 +132,8 @@ $( document ).ready(function() {
 	        type: "POST",
 	        dataType: "JSON",
 	        data: JSON.stringify(frm),
-	        success: function(result){
-	        	operation_alert(result, function(){
+	        success: function(data){
+	        	operation_alert(data, function(){
 	        		window.location.href = "?action=index";
 	        	});
 	        },
@@ -150,7 +150,6 @@ $( document ).ready(function() {
 	$("#log-in").submit(function(e) {
 	    e.preventDefault();
 	    var frm = $(this).serializeFormJSON();
-	    console.log(frm);
 	    $.ajax({
 	        url: "account?action=signin",
 	        type: "POST",
@@ -158,7 +157,6 @@ $( document ).ready(function() {
 	        data: JSON.stringify(frm),
 	        success: function(data){
 	        	operation_alert(data, function(){
-	        		console.log(data);
 	        		var str = data.result;
 	                if (str.search("ORGANIZER") != -1) {
 	                    operation_alert(data, function() {

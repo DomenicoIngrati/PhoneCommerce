@@ -6,6 +6,7 @@ public class ProductCategory {
 	private String name;
 	private ProductCategory anchestorCategory;
 	
+	
 	public long getId() {
 		return id;
 	}
@@ -34,6 +35,15 @@ public class ProductCategory {
 		
 		name = "";
 		anchestorCategory = null;
+	}
+	
+	public ProductCategory(String name) {
+		this.name = name;
+		anchestorCategory = null;
+	}
+	@Override
+	public String toString() {
+		return name;
 	}
 	
 

@@ -167,7 +167,7 @@ public class ProductDaoJDBC implements ProductDAO {
 	}
 
 	@Override
-	public void create(Product p) {
+	public boolean create(Product p) {
 		
 		Connection connection = this.dataSource.getConnection();
 		try {
@@ -176,9 +176,7 @@ public class ProductDaoJDBC implements ProductDAO {
 			
 			String insert = "insert into Product(id, name, description, price, category) values (?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			
-			
-			
+
 			statement.setLong(1, p.getId());
 			statement.setString(2, p.getName());
 			statement.setString(3, p.getDescription());
@@ -186,16 +184,16 @@ public class ProductDaoJDBC implements ProductDAO {
 			
 			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
 			ProductCategory pcat = cat.findByName(p.getCategory().getName());
-			
 			if(pcat == null)
 			{
+				System.out.println("NULLO");
 				cat.create(p.getCategory());
 				pcat = cat.findByName(p.getCategory().getName());
 			}
 			
 			statement.setLong(5, pcat.getId());
 		
-			statement.executeUpdate();
+			return (statement.executeUpdate() > 0) ? true : false;
 
 		} catch (SQLException e) {
 			if (connection != null) {
@@ -212,7 +210,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				throw new PersistenceException(e.getMessage());
 			}
 		}
-	
+	return false;
 	}
 
 

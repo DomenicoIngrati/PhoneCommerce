@@ -5,7 +5,7 @@
 
 <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/insertProduct.js" type="text/javascript"></script>
+<script src="js/administrator.js" type="text/javascript"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 <link rel="stylesheet" href="css/insertProduct.css">
@@ -27,7 +27,7 @@
                            </div>
                            <div class="form-group">
                               <label for="brand-category">Brand/Categoria</label>
-                              <input type="text" name="brand-category" id="brand-category"  class="form-control"  placeholder="Inserisci brand/category" >
+                              <input type="text" name="category" id="brand-category"  class="form-control"  placeholder="Inserisci brand/category" >
                            </div>
                            <div class="form-group">
                            
