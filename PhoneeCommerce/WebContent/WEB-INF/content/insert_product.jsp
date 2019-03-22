@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
+
 <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/insertProduct.js" type="text/javascript"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 <link rel="stylesheet" href="css/insertProduct.css">
@@ -21,18 +23,18 @@
                    <form id="add-product" action="#" method="post" name="login">
                            <div class="form-group">
                               <label for="name">Nome</label>
-                              <input type="text" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Inserisci email" required="required">
+                              <input type="text" name="name"  class="form-control" id="name" placeholder="Inserisci nome">
                            </div>
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Brand/Categoria</label>
-                              <input type="text" name="brand-category" id="brand-category"  class="form-control"  placeholder="Inserisci brand/category">
+                              <label for="brand-category">Brand/Categoria</label>
+                              <input type="text" name="brand-category" id="brand-category"  class="form-control"  placeholder="Inserisci brand/category" >
                            </div>
                            <div class="form-group">
                            
                            		<label for="price">Prezzo</label>
                            
 	                           <div class="input-group">
-								  <input type="text" class="form-control">
+								  <input name ="price" type="text" class="form-control" placeholder="Inserisci prezzo">
 								  <div class="input-group-append ">
 								    <span class="input-group-text">€</span>
 								  </div>
@@ -41,23 +43,26 @@
 							
 							<div class="form-group">
 								<label for="Descrizione">Descrizione</label>
-								<textarea class="form-control" rows="5" id="comment"></textarea>
+								<textarea name ="description" class="form-control" rows="5" id="comment" placeholder="Inserisci descrizione"></textarea>
 							
 							
 							</div>
 							
 							<div class="form-group">
-								<label for="photos">Immagini</label>
+								<label for="photos">Immagine</label>
 								<div class="custom-file">
+									<input  type="file" class="custom-file-input" id="customFile" accept="image/x-png,image/jpeg">
+									<label id="#label" class="custom-file-label" for="customFile">Scegli immagine</label>
+								</div>
 									    
 							
 							
 							</div>
 							
-							
+							<label id="#label1"  for="customFile">Scegli immagine</label>
                            
                            <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Accedi</button>
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Registra prodotto</button>
                            </div>
                            
                            
@@ -66,4 +71,7 @@
 			</div>
 			</div>
 		</div>
-      </div>   
+      </div>
+      
+      
+         
