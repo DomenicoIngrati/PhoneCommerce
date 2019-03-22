@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import model.Cart;
 import model.ProductCategory;
+import model.Type;
+import model.User;
 import persistence.dao.ProductCategoryDAO;
 import persistence.util.DatabaseManager;
 
@@ -58,7 +60,7 @@ public class Home extends HttpServlet {
 
 		action = (action == null) ? "" : action;
 		String page = "";
-		
+		User user = (User) session.getAttribute("user");
 		switch (action) {
 		case "index":
 			
@@ -79,7 +81,30 @@ public class Home extends HttpServlet {
 			break;
 		
 		case "myAccount":
-			page="myAccount";
+			
+			
+			if(user == null)
+				page = "index";
+			else
+			{
+					if(user.getType() == Type.Customer)
+						page = "myAccount";
+					else
+						page = "index";
+			}
+			break;
+		
+		case "aggiungiProdotto":
+			
+			if(user == null)
+				page = "index";
+			else
+			{
+					if(user.getType() == Type.Organizer)
+						page = "insert_product";
+					else
+						page = "index";
+			}
 			break;
 
 		default:

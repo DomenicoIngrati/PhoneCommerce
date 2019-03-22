@@ -76,7 +76,7 @@
 			    <c:when test="${user.type eq Type.Organizer}">
 			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
 			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-			          <a class="dropdown-item" href="home?action=myAccount">Aggiungi prodotto</a>
+			          <a class="dropdown-item" href="home?action=aggiungiProdotto">Aggiungi prodotto</a>
 			          <a class="dropdown-item" href="account?action=logout">Esci</a>
 			          
 			        </div>          
