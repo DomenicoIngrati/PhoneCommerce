@@ -15,6 +15,8 @@ public interface ProductDAO {
 	
 	public Product findById(Long id);
 	
+	public Product findByName(String name);
+	
 	public Set<Product> findByPrice(float price);
 	
 	public Set<Product> findByCategory(ProductCategory idCategory);

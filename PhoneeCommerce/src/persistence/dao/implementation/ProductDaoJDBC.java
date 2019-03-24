@@ -79,7 +79,33 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setId(result.getInt("id"));				
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
-				product.setPrice(result.getFloat("prize"));
+				product.setPrice(result.getFloat("price"));
+				//category??
+//				product.setReviews(result.getString("reviews"));
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return product;
+	}
+	
+	public Product findByName(String name) {
+		Connection connection = this.dataSource.getConnection();
+		Product product = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from Product where name = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, name);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				product = new Product();
+				product.setId(result.getInt("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
 				//category??
 //				product.setReviews(result.getString("reviews"));
 			}
@@ -128,7 +154,7 @@ public class ProductDaoJDBC implements ProductDAO {
 		try {
 			Product product;
 			PreparedStatement statement;
-			String query = "select * from Product where idCategory=?";
+			String query = "select * from Product where category=?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, idCategory.getId());
 			ResultSet result = statement.executeQuery();
