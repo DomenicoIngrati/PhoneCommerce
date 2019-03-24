@@ -45,8 +45,9 @@
               <a class="dropdown-item" href="#">Hawai</a>
               <a class="dropdown-item" href="#">Waiai</a> -->
               
+              
               <c:forEach var="brand" items="${brands}">
-              	<a class="dropdown-item" href="#">${brand.name}</a>
+              	<a class="dropdown-item" href="home?action=productsView&brandName=${brand.name}&brandId=${brand.id}"> ${brand.name} </a>
               </c:forEach> 
              
               
