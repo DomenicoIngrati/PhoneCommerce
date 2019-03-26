@@ -1,5 +1,6 @@
 package persistence.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import model.Product;
@@ -20,6 +21,8 @@ public interface ProductDAO {
 	public Set<Product> findByPrice(float price);
 	
 	public Set<Product> findByCategory(ProductCategory idCategory);
+	
+	public List<Product> findAll();
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 

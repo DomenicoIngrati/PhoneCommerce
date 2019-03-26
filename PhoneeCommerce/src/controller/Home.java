@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,8 +37,6 @@ public class Home extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
-	ProductService productService= new ProductService();
-	ProductCategoryService categoryService=new ProductCategoryService();
     
    
     ProductCategory productCat=new ProductCategory(); 
@@ -50,7 +47,7 @@ public class Home extends HttpServlet {
     String selectedProductName;
     
     List<ProductCategory> cats = new ArrayList<ProductCategory>();
-    cats = categoryService.findAllCategory();
+    cats = ProductCategoryService.findAllCategory();
     
     request.setAttribute("brands", cats);
     
@@ -69,68 +66,69 @@ public class Home extends HttpServlet {
     User user = (User) session.getAttribute("user");
     switch (action) {
     case "index":
-      // fare le cose relative alla home, come caricare gli ultimi 10 prodotti inseriti nel sito
-      page="index";
-      break;
+    	List <Product> newProducts = ProductService.getLastSixProducts();
+    	request.setAttribute("newproducts", newProducts);
+    	page="index";
+    	break;
       
     case "signin":
-      page="login";
-      break;
+    	page="login";
+    	break;
     
     case "registration":
-      page="signup";
-      break;
+    	page="signup";
+    	break;
     
     case "faq":
-      page="faq";
-      break;
+    	page="faq";
+    	break;
     
     case "myAccount":
       
       
-      if(user == null)
-        page = "index";
-      else
-      {
-          if(user.getType() == Type.Customer)
-            page = "myAccount";
-          else
-            page = "index";
-      }
-      break;
+    	if(user == null)
+    		page = "index";
+    	else
+    	{
+    		if(user.getType() == Type.Customer)
+    			page = "myAccount";
+    		else
+    			page = "index";
+    	}
+    	break;
     
     case "aggiungiProdotto":
       
-      if(user == null)
-        page = "index";
-      else
-      {
-          if(user.getType() == Type.Organizer)
-            page = "insert_product";
-          else
-            page = "index";
-      }
-      break;
+    	if(user == null)
+    		page = "index";
+    	else
+    	{
+    		if(user.getType() == Type.Organizer)
+    			page = "insert_product";
+    		else
+    			page = "index";
+    	}
+    	break;
       
     case "productsView":
-      page="productsView";
-      brandName=request.getParameter("brandName");
-      productCat=categoryService.findCategoryByName(brandName);
-      brandProducts=productService.findProductsByCategory(productCat);
-      request.setAttribute("brandProducts", brandProducts);
-      request.setAttribute("pageTitle",brandName);
+    	page="productsView";
+    	brandName=request.getParameter("brandName");
+    	productCat=ProductCategoryService.findCategoryByName(brandName);
+    	brandProducts=ProductService.findProductsByCategory(productCat);
+    	request.setAttribute("brandProducts", brandProducts);
+    	request.setAttribute("pageTitle",brandName);
 
-      break;
+    	break;
       
     case "singleProductView":
-      page="product";
-      selectedProductName=request.getParameter("productName");
-      selectedProduct=productService.findProductByName(selectedProductName);
-      request.setAttribute("selectedProduct",selectedProduct);
-      break;
+    	page="product";
+    	selectedProductName=request.getParameter("productName");
+    	selectedProduct=ProductService.findProductByName(selectedProductName);
+    	request.setAttribute("selectedProduct",selectedProduct);
+    	break;
 
     default:
-      page="index";
+    	page="index";
     }
     
     request.setAttribute("page", "content/" + page + ".jsp");

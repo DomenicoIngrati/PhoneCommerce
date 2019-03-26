@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import model.Product;
@@ -81,7 +83,10 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
-				//category??
+
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
 //				product.setReviews(result.getString("reviews"));
 			}
 		} catch (SQLException e) {
@@ -107,7 +112,10 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
-				//category??
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
 //				product.setReviews(result.getString("reviews"));
 			}
 		} catch (SQLException e) {
@@ -135,6 +143,9 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
 				
 				products.add(product);
 			}
@@ -241,6 +252,38 @@ public class ProductDaoJDBC implements ProductDAO {
 			}
 		}
 	return false;
+	}
+
+	@Override
+	public List<Product> findAll() {
+		Connection connection = this.dataSource.getConnection();
+		List<Product> products = new ArrayList<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from Product";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getLong("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
+				products.add(product);
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return products;
 	}
 
 

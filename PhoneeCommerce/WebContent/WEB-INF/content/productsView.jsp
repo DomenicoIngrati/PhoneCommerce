@@ -4,15 +4,14 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css/productsViewStyle.css">
 
-<div class="container">
  
  	<h1 class="newProductString"> ${pageTitle} </h1>
  	
  <!--  RIGA NUOVI PRODOTTI  -->
  
    	
-   	<div class="container-fluid mt-4">
-	    <div class="row justify-content-left">
+   	<div class="container mt-4">
+	    <div class="row justify-content-center">
 	        <c:forEach var="brandProduct" items="${brandProducts}">
 	        <div class="col-auto mb-3">
 	            <div class="card" style="width: 20rem;">
@@ -29,9 +28,5 @@
 	        	 </div>
 	        </div>
 	        </c:forEach>
-	        
+		</div>
 	</div>
-
-
-	
-</div>

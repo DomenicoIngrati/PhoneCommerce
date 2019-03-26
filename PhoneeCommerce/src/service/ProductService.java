@@ -1,6 +1,8 @@
 package service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.json.JSONException;
@@ -14,7 +16,7 @@ import persistence.dao.ProductDAO;
 import persistence.util.DAOfactory;
 import persistence.util.DatabaseManager;
 
-public class ProductService {
+public abstract class ProductService {
 	
 	public static JsonObject createProduct(String product)
 	{
@@ -42,31 +44,35 @@ public class ProductService {
 				destination = source;
 				result.addProperty("reason", "Sorry, something went wrong!");
 			}
-			System.err.println(source);
-			
-			
+			System.err.println(source);	
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 
-		
-		
-		
 		return result;
 	}
 	
-	public  Set<Product> findProductsByCategory(ProductCategory category) {
+	public static Set<Product> findProductsByCategory(ProductCategory category) {
 	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
 	    return brandProductsDAO.findByCategory(category);
 	}
 	
-	public  Product findProductByName(String name) {
+	public static Product findProductByName(String name) {
 	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
 	    return brandProductsDAO.findByName(name);
+	}
+	
+	public static List<Product> getLastSixProducts(){
+		
+		ProductDAO ProductDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+		List<Product> products = new ArrayList<Product>();
+		products = ProductDao.findAll();
+		
+		Collections.reverse(products);
+		
+		return products;
+		
 	}
 
 }

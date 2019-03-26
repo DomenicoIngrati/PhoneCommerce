@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <!-- CAROSELLO -->
 <div class="bd-example">
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -51,39 +52,25 @@
         
  
  <!--  RIGA NUOVI PRODOTTI  -->
-  <div class="card-deck">
-      	<div class="card" style="width: 20rem;">
-			  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
-			  <div class="card-body">
-			    <h5 class="card-title">iPhone XS</h5>
-			    <h6 class="card-subtitle mb-2 text-muted">Apple</h6> <!-- category --> 
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			    <a href="#" class="btn btn-primary">Scopri di più ></a>
-			  </div>
-      </div>
-
-
-
-	       	<div class="card" style="width: 20rem;">
-				  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
-				  <div class="card-body">
-				    <h5 class="card-title">Huawei P15</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Huawei</h6> <!-- category --> 
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="btn btn-primary">Scopri di più ></a>
-				  </div>
-      </div>
-
-
-	       	<div class="card" style="width: 20rem;">
-			  <img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
-			  <div class="card-body">
-			    <h5 class="card-title">Mi 9</h5>
-			    <h6 class="card-subtitle mb-2 text-muted">Xiaomi</h6> <!-- category --> 
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			    <a href="#" class="btn btn-primary">Scopri di più ></a>
-			  </div>
-      </div>
+  <div class="container mt-4">
+	    <div class="row justify-content-center">
+	        <c:forEach items="${newproducts}" var = "i" begin = "0" end = "5">
+	        <div class="col-auto mb-3">
+	            <div class="card" style="width: 20rem;">
+		 			<a href="home?action=singleProductView&productName=${i.name}" >
+					<img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
+					</a>
+						<div class="card-body flex-fill ">
+							<h5 class="card-title">${i.name} ${i.price}0 €</h5>
+							<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 
+						    <p class="card-text">${i.description}</p>
+						   	<a href="#" class="btn btn-primary">Aggiungi al carrello</a>
+						  	<a href="#" class="btn btn-primary">Preferiti</a>
+						</div>
+	        	 </div>
+	        </div>
+	        </c:forEach>
+		</div>
 	</div>
 
 <!--FINE RIGA NUOVI PRODOTTI  -->
