@@ -5,7 +5,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="css/productStyle.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <title>Insert title here</title>
+<script src="js/product.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -49,14 +51,26 @@
 
             <p>${selectedProduct.description}</p>
 
-            <form class="d-flex justify-content-left">
-              <!-- Default input -->
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                <i class="fas fa-shopping-cart ml-1"></i>
-              </button>
-
-            </form>
+<!-- 			<div class="input-group mb-3">
+			  <input type="text" class="form-control" placeholder="Quantità" aria-label="Quantità" aria-describedby="button-addon2">
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add to cart</button>
+			  </div>
+			</div> -->
+			
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark " id="minus-btn"><i class="fa fa-minus"></i></button>
+                                </div>
+                                <input type="number" id="qty_input" class="form-control form-control-mb" value="1" min="1">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark " id="plus-btn"><i class="fa fa-plus"></i></button>
+                                </div>
+                                
+                               <div class="input-group-append">
+			    					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Add to cart</button>
+			 				   </div>	
+                            </div>
 
           </div>
           <!--Content-->

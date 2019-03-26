@@ -2,3 +2,7 @@
 /* Footer color for sake of consistency with Navbar */
 .page-footer {
   background-color: #929FBA; }
+  
+#qty_input{
+	max-width: 80px;
+}
