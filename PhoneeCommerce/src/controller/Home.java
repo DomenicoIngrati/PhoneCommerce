@@ -19,9 +19,8 @@ import model.Product;
 import model.ProductCategory;
 import model.Type;
 import model.User;
-import persistence.dao.ProductCategoryDAO;
-import persistence.dao.ProductDAO;
-import persistence.util.DatabaseManager;
+import service.ProductCategoryService;
+import service.ProductService;
 
 /* Servlet implementation class Home
  */
@@ -39,21 +38,19 @@ public class Home extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
+	ProductService productService= new ProductService();
+	ProductCategoryService categoryService=new ProductCategoryService();
     
-    //CARICO LE CATEGORIE NELLA NAVBAR HOME
-    ProductCategoryDAO cat = DatabaseManager.getInstance().getDaoFactory().getProductCategoryDAO();
+   
+    ProductCategory productCat=new ProductCategory(); 
+    Set<Product> brandProducts = new HashSet<Product>();
     
-    //DEVO AGGIUNGERLE IN UNA SERVICE LE METTO QUI PER PROVA//
-    ProductCategory productCat=new ProductCategory(); //ByDOMENICO
-    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
-    Set<Product> brandProducts = new HashSet<Product>();//ByDOMENICO
-    
-    //DEVO AGGIUNGERLE IN UNA SERVICE LE METTO QUI PER PROVA//
-    Product selectedProduct = new Product();//ByDOMENICO
+ 
+    Product selectedProduct = new Product();
     String selectedProductName;
     
     List<ProductCategory> cats = new ArrayList<ProductCategory>();
-    cats = cat.findAll();
+    cats = categoryService.findAllCategory();
     
     request.setAttribute("brands", cats);
     
@@ -72,7 +69,6 @@ public class Home extends HttpServlet {
     User user = (User) session.getAttribute("user");
     switch (action) {
     case "index":
-      
       // fare le cose relative alla home, come caricare gli ultimi 10 prodotti inseriti nel sito
       page="index";
       break;
@@ -116,14 +112,11 @@ public class Home extends HttpServlet {
       }
       break;
       
-    case "productsView": //BYDOMENICO
+    case "productsView":
       page="productsView";
-      
-      //DEVO AGGIUNGERLE IN UNA SERVICE LE METTO QUI PER PROVA//
       brandName=request.getParameter("brandName");
-      productCat=cat.findByName(brandName);
-      brandProducts=brandProductsDAO.findByCategory(productCat);
-      
+      productCat=categoryService.findCategoryByName(brandName);
+      brandProducts=productService.findProductsByCategory(productCat);
       request.setAttribute("brandProducts", brandProducts);
       request.setAttribute("pageTitle",brandName);
 
@@ -132,8 +125,7 @@ public class Home extends HttpServlet {
     case "singleProductView":
       page="product";
       selectedProductName=request.getParameter("productName");
-      System.out.println(selectedProductName);
-      selectedProduct=brandProductsDAO.findByName(selectedProductName);
+      selectedProduct=productService.findProductByName(selectedProductName);
       request.setAttribute("selectedProduct",selectedProduct);
       break;
 

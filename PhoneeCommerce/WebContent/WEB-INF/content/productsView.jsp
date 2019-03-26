@@ -21,15 +21,11 @@
 					</a>
 						<div class="card-body flex-fill ">
 							<h5 class="card-title">${brandProduct.name} ${brandProduct.price}0 €</h5>
-							
-							
 							<h6 class="card-subtitle mb-2 text-muted">${brandProduct.category.name}</h6> <!-- category --> 
 						    <p class="card-text">${brandProduct.description}</p>
 						   	<a href="#" class="btn btn-primary">Aggiungi al carrello</a>
 						  	<a href="#" class="btn btn-primary">Preferiti</a>
 						</div>
-					  	        	 
-					  
 	        	 </div>
 	        </div>
 	        </c:forEach>

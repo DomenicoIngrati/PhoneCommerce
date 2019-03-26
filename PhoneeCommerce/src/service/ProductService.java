@@ -1,5 +1,8 @@
 package service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,6 +12,7 @@ import model.Product;
 import model.ProductCategory;
 import persistence.dao.ProductDAO;
 import persistence.util.DAOfactory;
+import persistence.util.DatabaseManager;
 
 public class ProductService {
 	
@@ -53,6 +57,16 @@ public class ProductService {
 		
 		
 		return result;
+	}
+	
+	public  Set<Product> findProductsByCategory(ProductCategory category) {
+	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
+	    return brandProductsDAO.findByCategory(category);
+	}
+	
+	public  Product findProductByName(String name) {
+	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
+	    return brandProductsDAO.findByName(name);
 	}
 
 }
