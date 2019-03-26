@@ -182,4 +182,31 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 		return categories;
 	}
 
+	@Override
+	public ProductCategory findById(Long id) {
+		
+		Connection connection = this.dataSource.getConnection();
+		ProductCategory category = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from ProductCategory where id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				category = new ProductCategory();
+				category.setId(result.getInt("id"));				
+				category.setName(result.getString("name"));
+				
+
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return category;
+		
+	}
+
 }

@@ -10,6 +10,7 @@ import java.util.Set;
 import model.Product;
 import model.ProductCategory;
 import persistence.util.PersistenceException;
+import persistence.dao.ProductCategoryDAO;
 import persistence.dao.ProductDAO;
 import persistence.util.*;
 
@@ -164,6 +165,9 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
 				
 				products.add(product);
 			}

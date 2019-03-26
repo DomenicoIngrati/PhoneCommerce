@@ -118,10 +118,12 @@ public class Home extends HttpServlet {
       
     case "productsView": //BYDOMENICO
       page="productsView";
+      
       //DEVO AGGIUNGERLE IN UNA SERVICE LE METTO QUI PER PROVA//
       brandName=request.getParameter("brandName");
       productCat=cat.findByName(brandName);
       brandProducts=brandProductsDAO.findByCategory(productCat);
+      
       request.setAttribute("brandProducts", brandProducts);
       request.setAttribute("pageTitle",brandName);
 

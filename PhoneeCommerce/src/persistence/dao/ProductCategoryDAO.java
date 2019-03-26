@@ -19,7 +19,7 @@ public interface ProductCategoryDAO {
 	
 	public List<ProductCategory> findAll();
 	
-//	public Set<ProductCategory> findById(Long id);
+	public ProductCategory findById(Long id);
 	
 	public ProductCategory findByName(String name);
 	
