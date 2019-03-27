@@ -47,7 +47,7 @@
               
               
               <c:forEach var="brand" items="${brands}">
-              	<a class="dropdown-item" href="home?action=productsView&brandName=${brand.name}&brandId=${brand.id}"> ${brand.name} </a>
+              	<a id="${brand.id}" class="dropdown-item" href="home?action=productsView&brandName=${brand.name}&brandId=${brand.id}"> ${brand.name} </a>
               </c:forEach> 
              
               
@@ -77,7 +77,8 @@
 			    <c:when test="${user.type eq Type.Organizer}">
 			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
 			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-			          <a class="dropdown-item" href="home?action=aggiungiProdotto">Aggiungi prodotto</a>
+			          <a class="dropdown-item" href="home?action=addProduct">Aggiungi prodotto</a>
+			          <a class="dropdown-item" href="home?action=modifydelete">Modifica o elimina prodotti</a>
 			          <a class="dropdown-item" href="account?action=logout">Esci</a>
 			          
 			        </div>          

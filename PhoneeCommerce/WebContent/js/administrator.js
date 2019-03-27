@@ -38,9 +38,40 @@ function operation_alert(result, callback) {
             $(this).removeClass("alert-danger fade in");
             callback();
         });
-    }
-    
+    }  
 }
+
+$( document ).ready(function() {
+	
+	$(".delete").click(function(){
+		var id = $(this).data('id');
+
+		$.ajax({
+			url: "product?action=DELETE",
+	        type: "POST",
+	        dataType: "JSON",
+	        data: JSON.stringify(id),
+	        success: function(result){
+	        	 var str = result.result;
+	        	    if ((str.search("SUCCESS")) != -1) {
+	        	    	$("#"+id).slideUp();
+	        	    	var deletedCategory = result.category;
+	        	    	console.log(deletedCategory);
+	        	    	if(deletedCategory != null){
+	        	    		$("#"+deletedCategory).slideUp();
+	        	    	}
+	        	    }
+	        	    else{
+	        	    	alert("Errore: non e' stato possibile eliminare il prodotto!")
+	        	    }
+	        },
+	        error: function(){	
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }
+		});		
+	});
+});
+
 
 $( document ).ready(function() {
 	
@@ -76,7 +107,6 @@ $( document ).ready(function() {
 	        error: function(){	
 	        	alert("Errore di richiesta al server! Riprovare.");
 	        }
-	    	
 	    });
 	});
 });

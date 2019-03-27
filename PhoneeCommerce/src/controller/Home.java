@@ -36,9 +36,7 @@ public class Home extends HttpServlet {
   /* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
-    
-   
+
     ProductCategory productCat=new ProductCategory(); 
     Set<Product> brandProducts = new HashSet<Product>();
     
@@ -97,7 +95,7 @@ public class Home extends HttpServlet {
     	}
     	break;
     
-    case "aggiungiProdotto":
+    case "addProduct":
       
     	if(user == null)
     		page = "index";
@@ -105,6 +103,23 @@ public class Home extends HttpServlet {
     	{
     		if(user.getType() == Type.Organizer)
     			page = "insert_product";
+    		else
+    			page = "index";
+    	}
+    	break;
+    
+    case "modifydelete":
+        
+    	if(user == null)
+    		page = "index";
+    	else
+    	{
+    		if(user.getType() == Type.Organizer)
+    		{
+    			List<Product> allproducts = ProductService.getAllProducts();
+    			request.setAttribute("allProducts", allproducts);
+    			page = "manageproduct";
+    		}
     		else
     			page = "index";
     	}

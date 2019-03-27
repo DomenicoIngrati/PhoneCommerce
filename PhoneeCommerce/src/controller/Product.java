@@ -47,7 +47,7 @@ public class Product extends HttpServlet {
 		
 		
 		User user = (User) session.getAttribute("user");
-		System.out.println("ciao");
+
 		switch (action) {
 		case "CREATE": {
 			if(user.getType() == Type.Organizer)
@@ -64,12 +64,11 @@ public class Product extends HttpServlet {
 //			result = eventService1.updateEvent();
 //			break;
 //		}
-//		case "DELETE":
-//		{
-//			EventService eventservice = new EventService(json);
-//			result=eventservice.deleteEvent();
-//			break;
-//		}
+		case "DELETE":
+		{
+			result=ProductService.deleteProduct(json);
+			break;
+		}
 //		case "SUSPEND":
 //		{
 //			EventService eventservice = new EventService(json);

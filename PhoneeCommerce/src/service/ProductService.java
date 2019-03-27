@@ -12,7 +12,9 @@ import com.google.gson.JsonObject;
 
 import model.Product;
 import model.ProductCategory;
+import persistence.dao.ProductCategoryDAO;
 import persistence.dao.ProductDAO;
+import persistence.dao.implementation.ProductCategoryDaoJDBC;
 import persistence.util.DAOfactory;
 import persistence.util.DatabaseManager;
 
@@ -73,6 +75,36 @@ public abstract class ProductService {
 		
 		return products;
 		
+	}
+	public static List<Product> getAllProducts(){
+		ProductDAO ProductDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+		List<Product> products = new ArrayList<Product>();
+		products = ProductDao.findAll();
+		
+		return products;
+	}
+
+	public static JsonObject deleteProduct(String json) {
+		
+		ProductDAO ProductDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+		Product p = ProductDao.findById(Long.parseLong(json));
+		JsonObject result = new JsonObject();
+		
+		if(ProductDao.delete(p))
+		{
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been insert succefully!");
+
+			List <Product> totalProduct = ProductDao.findFormCategory(p.getCategory());
+			if(totalProduct.isEmpty())
+				result.addProperty("category", p.getCategory().getId());
+		} 
+		else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong!");
+		}
+		
+		return result;
 	}
 
 }

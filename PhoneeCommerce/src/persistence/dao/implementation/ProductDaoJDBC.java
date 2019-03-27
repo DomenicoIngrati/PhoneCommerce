@@ -25,13 +25,25 @@ public class ProductDaoJDBC implements ProductDAO {
 	}
 	
 	@Override
-	public void delete(Product t) {
+	public boolean delete(Product t) {
 		Connection connection = this.dataSource.getConnection();
 		try {
+			 
 			String delete = "delete FROM Product WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setLong(1, t.getId());
-			statement.executeUpdate();
+			
+			boolean temp = (statement.executeUpdate() > 0) ? true : false;
+			
+			if(temp)
+			{
+				ProductCategoryDAO prodCat = new ProductCategoryDaoJDBC(dataSource);
+				List <Product> totalProduct = findFormCategory(t.getCategory());
+				if(totalProduct.isEmpty())
+					prodCat.deleteById(t.getCategory());
+			}
+			return temp;
+
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -227,7 +239,6 @@ public class ProductDaoJDBC implements ProductDAO {
 			ProductCategory pcat = cat.findByName(p.getCategory().getName());
 			if(pcat == null)
 			{
-				System.out.println("NULLO");
 				cat.create(p.getCategory());
 				pcat = cat.findByName(p.getCategory().getName());
 			}
@@ -263,6 +274,42 @@ public class ProductDaoJDBC implements ProductDAO {
 			PreparedStatement statement;
 			String query = "select * from Product";
 			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getLong("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
+				products.add(product);
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> findFormCategory(ProductCategory pc) {
+		Connection connection = this.dataSource.getConnection();
+		List<Product> products = new ArrayList<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from product where category = ?";
+			
+			statement = connection.prepareStatement(query);
+			System.out.println("STO SETTANDO nella query: "+pc.getId());
+			statement.setLong(1, pc.getId());
+			
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				product = new Product();

@@ -10,7 +10,7 @@ public interface ProductDAO {
 	
 	public boolean create(Product modelObject);
 	
-	public void delete(Product t);
+	public boolean delete(Product t);
 	
 	public void update (Product t);
 	
@@ -23,6 +23,8 @@ public interface ProductDAO {
 	public Set<Product> findByCategory(ProductCategory idCategory);
 	
 	public List<Product> findAll();
+	
+	public List<Product> findFormCategory(ProductCategory pc);
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 

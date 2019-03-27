@@ -57,7 +57,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 	public void deleteById(ProductCategory tc) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM ProductCategory WHERE name = ? ";
+			String delete = "delete FROM ProductCategory WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setLong(1, tc.getId());
 			statement.executeUpdate();
