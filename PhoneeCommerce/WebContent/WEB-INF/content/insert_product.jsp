@@ -58,8 +58,6 @@
 							
 							
 							</div>
-							
-							<label id="#label1"  for="customFile">Scegli immagine</label>
                            
                            <div class="col-md-12 text-center ">
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Registra prodotto</button>
