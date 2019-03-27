@@ -59,11 +59,11 @@ public class Product extends HttpServlet {
 			}
 			break;
 		}
-//		case "UPDATE": {
-//			EventService eventService1 = new EventService(json);
-//			result = eventService1.updateEvent();
-//			break;
-//		}
+		case "UPDATE": {
+
+			result = ProductService.updateProduct(json);
+			break;
+		}
 		case "DELETE":
 		{
 			result=ProductService.deleteProduct(json);

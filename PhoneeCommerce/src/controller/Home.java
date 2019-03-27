@@ -66,6 +66,15 @@ public class Home extends HttpServlet {
     case "index":
     	List <Product> newProducts = ProductService.getLastSixProducts();
     	request.setAttribute("newproducts", newProducts);
+    	
+//    	ProductCategory old = catDao.findByName(jsonProduct.getString("oldnamecategory"));
+//		List <Product> totalProduct = dao.findFormCategory(old);
+//		if(totalProduct.isEmpty())
+//		{
+//			catDao.deleteById(old);
+//			result.addProperty("oldnamecategory", old.getId());
+//		}
+    	
     	page="index";
     	break;
       

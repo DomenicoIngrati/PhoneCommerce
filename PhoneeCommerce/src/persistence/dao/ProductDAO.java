@@ -12,7 +12,7 @@ public interface ProductDAO {
 	
 	public boolean delete(Product t);
 	
-	public void update (Product t);
+	public boolean update (Product t);
 	
 	public Product findById(Long id);
 	

@@ -43,6 +43,27 @@ function operation_alert(result, callback) {
 
 $( document ).ready(function() {
 	
+	$('#modifyModal').on('show.bs.modal', function (event) {
+		
+		var button = $(event.relatedTarget); // Button that triggered the modal
+		var name = button.data('name'); // Extract info from data-* attributes
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		var modal = $(this);
+		modal.find('#name').val(button.data('name'));
+		modal.find('#category').val(button.data('category'));
+		modal.find('#price').val(button.data('price'));
+		modal.find('#description').val(button.data('description'));
+		modal.find('#label').html(button.data('image'));
+		modal.find('#submitModify').attr('data-idproduct',button.data('id'));
+		modal.find('#submitModify').attr('data-oldnamecategory',button.data('category'));
+		
+	});
+	
+});
+
+$( document ).ready(function() {
+	
 	$(".delete").click(function(){
 		var id = $(this).data('id');
 
@@ -72,6 +93,46 @@ $( document ).ready(function() {
 	});
 });
 
+$( document ).ready(function() {
+	
+	$("#modifyProduct").submit(function(e) {
+	    e.preventDefault();
+	    
+	    var frm = $(this).serializeFormJSON();
+	    
+	    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
+	    frm.image = filename;
+	    
+	    var idproduct = $('#submitModify').data('idproduct');
+	    var oldNameCategory = $('#submitModify').data('oldnamecategory');
+	    
+	    frm.id = idproduct;
+	    frm.oldnamecategory = oldNameCategory;
+	    $('#modifyModal').modal('hide');
+//	    console.log(frm);
+
+	    $.ajax({
+	        url: "product?action=UPDATE",
+	        type: "POST",
+	        dataType: "JSON",
+	        data: JSON.stringify(frm),
+	        success: function(result){
+	        	
+	        	var category = result.oldnamecategory;
+    	    	if(category != null){
+    	    		$("#"+category).slideUp();
+    	    	}
+	        	operation_alert(result, function(){
+	        	    	window.location.href = "home?action=modifydelete";
+	        	    	//lo protrei fare dinamico modificando i campi su javascript
+	        	});
+	        },
+	        error: function(){	
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }
+	    });
+	});
+});
 
 $( document ).ready(function() {
 	

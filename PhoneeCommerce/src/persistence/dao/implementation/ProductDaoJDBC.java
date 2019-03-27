@@ -52,7 +52,7 @@ public class ProductDaoJDBC implements ProductDAO {
 	}
 
 	@Override
-	public void update(Product t) {
+	public boolean update(Product t) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
@@ -72,12 +72,14 @@ public class ProductDaoJDBC implements ProductDAO {
 			
 			statement.setLong(4, pcat.getId());
 			statement.setLong(5, t.getId());
-			statement.executeUpdate();
+			
+			return (statement.executeUpdate() > 0) ? true : false;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			DAOUtility.close(connection);
 		}
+		
 	}
 	
 	public Product findById(Long id) {
