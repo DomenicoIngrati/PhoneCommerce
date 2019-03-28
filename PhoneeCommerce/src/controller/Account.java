@@ -55,7 +55,6 @@ public class Account extends HttpServlet {
 				HttpSession session = request.getSession();				
 
 				session.setAttribute("user", user);
-
 			}
 			response.getWriter().write(result.toString());
 			break;

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <title>Insert title here</title>
 <script src="js/product.js" type="text/javascript"></script>
+<script src="js/cart.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -67,8 +68,9 @@
                                     <button class="btn btn-dark " id="plus-btn"><i class="fa fa-plus"></i></button>
                                 </div>
                                 
-                               <div class="input-group-append">
-			    					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Add to cart</button>
+                               <div class="input-group-append" id="add-product">
+                               	<!-- Da modificare la quantità passata alla servlet. Va preso il valore contenuto in value qui sopra  -->
+			    					<button class="btn btn-outline-secondary" onclick="addProductOnCart('${brandProduct.name}','1');"> Add to cart</button>
 			 				   </div>	
                             </div>
 

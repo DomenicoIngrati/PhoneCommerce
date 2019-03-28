@@ -8,11 +8,13 @@
     <head>
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
         <link rel="stylesheet" href="css/indexStyle.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
         
         <!-- <script src="js/account.js" type="text/javascript"></script> -->
+
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
@@ -91,9 +93,78 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Chi siamo?</a>
           </li>
-
+          
           <li class="nav-item">
             <a class="nav-link" href="home?action=faq">FAQ</a>
+          </li>
+
+          <li class="nav-item">
+           <!--  <a class="nav-link" href="home?action=faq">FAQ</a> -->
+            <!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			  Carrello
+			</button>
+			
+			<!-- Modal -->
+			<div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+			    <div class="modal-content" style="width:1300px;">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">CARRELLO</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body" style="width:1300px;">
+								<table id="cart" class="table table-hover table-condensed">
+			    				<thead>
+									<tr>
+										<th style="width:50%">Product</th>
+										<th style="width:10%">Price</th>
+										<th style="width:8%">Quantity</th>
+										<th style="width:22%" class="text-center">Subtotal</th>
+										<th style="width:10%"></th>
+									</tr>
+								</thead>
+								
+								<tbody>
+								
+								<c:forEach var="productOnCart" items="${productsOnCart}">
+									<tr>
+										<td data-th="Product">
+											<div class="row">
+												<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+												<div class="col-sm-10">
+													<h4 class="nomargin">${productOnCart.product.name}</h4>
+													<p>${productOnCart.product.description }</p>
+												</div>
+											</div>
+										</td>
+										<td data-th="Price">$${productOnCart.product.price}0</td>
+										<td data-th="Quantity">
+											<input type="number" class="form-control text-center" value="1">
+										</td>
+										<td data-th="Subtotal" class="text-center">NON SO COS'è</td>
+										<td class="actions" data-th="">
+											<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+											<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+										</td>
+									</tr>
+								</c:forEach> 
+								</tbody>
+								<tfoot>
+									<tr>
+										<td><a href="#" class="custom-close btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+										<td colspan="2" class="hidden-xs"></td>
+										<td class="hidden-xs text-center"><strong>Total $<c:out value="${cart.total}" /></strong></td>
+										<td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+									</tr>
+								</tfoot>
+							  </table>
+			      </div>
+			    </div>
+			  </div>
+			</div>
           </li>
         </ul>
 
@@ -112,6 +183,8 @@
   
  	<!-- PAGINA CARICATA -->
 	<jsp:include page="${page}" />
+	
+	
 	
 <%-- 	<!-- Footer -->
 	<%@ include file="content/footer.html"%>

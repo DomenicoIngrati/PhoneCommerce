@@ -139,8 +139,7 @@ $( document ).ready(function() {
 	        },
 	        error: function(){	
 	        	alert("Errore di richiesta al server! Riprovare.");
-	        }
-	    	
+	        }    	
 	    });
 	});
 });

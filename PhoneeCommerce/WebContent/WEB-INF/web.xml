@@ -8,7 +8,6 @@
     <servlet-name>Home</servlet-name>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Account</servlet-name>
     <servlet-class>controller.Account</servlet-class>
@@ -17,13 +16,21 @@
     <servlet-name>Account</servlet-name>
     <url-pattern>/account</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>Product</servlet-name>
     <servlet-class>controller.Product</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Product</servlet-name>
     <url-pattern>/product</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>controller.CartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/cart</url-pattern>
   </servlet-mapping>
 </web-app>
