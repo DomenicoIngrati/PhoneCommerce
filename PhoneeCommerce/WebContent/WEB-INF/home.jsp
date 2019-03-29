@@ -108,14 +108,14 @@
 			<!-- Modal -->
 			<div class="modal fade"  id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-			    <div class="modal-content" style="width:1300px;">
+			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">CARRELLO</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			      <div class="modal-body" style="width:1300px;">
+			      <div class="modal-body">
 								<table id="cart" class="table table-hover table-condensed">
 			    				<thead>
 									<tr>
@@ -133,8 +133,9 @@
 									<tr>
 										<td data-th="Product">
 											<div class="row">
-												<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
-												<div class="col-sm-10">
+												<div class="col-sm-4 image"  style=" background-image:url(http://placehold.it/100x100); background-repeat:no-repeat; background-position: center center; background-size: cover;" > </div>
+												<!-- <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div> -->
+												<div class="col-sm-8">
 													<h4 class="nomargin">${productOnCart.product.name}</h4>
 													<p>${productOnCart.product.description }</p>
 												</div>

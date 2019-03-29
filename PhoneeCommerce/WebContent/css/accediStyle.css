@@ -70,3 +70,10 @@
          color: #ff0000;
          }
          #second{display:none;}
+         
+         image {
+    background-repeat:no-repeat;
+    background-position: center center;
+    
+    background-size: contain;
+}
