@@ -34,7 +34,7 @@ function addProductOnCart(productName,q){
 
 $(function () {
     $(".custom-close").on('click', function() {
-        $('#myModal').modal('hide');
+        $('#cartmodal').modal('hide');
     });
 });
 

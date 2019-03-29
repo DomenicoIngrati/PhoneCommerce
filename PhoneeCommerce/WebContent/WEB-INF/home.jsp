@@ -13,7 +13,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
         
-        <!-- <script src="js/account.js" type="text/javascript"></script> -->
+        <!-- <script src="js/cart.js" type="text/javascript"></script> -->
 
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,12 +101,12 @@
           <li class="nav-item">
            <!--  <a class="nav-link" href="home?action=faq">FAQ</a> -->
             <!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cartmodal">
 			  Carrello
 			</button>
 			
 			<!-- Modal -->
-			<div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade"  id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 			    <div class="modal-content" style="width:1300px;">
 			      <div class="modal-header">

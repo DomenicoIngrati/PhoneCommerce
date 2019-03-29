@@ -38,14 +38,13 @@
 								  <div class="input-group-append ">
 								    <span class="input-group-text">€</span>
 								  </div>
-								</div>
+								</div> 
 							</div>
 							
 							<div class="form-group">
 								<label for="Descrizione">Descrizione</label>
 								<textarea name ="description" class="form-control" rows="5" id="comment" placeholder="Inserisci descrizione"></textarea>
-							
-							
+
 							</div>
 							
 							<div class="form-group">
@@ -54,9 +53,7 @@
 									<input  type="file" class="custom-file-input" id="customFile" accept="image/x-png,image/jpeg">
 									<label id="#label" class="custom-file-label" for="customFile">Scegli immagine</label>
 								</div>
-									    
-							
-							
+
 							</div>
                            
                            <div class="col-md-12 text-center ">
