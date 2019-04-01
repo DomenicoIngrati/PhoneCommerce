@@ -22,5 +22,9 @@ public class Item {
 	public int getQuantity() {
 		return quantity;
 	}
+	
+	public void increaseQuantity(int q) {
+		this.quantity += q;
+	}
 
 }

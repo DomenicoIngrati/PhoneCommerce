@@ -20,7 +20,7 @@
 })(jQuery);
 
 function operation_alert(result, callback) {
-    $("body").scrollTop(0);
+	$("html, body").animate({ scrollTop: 0 }, "slow");
     $("#login-auto-close-alert").focus();
     
     var str = result.result;

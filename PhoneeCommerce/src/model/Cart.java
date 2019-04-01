@@ -1,26 +1,28 @@
 package model;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-
 
 public class Cart {
 	private User user;
-	private Map<Product,Integer> products; //prodotto, quantita
 	
 	private Set<Item> itemsOnCart;
 	
 	private double total;
 	
+	private int size;
+	
 	public Cart() {
 		user = null;
-		products = new HashMap<Product, Integer>();
 		itemsOnCart=new HashSet<Item>();
 		total = 0;
+		size = 0;
 	}
-	
+
+	public void setProducts(Set<Item> itemsOnCart) {
+		this.itemsOnCart = itemsOnCart;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -31,10 +33,6 @@ public class Cart {
 
 	public Set<Item> getProducts() {
 		return itemsOnCart;
-	}
-
-	public void setProducts(Map<Product, Integer> products) {
-		this.products = products;
 	}
 
 	public double getTotal() {
@@ -56,11 +54,36 @@ public class Cart {
     }
     
     public void addProducts(Product p,int quantita) {
-    	Item i=new Item(p,quantita);
-    	sumTotal(p.getPrice()*quantita);
-    	products.put(p, quantita);
-    	itemsOnCart.add(i);
+    	boolean ce = false;
+    	for(Item prod: this.itemsOnCart)
+    	{
+    		if(prod.getProduct().equals(p))
+    		{
+    			prod.increaseQuantity(quantita);
+    			ce = true;
+    		}
+    	}
+    	if(!ce)
+    	{
+    		Item i=new Item(p,quantita);
+        	sumTotal(p.getPrice()*quantita);
+        	itemsOnCart.add(i);
+    	}
     }
-    
+   @Override
+	public String toString() {
+	   String out = "";
+	   for(Item prod: this.itemsOnCart) {
+		   out += prod.getProduct().getName() + ": " + prod.getQuantity()+"\n";
+	   }
+	   return out;
+	}
 
+	public int getSize() {
+		this.size = 0;
+		for(Item it: this.itemsOnCart) {
+			this.size += it.getQuantity();
+		}
+		return this.size;
+	}
 }

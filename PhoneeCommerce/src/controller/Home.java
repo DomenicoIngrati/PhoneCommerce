@@ -150,6 +150,10 @@ public class Home extends HttpServlet {
     	selectedProduct=ProductService.findProductByName(selectedProductName);
     	request.setAttribute("selectedProduct",selectedProduct);
     	break;
+    
+    case "cart":
+    	page = "cart";
+    	break;
 
     default:
     	page="index";
