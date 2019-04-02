@@ -71,6 +71,19 @@ public class Cart {
         	itemsOnCart.add(i);
     	}
     }
+    
+    public void deleteProduct(Product p) {
+        // TODO Auto-generated method stub
+    	  Set<Item> toRemove = new HashSet<Item>();
+          for (Item i : this.itemsOnCart){
+            if(i.getProduct().equals(p)){
+               decrementTotal(i.getProduct().getPrice()*i.getQuantity());
+               toRemove.add(i);
+            }
+          }  
+          this.itemsOnCart.removeAll(toRemove);
+    }
+    
    @Override
 	public String toString() {
 	   String out = "";

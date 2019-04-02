@@ -39,9 +39,7 @@ function addProductOnCart(productName,q){
         	console.log(data.size);
         	$("#countCart").text(size);
         	
-        	operation_alert(data, function(){
-        		window.location.href = "";
-        	});
+
         	
         },
         error: function(){	
@@ -49,6 +47,35 @@ function addProductOnCart(productName,q){
         } 
 	});
 };
+
+
+
+$(document).ready(function () {
+
+	
+	
+	$(".delete-Product").on('click', function() {
+	
+	
+	var productName = $(this).data('id');
+	
+	console.log(productName);
+	
+	$.ajax({
+		url: "cart?action=deleteProduct",
+		type: "POST",
+		datatype: "json",
+		data: JSON.stringify(productName),
+        success: function(result){   	
+        	window.location.reload();
+        },
+        error: function(){	
+        	alert("Errore di richiesta al server! Riprovare.");
+        } 
+	});
+  });
+});
+
 
 //$(function () {
 //    $(".custom-close").on('click', function() {

@@ -32,4 +32,20 @@ public abstract class CartService {
 		} 
 		return result;
 	}
+	
+	public static JsonObject deleteProductFromCart(String json, Cart cart) {
+		  JsonObject result = new JsonObject();
+		  ProductDAO dao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+		  Product p = new Product();
+		  String productName= json.substring(1, json.length()-1);
+		  p=dao.findByName(productName);
+		  
+		  System.out.println(p.getName());
+		  
+	      cart.deleteProduct(p);
+	      result.addProperty("result", "SUCCESS");
+	      result.addProperty("message", "Product has been added into the cart successfully!");
+		  
+		  return result;
+	}
 }

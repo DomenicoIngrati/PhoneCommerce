@@ -57,6 +57,12 @@ public class CartServlet extends HttpServlet {
 	    	session.setAttribute("productsOnCart", cart.getProducts());
 	    	response.getWriter().write(result.toString());
 	    	break;
+	    	
+	    case "deleteProduct":
+	    	  result=CartService.deleteProductFromCart(json,cart);
+	    	  session.setAttribute("productsOnCart", cart.getProducts());
+	    	  response.getWriter().write(result.toString());
+	    	break;
 	    
 	    default:
 	    	result.addProperty("result", "FAIL");
