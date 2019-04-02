@@ -61,6 +61,7 @@ public class Cart {
     		{
     			prod.increaseQuantity(quantita);
     			ce = true;
+    			sumTotal(p.getPrice()*quantita);
     		}
     	}
     	if(!ce)

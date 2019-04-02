@@ -56,7 +56,7 @@
                              <div class="input-group-prepend">
                                  <button class="btn btn-dark " id="plus-btn"><i class="fa fa-plus"></i></button>
                              </div> -->
-                             <input type="number" min="0" max="10" step="1"/>
+                             <input value="${productOnCart.quantity}"type="number" min="0" max="10" step="1"/>
                          </div>
 
 				</td>
