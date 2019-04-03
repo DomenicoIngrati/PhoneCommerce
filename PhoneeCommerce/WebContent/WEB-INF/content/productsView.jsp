@@ -7,12 +7,13 @@
 <script src="js/cart.js" type="text/javascript"></script>
 
  
- 	<h1 class="newProductString"> ${pageTitle} </h1>
+ 	
  	
  <!--  RIGA NUOVI PRODOTTI  -->
  
    	
-   	<div class="container mt-4">
+   	<div class="boxcontainer container mt-4">
+   	<h2 class="text-center" style="margin-bottom:40px;"> ${pageTitle} </h1>
 	    <div class="row justify-content-center">
 	        <c:forEach var="brandProduct" items="${brandProducts}">
 	        <div class="col-auto mb-3">

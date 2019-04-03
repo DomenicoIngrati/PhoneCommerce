@@ -1,6 +1,8 @@
 @charset "ISO-8859-1";
 
-
+#newbox{
+	margin-top: 50px;
+}
 
 .carousel-inner{
   min-height: 400px; /* Modifichiamo l'altezza del carosello  */
@@ -33,13 +35,13 @@
 }
 
 .newProductString {
-    padding: 80px 0px 10px;
-    padding: 5vw 0vw 0.69444vw;
+
     font-family: "SamsungSharpSans",arial;
     font-size: 34px;
     font-size: 2.22vw;
     text-align: center;
     padding-bottom: 80px;
+    margin: 0;
     
 }
 
