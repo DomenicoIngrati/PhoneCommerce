@@ -47,9 +47,9 @@
  <!-- FINE CAROSELLO -->
   
  
- <div class="container">
+ <div id="newbox" class="boxcontainer container">
  
- 	<h2 class="newProductString">Scopri i nuovi prodotti</h2>
+ 	<h2 class="text-center" >Scopri i nuovi prodotti</h2>
         
  
  <!--  RIGA NUOVI PRODOTTI  -->

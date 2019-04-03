@@ -13,7 +13,7 @@
 <body>
 
 <!--Main layout-->
-  <main class="mt-5 pt-4">
+  <main class="boxcontainer container mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
 
       <!--Grid row-->
