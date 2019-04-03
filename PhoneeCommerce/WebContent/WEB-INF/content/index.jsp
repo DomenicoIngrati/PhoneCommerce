@@ -66,7 +66,7 @@
 							<h5 class="card-title">${i.name} ${i.price}0 €</h5>
 							<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 
 						    <p class="card-text">${i.description}</p>
-						   	<input class="btn btn-primary" type="button" value="Add to cart" onclick="addProductOnCart('${i.name}','1');"/>
+						   	<input class="btn btn-primary add-product-on-cart" type="button" value="Add to cart" data-name="${i.name}" />
 						  	<a href="#" class="btn btn-primary">Preferiti</a>
 						</div>
 	        	 </div>
