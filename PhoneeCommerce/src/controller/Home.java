@@ -80,10 +80,22 @@ public class Home extends HttpServlet {
       
     case "signin":
     	page="login";
+		session.setAttribute("comingFromCart", "No");
     	break;
     
     case "registration":
+    	
     	page="signup";
+    	System.out.println(request.getParameter("fromCart"));
+    	String value=request.getParameter("fromCart");
+    	System.out.println(value);
+    	if(value.equals("no")) {
+    		session.setAttribute("comingFromCart", "No");
+    	}
+    	else
+    	{
+    		session.setAttribute("comingFromCart", "Yes");	
+    	}
     	break;
     
     case "faq":
@@ -153,6 +165,17 @@ public class Home extends HttpServlet {
     
     case "cart":
     	page = "cart";
+    	break;
+    
+    case "cartCheckout":
+		session.setAttribute("comingFromCart", "Yes");
+    	if(user==null) {
+    		page= "login";
+    	}
+    	else{
+    		page="faq";
+    	}
+    	
     	break;
 
     default:

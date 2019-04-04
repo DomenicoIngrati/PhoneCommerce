@@ -28,13 +28,12 @@
 				<th style="width:22%" class="text-center">Subtotal</th>
 				<th style="width:8%"></th>
 			</tr>
-		</thead>
+				</thead>
 		
 		<tbody>
-		
 		<c:forEach var="productOnCart" items="${productsOnCart}">
 
-		
+			
 				<tr>
 				<td data-th="Product">
 					<div class="row">
@@ -58,15 +57,15 @@
                                  <button class="btn btn-dark " id="plus-btn"><i class="fa fa-plus"></i></button>
                              </div> -->
                              <input value="${productOnCart.quantity}" type="number" min="0" max="10" step="1"/>
-                         </div>
-
+                </div>
 				</td>
 				<td data-th="Subtotal" class="text-center">NON SO COS'è</td>
 				<td class="actions" data-th="">
-					<!-- <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button> -->
 					<button class="btn btn-danger btn-sm delete-Product" data-id="${productOnCart.product.name}" ><i class="fa fa-trash-o"></i></button>
 				</td>
-			</tr>
+			   </tr>
+
+			
 		</c:forEach> 
 		</tbody>
 		<tfoot>
@@ -74,7 +73,7 @@
 				<td><a href="#" class="custom-close btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
 				<td colspan="2" class="hidden-xs"></td>
 				<td class="hidden-xs text-center"><strong>Total $<c:out value="${cart.total}0" /></strong></td>
-				<td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+				<td><a href="home?action=cartCheckout" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
 			</tr>
 		</tfoot>
 	  </table>

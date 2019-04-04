@@ -39,7 +39,7 @@
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Accedi</button>
                            </div>
                            <div class="form-group">
-                              <p class="text-center">Non hai un account? <a href="?action=registration" id="signup">Registrati qui</a></p>
+                              <p class="text-center">Non hai un account? <a href="?action=registration&fromCart=yes" id="signup">Registrati qui</a></p>
                            </div>
                            
                            <div class="col-md-12 ">

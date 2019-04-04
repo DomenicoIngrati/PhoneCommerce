@@ -65,7 +65,7 @@
 			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account </a>
 			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
 			          <a class="dropdown-item" href="home?action=signin">Accedi</a>
-			          <a class="dropdown-item" href="home?action=registration">Registrati</a>
+			          <a class="dropdown-item" href="home?action=registration&fromCart=no">Registrati</a>
 			        </div>        
 			    </c:when>
 			    <c:when test="${user.type eq Type.Customer}">

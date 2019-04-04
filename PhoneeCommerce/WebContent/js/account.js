@@ -133,9 +133,20 @@ $( document ).ready(function() {
 	        dataType: "JSON",
 	        data: JSON.stringify(frm),
 	        success: function(data){
-	        	operation_alert(data, function(){
-	        		window.location.href = "?action=index";
-	        	});
+	        	
+	        	var newData=data.comingFromCart;
+	        	
+	        	if(newData == true){
+		        	operation_alert(data, function(){
+		        		window.location.href="?action=cartCheckout";
+		        	});
+	        	}
+	        	else{
+		        	operation_alert(data, function(){
+		        		window.location.href = "?action=index";
+		        	});
+	        	}
+	        	
 	        },
 	        error: function(){	
 	        	alert("Errore di richiesta al server! Riprovare.");
@@ -155,20 +166,30 @@ $( document ).ready(function() {
 	        dataType: "JSON",
 	        data: JSON.stringify(frm),
 	        success: function(data){
+
+	        	
 	        	operation_alert(data, function(){
 	        		var str = data.result;
+	        		console.log(data);
 	                if (str.search("ORGANIZER") != -1) {
-	                    operation_alert(data, function() {
+	                	
+	                		
 	                        window.location.href = "home?action=index";
-	                    });
-	                } else {
-	                    operation_alert(data, function() {
-	                        window.location.reload();
-	                    });
-	
+	                } 
+	                else{
+	               
+	                	var newData= data.comingFromCart;
+	    	        	if(newData == true){
+	    	        			console.log("oooooooooo");
+	    		        		window.location.href="home?action=cartCheckout";
+	    	        	}
+	    	        	else{
+	    	        		console.log("mammita");
+	    	        		window.location.href = "home?action=index";
+	    	        	}
+		                   
 	                }
-	        		
-	        		window.location.href = "home?action=index";
+	                
 	        	});
 	        },
 	        error: function(){	
@@ -177,6 +198,7 @@ $( document ).ready(function() {
 	    });
 	});
 });
+
 
 
 

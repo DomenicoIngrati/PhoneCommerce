@@ -13,27 +13,28 @@ public class AccountService {
 	private AccountService() {
 	}
 
-	public static void signUp(String data, JsonObject result) {
+	public static User signUp(String data, JsonObject result) {
 		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 		UserDAO dao = factory.getUserDAO();
 		Gson gson = new Gson();
 		User source = gson.fromJson(data, User.class);
-		User destination = source;
-		if (dao.create(destination)) {
+		if (dao.create(source)) {
 			result.addProperty("result", "SUCCESS");
 			result.addProperty("message", "You have successfully signed-up, will be redirected soon !");
+			System.err.println(source);
+			return source;
 		} else {
 			result.addProperty("result", "FAIL");
-			destination = source;
-			if (dao.findByUsername(destination.getUsername()) == null) {
+			if (dao.findByUsername(source.getUsername()) == null) {
 				result.addProperty("reason", "Username already exists, try agan with a new one!");
-			} else if (dao.findByEmail(destination.getEmail()) == null) {
+			} else if (dao.findByEmail(source.getEmail()) == null) {
 				result.addProperty("reason", "Email already exists, try agan with a different one");
 			} else {
 				result.addProperty("reason", "Sorry, something went wrong, try again within few minutes");
 			}
+			System.err.println(source);
+			return null;
 		}
-		System.err.println(source);
 	}
 
 	public static User signIn(String data, JsonObject result) {

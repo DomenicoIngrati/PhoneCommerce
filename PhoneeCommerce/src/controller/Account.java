@@ -42,19 +42,35 @@ public class Account extends HttpServlet {
 		}
 		// get the action
 		String action = request.getParameter("action");
+		HttpSession session=request.getSession();
+		String comingFromCart= (String) session.getAttribute("comingFromCart");
+		User user=null;
+		
 		JsonObject result = new JsonObject();
 		switch (action) {
 		
 		case "signup":
-			AccountService.signUp(json, result);
+			user=AccountService.signUp(json, result);
+			session.setAttribute("user", user);
+			
+			if(comingFromCart=="Yes" && user!=null) {
+				result.addProperty("comingFromCart", true);
+			}
+			else {
+				result.addProperty("comingFromCart", false);	
+			}
 			response.getWriter().write(result.toString());
 			break;
 		case "signin":
-			User user = AccountService.signIn(json, result);
-			if (user != null) {
-				HttpSession session = request.getSession();				
-
+			user = AccountService.signIn(json, result);
+			if (user != null) {	
 				session.setAttribute("user", user);
+			}
+			if(comingFromCart=="Yes") {
+				result.addProperty("comingFromCart", true);
+			}
+			else {
+				result.addProperty("comingFromCart", false);	
 			}
 			response.getWriter().write(result.toString());
 			break;
