@@ -4,14 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import model.Address;
+import model.Product;
+import model.ProductCategory;
 import model.Type;
 import model.User;
 import persistence.util.PersistenceException;
 import persistence.dao.AddressDAO;
+import persistence.dao.ProductCategoryDAO;
 import persistence.dao.UserDAO;
 import persistence.util.DAOUtility;
+import persistence.util.DAOfactory;
 import persistence.util.DataSource;
 import persistence.util.IdBroker;
 
@@ -34,7 +42,7 @@ public class AddressDaoJDBC implements AddressDAO {
 		    long id = IdBroker.getId(connection);
 			u.setId(id);
 
-		    query = "insert into users (namelastname, address, city, province, zipcode, tel, id) values (?,?,?,?,?,?)";
+		    query = "insert into address (namelastname, address, city, province, zipcode, tel, id,user) values (?,?,?,?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, u.getNamelastname());
 		    statement.setString(2, u.getAddress());
@@ -43,6 +51,7 @@ public class AddressDaoJDBC implements AddressDAO {
 		    statement.setString(5, u.getZipcode());
 		    statement.setString(6, u.getTel());
 		    statement.setLong(7, u.getId());
+		    statement.setLong(8, u.getUser().getId());
 
 		    return (statement.executeUpdate() > 0) ? true : false;
 		} catch (SQLException e) {
@@ -73,7 +82,7 @@ public class AddressDaoJDBC implements AddressDAO {
 	@Override
 	public Address findById(int id) {
 		Connection connection = this.dataSource.getConnection();
-		User u = null;
+		Address u = null;
 		try {
 			PreparedStatement statement;
 			String query = "select * from address where id = ?";
@@ -81,21 +90,16 @@ public class AddressDaoJDBC implements AddressDAO {
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
-				u = new User();
+				u = new Address();
 				u.setId(result.getLong("id"));				
-				u.setName(result.getString("name"));
-				u.setSurname(result.getString("surname"));
-				u.setUsername(result.getString("username"));
-				u.setEmail(result.getString("email"));
-				u.setPassword(result.getString("password"));
-				
-				if(result.getBoolean("admin"))
-					u.setType(Type.Organizer);
-				else
-					u.setType(Type.Customer);
-				
-				
-
+				u.setAddress(result.getString("address"));
+				u.setCity(result.getString("city"));
+				u.setProvince(result.getString("province"));
+				u.setZipcode(result.getString("zipcode"));
+				u.setTel(result.getString("tel"));
+				DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+				UserDAO dao = factory.getUserDAO();
+				u.setUser(dao.findById(result.getLong("user")));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -106,93 +110,64 @@ public class AddressDaoJDBC implements AddressDAO {
 	}
 
 	@Override
-	public User findByUsername(String username) {
+	public List<Address> findByUserId(User user) {
+
 		Connection connection = this.dataSource.getConnection();
-		User u = null;
+		List<Address> addresses = new ArrayList<Address>();
 		try {
+			Address address;
 			PreparedStatement statement;
-			String query = "select * from users where username = ?";
+			String query = "select * from address where user=?";
 			statement = connection.prepareStatement(query);
-			statement.setString(1, username);
+			statement.setLong(1, user.getId());
 			ResultSet result = statement.executeQuery();
-			if (result.next()) {
-				u = new User();
-				u.setId(result.getLong("id"));				
-				u.setName(result.getString("name"));
-				u.setSurname(result.getString("surname"));
-				u.setUsername(result.getString("username"));
-				u.setEmail(result.getString("email"));
-				u.setPassword(result.getString("password"));
+			while (result.next()) {
 				
-				if(result.getBoolean("admin"))
-					u.setType(Type.Organizer);
-				else
-					u.setType(Type.Customer);
-
+				address = new Address();
+				address.setId(result.getLong("id"));				
+				address.setAddress(result.getString("address"));
+				address.setCity(result.getString("city"));
+				address.setProvince(result.getString("province"));
+				address.setZipcode(result.getString("zipcode"));
+				address.setTel(result.getString("tel"));
+				DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+				UserDAO dao = factory.getUserDAO();
+				address.setUser(dao.findById(result.getLong("user")));
 				
 				
-
+				addresses.add(address);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
-		} finally {
+		}	 finally {
 			DAOUtility.close(connection);
-		}	
-		return u;
+		}
+		return addresses;
 	}
-
-	@Override
-	public User findByEmail(String email) {
-		Connection connection = this.dataSource.getConnection();
-		User u = null;
-		try {
-			PreparedStatement statement;
-			String query = "select * from users where email = ?";
-			statement = connection.prepareStatement(query);
-			statement.setString(1, email);
-			ResultSet result = statement.executeQuery();
-			if (result.next()) {
-				u = new User();
-				u.setId(result.getLong("id"));				
-				u.setName(result.getString("name"));
-				u.setSurname(result.getString("surname"));
-				u.setUsername(result.getString("username"));
-				u.setEmail(result.getString("email"));
-				u.setPassword(result.getString("password"));
-
-				if(result.getBoolean("admin"))
-					u.setType(Type.Organizer);
-				else
-					u.setType(Type.Customer);
-			}
-		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
-		} finally {
-			DAOUtility.close(connection);
-		}	
-		return u;
-	}
-
-	@Override
-	public void update(User user) {
+	
+	public boolean update(Address a) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update users SET username = ?, name = ?, surname = ?, email = ?, password = ?  WHERE id=?";
-			PreparedStatement statement = connection.prepareStatement(update);
-
-			statement.setString(1, user.getUsername());
-			statement.setString(2, user.getName());
-			statement.setString(3, user.getSurname());
-			statement.setString(4, user.getEmail());
-			statement.setString(5, user.getPassword());
-			statement.setLong(6, user.getId());
 			
-			statement.executeUpdate();
+			String update = "update address SET namelastname = ?, address = ?, city = ?, province = ?, zipcode=?, tel=?, user=? WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, a.getNamelastname());
+			statement.setString(2, a.getAddress());
+			statement.setString(3,  a.getCity());
+			statement.setString(4, a.getProvince());
+			statement.setString(5, a.getZipcode());
+			statement.setString(6,  a.getTel());
+			statement.setLong(7, a.getUser().getId());
+			statement.setLong(8, a.getId());
+
+			
+			return (statement.executeUpdate() > 0) ? true : false;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			DAOUtility.close(connection);
 		}
+		
 	}
 
 }

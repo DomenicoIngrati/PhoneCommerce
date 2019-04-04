@@ -12,7 +12,6 @@ public class Address {
     private String province;
     private String zipcode;
     private String tel;
-
     private User user;
     
 	public Address() {

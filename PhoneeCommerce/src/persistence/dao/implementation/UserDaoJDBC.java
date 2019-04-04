@@ -68,7 +68,7 @@ public class UserDaoJDBC implements UserDAO {
 	}
 
 	@Override
-	public User findById(int id) {
+	public User findById(long id) {
 		Connection connection = this.dataSource.getConnection();
 		User u = null;
 		try {

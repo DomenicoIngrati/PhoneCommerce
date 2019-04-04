@@ -6,7 +6,7 @@ public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
 	
 	 	public boolean create(User user); //Create
 
-	    public User findById(int id); //Retrice
+	    public User findById(long id); //Retrice
 
 	    public User findByUsername(String username);
 
