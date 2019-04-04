@@ -86,9 +86,7 @@ public class Home extends HttpServlet {
     case "registration":
     	
     	page="signup";
-    	System.out.println(request.getParameter("fromCart"));
     	String value=request.getParameter("fromCart");
-    	System.out.println(value);
     	if(value.equals("no")) {
     		session.setAttribute("comingFromCart", "No");
     	}
@@ -176,6 +174,10 @@ public class Home extends HttpServlet {
     		page="faq";
     	}
     	
+    	break;
+    
+    case "address":
+    	page = "address";
     	break;
 
     default:
