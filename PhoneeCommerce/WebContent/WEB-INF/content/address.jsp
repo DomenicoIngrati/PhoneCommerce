@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="css/address.css">
 <link rel="stylesheet" href="css/productsViewStyle.css">
-<script src="js/cart.js" type="text/javascript"></script>
+<script src="js/account.js" type="text/javascript"></script>
 
  
  	
@@ -39,11 +39,11 @@
 		<div class="address-box">
 			<div class="row">
 				<div class="col-auto"> <!-- DIV IMMAGINE -->
-				<p> <strong>${address.namelastname}  CIAO MAMMITQa</strong> </p> 
-				<p> ${address.address} VIa ciao jasjd </p>
-				<p> ${address.city}, ${address.province}, ${address.zipcode} asdas, adsaddasdasd, asdasdas</p>
+				<p> <strong>${address.namelastname}</strong> </p> 
+				<p> ${address.address}</p>
+				<p> ${address.city}, ${address.province}, ${address.zipcode}</p>
 				<p> Italia </p>
-				<p> Numero di telefono: ${address.tel} 9876546687 </p>
+				<p> Numero di telefono: ${address.tel} </p>
 				</div>  			
 			</div>
 		</div>
@@ -66,7 +66,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="modifyProduct">
+        <form id="address-form">
           
           <div class="form-group">
           	
@@ -75,35 +75,37 @@
           </div>
           <div class="form-group">
 	          <label for="address">Indirizzo</label>
-	          <input id="address" type="text" name="category" class="form-control"  placeholder="Inserisci indirizzo" >
+	          <input id="address" type="text" name="address" class="form-control"  placeholder="Inserisci indirizzo" required>
           </div>
           <div class="form-group">
 	          <label for="city">Citta'</label>
-	          <input id="city" type="text" name="city" class="form-control"  placeholder="Inserisci citta" >
+	          <input id="city" type="text" name="city" class="form-control"  placeholder="Inserisci citta"required >
           </div>
 							
 		<div class="form-group">
 	          <label for="province">Provincia</label>
-	          <input id="province" type="text" name="province" class="form-control"  placeholder="Inserisci provincia" >
+	          <input id="province" type="text" name="province" class="form-control"  placeholder="Inserisci provincia" required>
           </div>
 							
 		<div class="form-group">
 	          <label for="zipcode">Codice postale</label>
-	          <input id="zipcode" type="text" name="zipcode" class="form-control"  placeholder="Inserisci codice postale" >
+	          <input id="zipcode" type="text" name="zipcode" class="form-control"  placeholder="Inserisci codice postale" required>
           </div>
 							
 		<div class="form-group">
 	          <label for="tel">Telefono</label>
-	          <input id="tel" type="text" name="tel" class="form-control"  placeholder="Inserisci numero di telefono" >
+	          <input id="tel" type="text" name="tel" class="form-control"  placeholder="Inserisci numero di telefono" required>
         </div>
-          
+        
+        <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+	        <button id="btn-add-address" type="submit" class="btn btn-primary">Salva indirizzo</button>
+      	</div>
+      	
         </form>
         
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-        <button id="btn-add-address" type="button" class="btn btn-primary">Salva indirizzo</button>
-      </div>
+      
     </div>
   </div>
 </div>

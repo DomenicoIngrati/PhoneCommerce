@@ -179,9 +179,16 @@ public class Home extends HttpServlet {
     	break;
     
     case "address":
-    	page = "address";
-    	List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
-    	request.setAttribute("allAddress", allAddress);
+    	if(user == null) {
+    		page = "index";
+    	}
+    	else //if(user.getType() == Type.Customer)
+    	{
+    		page = "address";
+        	List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
+        	request.setAttribute("allAddress", allAddress);
+    	}
+    	
     	break;
 
     default:

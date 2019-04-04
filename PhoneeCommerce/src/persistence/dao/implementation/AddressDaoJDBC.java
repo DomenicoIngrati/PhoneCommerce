@@ -5,18 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import model.Address;
-import model.Product;
-import model.ProductCategory;
-import model.Type;
 import model.User;
 import persistence.util.PersistenceException;
 import persistence.dao.AddressDAO;
-import persistence.dao.ProductCategoryDAO;
 import persistence.dao.UserDAO;
 import persistence.util.DAOUtility;
 import persistence.util.DAOfactory;
@@ -41,8 +35,8 @@ public class AddressDaoJDBC implements AddressDAO {
 
 		    long id = IdBroker.getId(connection);
 			u.setId(id);
-
-		    query = "insert into address (namelastname, address, city, province, zipcode, tel, id,user) values (?,?,?,?,?,?,?,?)";
+			System.out.println(u);
+		    query = "insert into address (namelastname, address, city, province, zipcode, tel, id, users) values (?,?,?,?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, u.getNamelastname());
 		    statement.setString(2, u.getAddress());
@@ -102,7 +96,7 @@ public class AddressDaoJDBC implements AddressDAO {
 				DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 				UserDAO dao = factory.getUserDAO();
 				
-				u.setUser(dao.findById(result.getLong("user")));
+				u.setUser(dao.findById(result.getLong("users")));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -153,7 +147,7 @@ public class AddressDaoJDBC implements AddressDAO {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			
-			String update = "update address SET namelastname = ?, address = ?, city = ?, province = ?, zipcode=?, tel=?, user=? WHERE id=?";
+			String update = "update address SET namelastname = ?, address = ?, city = ?, province = ?, zipcode=?, tel=?, users=? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, a.getNamelastname());
 			statement.setString(2, a.getAddress());

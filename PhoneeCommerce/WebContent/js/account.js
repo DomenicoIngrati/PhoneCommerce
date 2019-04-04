@@ -122,6 +122,41 @@ function operation_alert(result, callback) {
 
 $( document ).ready(function() {
 	
+	$("#address-form").submit(function(e){
+		
+		e.preventDefault();
+	    
+	    var frm = $(this).serializeFormJSON();
+	    
+	    console.log(frm);
+	    
+	    $.ajax({
+	        url: "address?action=CREATE",
+	        type: "POST",
+	        dataType: "JSON",
+	        data: JSON.stringify(frm),
+	        success: function(data){
+	        	$("#add-address-modal").modal('hide');
+	        	var newData=data.comingFromCart;
+	        	
+	        	operation_alert(data, function(){
+	        		window.location.reload();
+	        	});
+	        	
+	        },
+	        error: function(){	
+	        	$("#add-address-modal").modal('hide');
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }    	
+	    });
+	    
+		
+	});
+	
+});
+
+$( document ).ready(function() {
+	
 	$("#sign-up").submit(function(e) {
 	    e.preventDefault();
 	    
