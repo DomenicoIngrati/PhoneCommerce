@@ -1,36 +1,40 @@
-#cardContainer{}
 
 
-.myAccountBox{
-	padding-top:50px;
+#add-address{
+	background-color: #eeeeee;
+	height: auto;
+	border: 2px #ddd solid;
+	border-radius: 10px;
+	border-style: dashed;
+	min-height:150px;
+	padding: 14px 18px;
 }
 
-#cardContainer{
-	padding-top:50px;
-}
-.card {
-    min-height: 170px;
-}
-.account-button{
-	min-height:158px;
+.address-box{
+	min-height:150px;
 	background-color: #eeeeee;
 	height: auto;
 	border: 1px #ddd solid;
 	border-radius: 10px;
 	
 	padding: 14px 18px;
+	margin-bottom: 7px;
 	
 	
 }
 
-.account-button:hover{
+p{
+	margin-bottom:0;
+}
+
+.address-box:hover{
 	background-color: highlight;
 	
 }
 
-.account-button-box{
+/* .account-button-box{
 	padding: 15px 20px;
-}
+} */
 
 .col-sm{
 	padding-bottom: 10px;

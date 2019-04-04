@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
         <link rel="stylesheet" href="css/indexStyle.css">
         <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="node_modules/octicons/build/font/octicons.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

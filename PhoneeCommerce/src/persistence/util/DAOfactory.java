@@ -61,6 +61,8 @@ public abstract class DAOfactory {
 		public abstract UserDAO getUserDAO();
 		
 		public abstract WishlistDAO getWishlistDAO();
+		
+		public abstract AddressDAO getAddressDAO();
 
 //		public abstract  getUtilDAO(); //???
 	

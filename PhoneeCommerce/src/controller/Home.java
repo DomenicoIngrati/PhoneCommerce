@@ -18,6 +18,8 @@ import model.Product;
 import model.ProductCategory;
 import model.Type;
 import model.User;
+import model.Address;
+import service.AccountService;
 import service.ProductCategoryService;
 import service.ProductService;
 
@@ -178,6 +180,8 @@ public class Home extends HttpServlet {
     
     case "address":
     	page = "address";
+    	List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
+    	request.setAttribute("allAddress", allAddress);
     	break;
 
     default:

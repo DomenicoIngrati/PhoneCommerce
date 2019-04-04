@@ -1,10 +1,15 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import model.Type;
 import model.User;
+import model.Address;
+import persistence.dao.AddressDAO;
 import persistence.dao.UserDAO;
 import persistence.util.DAOfactory;
 
@@ -66,6 +71,40 @@ public class AccountService {
 			result.addProperty("reason", "Sorry,you have to fill all fields!");
 			return null;
 		}
+	}
+
+	public static JsonObject addAddress(User user, String json) {
+		
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		AddressDAO dao = factory.getAddressDAO();
+		UserDAO daoUser = factory.getUserDAO();
+		
+		Gson gson = new Gson();
+		Address tmp = gson.fromJson(json, Address.class);
+		
+		JsonObject result = new JsonObject();
+	
+		tmp.setUser(daoUser.findByEmail(user.getEmail()));
+		if(dao.create(tmp)) {
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Address added to your account!");
+			System.err.println(tmp);
+		} else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong, try again within few minutes!");
+		}	
+		return result;
+	}
+
+	public static List<Address> getAllAddressesFromUser(User user) {
+		List<Address> addresses = null;
+		
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		AddressDAO dao = factory.getAddressDAO();
+		
+		addresses = dao.findByUserId(user);
+		return addresses;
+		
 	}
 
 }

@@ -1,6 +1,7 @@
 package persistence.util;
 
 import persistence.util.DataSource;
+import persistence.dao.AddressDAO;
 import persistence.dao.AdministratorDAO;
 import persistence.dao.OrderDAO;
 import persistence.dao.ProductCategoryDAO;
@@ -70,6 +71,11 @@ private static  DataSource dataSource;
 	@Override
 	public ProductCategoryDAO getProductCategoryDAO() {
 		return new ProductCategoryDaoJDBC(dataSource);
+	}
+
+	@Override
+	public AddressDAO getAddressDAO() {
+		return new AddressDaoJDBC(dataSource);
 	}
 
 }

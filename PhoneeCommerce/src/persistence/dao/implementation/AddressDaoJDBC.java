@@ -91,14 +91,17 @@ public class AddressDaoJDBC implements AddressDAO {
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				u = new Address();
-				u.setId(result.getLong("id"));				
+				u.setId(result.getLong("id"));
+				u.setNamelastname(result.getString("namelastname"));
 				u.setAddress(result.getString("address"));
 				u.setCity(result.getString("city"));
 				u.setProvince(result.getString("province"));
 				u.setZipcode(result.getString("zipcode"));
 				u.setTel(result.getString("tel"));
+				
 				DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 				UserDAO dao = factory.getUserDAO();
+				
 				u.setUser(dao.findById(result.getLong("user")));
 			}
 		} catch (SQLException e) {
@@ -117,14 +120,15 @@ public class AddressDaoJDBC implements AddressDAO {
 		try {
 			Address address;
 			PreparedStatement statement;
-			String query = "select * from address where user=?";
+			String query = "select * from address where users=?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, user.getId());
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				
 				address = new Address();
-				address.setId(result.getLong("id"));				
+				address.setId(result.getLong("id"));
+				address.setNamelastname(result.getString("namelastname"));
 				address.setAddress(result.getString("address"));
 				address.setCity(result.getString("city"));
 				address.setProvince(result.getString("province"));
@@ -132,7 +136,7 @@ public class AddressDaoJDBC implements AddressDAO {
 				address.setTel(result.getString("tel"));
 				DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 				UserDAO dao = factory.getUserDAO();
-				address.setUser(dao.findById(result.getLong("user")));
+				address.setUser(dao.findById(result.getLong("users")));
 				
 				
 				addresses.add(address);

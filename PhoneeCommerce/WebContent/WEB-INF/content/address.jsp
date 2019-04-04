@@ -3,6 +3,7 @@
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
+<link rel="stylesheet" href="css/address.css">
 <link rel="stylesheet" href="css/productsViewStyle.css">
 <script src="js/cart.js" type="text/javascript"></script>
 
@@ -13,59 +14,96 @@
  
    	
 <div class="boxcontainer container mt-5">
-<h2>Visualizza, modifica e aggiungi indirizzi</h2>
+<h2>Visualizza, modifica e aggiungi indirizzi </h2>
 <hr>
 
-<div class="row account-button-box">
+<div class="row">
 	
-	<div class="col-sm">
-	<a href="#">
-		<div class="account-button">
-			<div class="row">
-				<div class="col-auto"> <!-- DIV IMMAGINE -->
-					<img src="img/Box.png" class="img-fluid">
+	<div class="col-sm-4">
+		<button id="add-address" type="button" class="btn btn-block" data-toggle="modal" data-target="#add-address-modal">
+			
+				<div class="row">
+					<div class="col"> <!-- DIV TESTO -->
+						<div class="d-flex justify-content-center"> <img src="img/plus.png" height="50" width="50"> </div>
+						
+						<div class="d-flex justify-content-center"> <h4 class="card-title">Aggiungi indirizzo</h4> </div>
+					</div>  			
 				</div>
-				<div class="col"> <!-- DIV TESTO -->
-					<h4 class="card-title">I miei ordini </h4>
-	            	<p>Visualizza i tuoi articoli</p>
-				</div>  			
-			</div>
-		</div>
-	</a>
+			
+		</button>
 	</div>
 
-	
-	<div class="col-sm">
+<c:forEach var="address" items="${allAddress}">
+	<div class="col-sm-4">
 	<a href="#">
-		<div class="account-button">
+		<div class="address-box">
 			<div class="row">
 				<div class="col-auto"> <!-- DIV IMMAGINE -->
-					<img src="img/lockMyAccount.png" class="img-fluid">
-				</div>
-				<div class="col"> <!-- DIV TESTO -->
-					<h4 class="card-title">Whislist</h4>
-	                 <p>  Crea e visualizza le tue liste dei desideri </p>
+				<p> <strong>${address.namelastname}  CIAO MAMMITQa</strong> </p> 
+				<p> ${address.address} VIa ciao jasjd </p>
+				<p> ${address.city}, ${address.province}, ${address.zipcode} asdas, adsaddasdasd, asdasdas</p>
+				<p> Italia </p>
+				<p> Numero di telefono: ${address.tel} 9876546687 </p>
 				</div>  			
 			</div>
 		</div>
 	</a>
 	</div>
+</c:forEach>
 	
-	<div class="col-sm">
-	<a href="home?action=address">
-			<div class="account-button">
-			<div class="row">
-				<div class="col-auto"> <!-- DIV IMMAGINE -->
-					<img src="img/addressMapMyAccount.png" class="img-fluid">
-				</div>
-				<div class="col"> <!-- DIV TESTO -->
-					<h4 class="card-title">Indirizzi</h4>
-	                    <p>Visualizza e modifica indirizzi per gli ordini </p>
-				</div>  			
-			</div>
-		</div>
-	</a>
-	</div>
+	
 	
 </div>
+</div>
+
+<div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aggiungi indirizzo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="modifyProduct">
+          
+          <div class="form-group">
+          	
+          	<label for="namelastname">Nome</label>
+            <input type="text" name="namelastname"  class="form-control" id="namelastname" placeholder="Inserisci nome e cognome" required>
+          </div>
+          <div class="form-group">
+	          <label for="address">Indirizzo</label>
+	          <input id="address" type="text" name="category" class="form-control"  placeholder="Inserisci indirizzo" >
+          </div>
+          <div class="form-group">
+	          <label for="city">Citta'</label>
+	          <input id="city" type="text" name="city" class="form-control"  placeholder="Inserisci citta" >
+          </div>
+							
+		<div class="form-group">
+	          <label for="province">Provincia</label>
+	          <input id="province" type="text" name="province" class="form-control"  placeholder="Inserisci provincia" >
+          </div>
+							
+		<div class="form-group">
+	          <label for="zipcode">Codice postale</label>
+	          <input id="zipcode" type="text" name="zipcode" class="form-control"  placeholder="Inserisci codice postale" >
+          </div>
+							
+		<div class="form-group">
+	          <label for="tel">Telefono</label>
+	          <input id="tel" type="text" name="tel" class="form-control"  placeholder="Inserisci numero di telefono" >
+        </div>
+          
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        <button id="btn-add-address" type="button" class="btn btn-primary">Salva indirizzo</button>
+      </div>
+    </div>
+  </div>
 </div>
