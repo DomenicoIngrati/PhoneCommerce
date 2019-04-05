@@ -101,7 +101,7 @@
         </div>
         
         <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+	        <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
 	        <button id="btn-add-address" type="submit" class="btn btn-primary">Salva indirizzo</button>
       	</div>
       	

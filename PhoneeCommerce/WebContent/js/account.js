@@ -256,6 +256,18 @@ $("#add-address").on('click', function() {
 });
 
 $( document ).ready(function() {
+	$("#close-modal").on('click',function(){
+		var modal = $("#add-address-modal");
+			modal.find('#namelastname').val("");
+			modal.find('#address').val("");
+			modal.find('#city').val("");
+			modal.find('#province').val("");
+			modal.find('#zipcode').val("");
+			modal.find('#tel').val("");
+	});
+});
+
+$( document ).ready(function() {
 	
 	$("#sign-up").submit(function(e) {
 	    e.preventDefault();
