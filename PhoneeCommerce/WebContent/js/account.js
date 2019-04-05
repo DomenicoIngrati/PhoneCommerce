@@ -117,7 +117,6 @@ function operation_alert(result, callback) {
             callback();
         });
     }
-    
 }
 
 $( document ).ready(function() {
@@ -141,9 +140,7 @@ $( document ).ready(function() {
         	    	operation_alert(result, function(){
     	        		
     	        	});
-
-        	    }
-	        	
+        	    }	
 	        },
 	        error: function(){	
 	        	alert("Errore di richiesta al server! Riprovare.");
@@ -152,7 +149,6 @@ $( document ).ready(function() {
 	});
 	
 });
-
 
 $( document ).ready(function() {
 	

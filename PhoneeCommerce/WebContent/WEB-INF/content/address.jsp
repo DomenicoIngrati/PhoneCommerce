@@ -21,7 +21,6 @@
 	
 	<div class="col-sm-4">
 		<button id="add-address" type="button" class="btn btn-block" data-name="add" data-toggle="modal" data-target="#add-address-modal">
-			
 				<div class="row">
 					<div class="col"> <!-- DIV TESTO -->
 						<div class="d-flex justify-content-center"> <img src="img/plus.png" height="50" width="50"> </div>
@@ -29,7 +28,6 @@
 						<div class="d-flex justify-content-center"> <h4 class="card-title">Aggiungi indirizzo</h4> </div>
 					</div>  			
 				</div>
-			
 		</button>
 	</div>
 
