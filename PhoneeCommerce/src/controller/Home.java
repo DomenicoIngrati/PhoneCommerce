@@ -173,7 +173,7 @@ public class Home extends HttpServlet {
     		page= "login";
     	}
     	else{
-    		page="faq";
+    		page="checkout";
     	}
     	
     	break;
