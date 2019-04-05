@@ -20,7 +20,7 @@
 <div class="row">
 	
 	<div class="col-sm-4">
-		<button id="add-address" type="button" class="btn btn-block" data-toggle="modal" data-target="#add-address-modal">
+		<button id="add-address" type="button" class="btn btn-block" data-name="add" data-toggle="modal" data-target="#add-address-modal">
 			
 				<div class="row">
 					<div class="col"> <!-- DIV TESTO -->
@@ -34,20 +34,25 @@
 	</div>
 
 <c:forEach var="address" items="${allAddress}">
-	<div class="col-sm-4">
-	<a href="#">
+	<div id="address-${address.id}" class="col-sm-4">
+<!-- 	<a href="#"> -->
 		<div class="address-box">
 			<div class="row">
 				<div class="col-auto"> <!-- DIV IMMAGINE -->
-				<p> <strong>${address.namelastname}</strong> </p> 
-				<p> ${address.address}</p>
-				<p> ${address.city}, ${address.province}, ${address.zipcode}</p>
-				<p> Italia </p>
-				<p> Numero di telefono: ${address.tel} </p>
-				</div>  			
+					<p> <strong>${address.namelastname}</strong> </p> 
+					<p> ${address.address}</p>
+					<p> ${address.city}, ${address.province}, ${address.zipcode}</p>
+					<p> Italia </p>
+					<p> Numero di telefono: ${address.tel} </p>
+				</div>  
+				<div class="col-auto btn-box-address">
+					<button type="button" class="btn btn-sm btn-address btn-address-modify" data-name="modify" data-idaddress="${address.id}" data-namelastname="${address.namelastname}" data-address="${address.address}" data-city="${address.city}" data-province="${address.province}" data-zipcode="${address.zipcode}" data-tel="${address.tel}" data-dismiss="modal" data-toggle="modal" data-target="#add-address-modal" >modifica</button>
+	        		<button type="submit" class="btn btn-sm btn-address btn-address-delete" data-id="${address.id}">elimina</button>
+				</div>
+							
 			</div>
 		</div>
-	</a>
+<!-- 	</a> -->
 	</div>
 </c:forEach>
 	

@@ -12,7 +12,7 @@ public interface AddressDAO { //interfaccia pattern DAO con metodi CRUD
 
 	    public boolean delete(Address a); //Delete
 
-	    public Address findById(int id); //Retrive
+	    public Address findById(Long id); //Retrive
 
 	    public List<Address> findByUserId(User u);
 }

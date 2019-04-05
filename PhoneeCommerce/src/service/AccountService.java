@@ -1,6 +1,5 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -105,6 +104,53 @@ public class AccountService {
 		addresses = dao.findByUserId(user);
 		return addresses;
 		
+	}
+
+	public static JsonObject deleteAddress(User user, String id) {
+		
+		JsonObject result = new JsonObject();
+
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		AddressDAO dao = factory.getAddressDAO();
+		
+		Address tmp = dao.findById(Long.parseLong(id));
+		
+		if(dao.delete(tmp)) {
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been deleted succefully!");
+		} 
+		else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong!");
+		}
+		
+		
+		return result;
+		
+	}
+
+	public static JsonObject updateAddress(User user, String json) {
+		
+		JsonObject result = new JsonObject();
+
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		AddressDAO dao = factory.getAddressDAO();
+		
+		Gson gson = new Gson();
+		Address tmp = gson.fromJson(json, Address.class);
+
+		tmp.setUser(dao.findById(tmp.getId()).getUser());
+		
+		if(dao.update(tmp)) {
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been updated succefully!");
+		}
+		else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong!");
+		}
+		
+		return result;
 	}
 
 }

@@ -185,13 +185,19 @@ public class Home extends HttpServlet {
     	else //if(user.getType() == Type.Customer)
     	{
     		page = "address";
-        	List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
-        	request.setAttribute("allAddress", allAddress);
+    		List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
+//        	List<Address> allAddress = (List<Address>) session.getAttribute("allAddress");
+//        	if(allAddress == null) //PER OTTIMIZZARE, SOLO che va resettato ogni volta ch enoi aggiungiamo o eliminiamo un indirizzo altrimenti rimane sempre la stessa pagina
+//        		allAddress = AccountService.getAllAddressesFromUser(user);
+        	
+        	session.setAttribute("allAddress", allAddress);
     	}
     	
     	break;
 
     default:
+    	List <Product> newProducts2 = ProductService.getLastSixProducts();
+    	request.setAttribute("newproducts", newProducts2);
     	page="index";
     }
     

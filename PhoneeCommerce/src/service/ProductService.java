@@ -90,7 +90,7 @@ public abstract class ProductService {
 		if(ProductDao.delete(p))
 		{
 			result.addProperty("result", "SUCCESS");
-			result.addProperty("message", "Product has been insert succefully!");
+			result.addProperty("message", "Product has been deleted succefully!");
 
 			List <Product> totalProduct = ProductDao.findFormCategory(p.getCategory());
 			if(totalProduct.isEmpty())

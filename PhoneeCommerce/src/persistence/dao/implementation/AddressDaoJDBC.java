@@ -74,7 +74,7 @@ public class AddressDaoJDBC implements AddressDAO {
 	}
 
 	@Override
-	public Address findById(int id) {
+	public Address findById(Long id) {
 		Connection connection = this.dataSource.getConnection();
 		Address u = null;
 		try {

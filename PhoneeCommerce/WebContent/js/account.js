@@ -122,37 +122,133 @@ function operation_alert(result, callback) {
 
 $( document ).ready(function() {
 	
-	$("#address-form").submit(function(e){
+	$(".btn-address-delete").click(function(){
+		var id = $(this).data('id');
+		console.log(id);
 		
-		e.preventDefault();
-	    
-	    var frm = $(this).serializeFormJSON();
-	    
-	    console.log(frm);
-	    
-	    $.ajax({
-	        url: "address?action=CREATE",
+		
+		$.ajax({
+	        url: "address?action=DELETE",
 	        type: "POST",
 	        dataType: "JSON",
-	        data: JSON.stringify(frm),
-	        success: function(data){
-	        	$("#add-address-modal").modal('hide');
-	        	var newData=data.comingFromCart;
-	        	
-	        	operation_alert(data, function(){
-	        		window.location.reload();
-	        	});
+	        data: JSON.stringify(id),
+	        success: function(result){
+	        	var str = result.result;
+        	    if ((str.search("SUCCESS")) != -1) {
+        	    	$("#address-"+id).fadeOut();
+        	    }
+        	    else{
+        	    	operation_alert(result, function(){
+    	        		
+    	        	});
+
+        	    }
 	        	
 	        },
 	        error: function(){	
-	        	$("#add-address-modal").modal('hide');
 	        	alert("Errore di richiesta al server! Riprovare.");
 	        }    	
 	    });
-	    
+	});
+	
+});
+
+
+$( document ).ready(function() {
+	
+	$('#add-address-modal').on('show.bs.modal', function (e) {
+
+		var button = $(e.relatedTarget); // Button that triggered the modal
+		
+		var name = button.data('name'); // Extract info from data-* attributes
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		console.log(name);
+		if(name=="modify")
+		{
+			
+			var modal = $(this);
+			modal.find('#namelastname').val(button.data('namelastname'));
+			modal.find('#address').val(button.data('address'));
+			modal.find('#city').val(button.data('city'));
+			modal.find('#province').val(button.data('province'));
+			modal.find('#zipcode').val(button.data('zipcode'));
+			modal.find('#tel').val(button.data('tel'));
+
+			
+			
+			$("#address-form").submit(function(e){
+				
+				e.preventDefault();
+			    var frm = null;
+			    frm = $(this).serializeFormJSON();
+			    frm.id =  button.data('idaddress');
+			   
+			    console.log(frm);
+			    
+			    $.ajax({
+			        url: "address?action=UPDATE",
+			        type: "POST",
+			        dataType: "JSON",
+			        data: JSON.stringify(frm),
+			        success: function(data){
+			        	$("#add-address-modal").modal('hide');
+			        	operation_alert(data, function(){
+			        		window.location.reload();
+			        	});
+			        	
+			        },
+			        error: function(){	
+			        	$("#add-address-modal").modal('hide');
+			        	alert("Errore di richiesta al server! Riprovare.");
+			        }    	
+			    });
+			    
+				
+			});
+		}
+		else{
+			$("#address-form").submit(function(e){
+				
+				
+				e.preventDefault();
+				var frm = null;
+			    frm = $(this).serializeFormJSON();
+			   
+			    console.log(frm);
+			    
+			    $.ajax({
+			        url: "address?action=CREATE",
+			        type: "POST",
+			        dataType: "JSON",
+			        data: JSON.stringify(frm),
+			        success: function(data){
+			        	$("#add-address-modal").modal('hide');
+			        	var newData=data.comingFromCart;
+			        	
+			        	operation_alert(data, function(){
+			        		window.location.reload();
+			        	});
+			        	
+			        },
+			        error: function(){	
+			        	$("#add-address-modal").modal('hide');
+			        	alert("Errore di richiesta al server! Riprovare.");
+			        }    	
+			    });
+
+		});
+		}
+		
 		
 	});
 	
+});
+
+$( document ).ready(function() {
+	$("#add-address").click(function(){
+		$("#btn-add-address").removeAttr("data-idaddresstomodidy");
+	});
 });
 
 $( document ).ready(function() {

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
-import model.Type;
 import model.User;
 import service.AccountService;
-import service.ProductService;
 
 public class Address extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -47,16 +44,17 @@ public class Address extends HttpServlet {
 			
 			break;
 		}
-//		case "UPDATE": {
-//
-//			result = ProductService.updateProduct(json);
-//			break;
-//		}
-//		case "DELETE":
-//		{
-//			result=ProductService.deleteProduct(json);
-//			break;
-//		}
+		case "UPDATE": {
+
+			result = AccountService.updateAddress(user, json);
+			break;
+		}
+		case "DELETE":
+		{
+			System.out.println(json);
+			result=AccountService.deleteAddress(user, json);
+			break;
+		}
 
 		default:
 			break;
