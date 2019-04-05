@@ -2,8 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -18,13 +17,13 @@
     <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
 	<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/account.js" type="text/javascript"></script>
 
     <!-- Custom styles for this template -->
     <link href="css/checkOutStyle.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/productsViewStyle.css">
     <link rel="stylesheet" href="css/address.css">
-  </head>
 
-  <body class="bg-light">
 
     <div class="container">
       <div class="py-5 text-center">
@@ -68,6 +67,10 @@
           <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   				<div class="modal-dialog modal-lg">
     				<div class="modal-content">
+    				
+    					<div class="boxcontainer container mt-5">
+						<h2>Visualizza, modifica e aggiungi indirizzi </h2>
+						<hr>
       					<div class="row">
 	
 							<div class="col-sm-4">
@@ -85,29 +88,88 @@
 							</div>
 							
 							<c:forEach var="address" items="${allAddress}">
-								<div class="col-sm-4">
-								<a href="#">
+								<div id="address-${address.id}" class="col-sm-4">
 									<div class="address-box">
 										<div class="row">
 											<div class="col-auto"> <!-- DIV IMMAGINE -->
-											<p> <strong>${address.namelastname}</strong> </p> 
-											<p> ${address.address}</p>
-											<p> ${address.city}, ${address.province}, ${address.zipcode}</p>
-											<p> Italia </p>
-											<p> Numero di telefono: ${address.tel} </p>
-											</div>  			
+												<p> <strong>${address.namelastname}</strong> </p> 
+												<p> ${address.address}</p>
+												<p> ${address.city}, ${address.province}, ${address.zipcode}</p>
+												<p> Italia </p>
+												<p> Numero di telefono: ${address.tel} </p>
+											</div>  
+											<div class="col-auto btn-box-address">
+												<button type="button" class="btn btn-sm btn-address btn-address-modify" data-name="modify" data-idaddress="${address.id}" data-namelastname="${address.namelastname}" data-address="${address.address}" data-city="${address.city}" data-province="${address.province}" data-zipcode="${address.zipcode}" data-tel="${address.tel}" data-dismiss="modal" data-toggle="modal" data-target="#add-address-modal" >modifica</button>
+								        		<button type="submit" class="btn btn-sm btn-address btn-address-delete" data-id="${address.id}">elimina</button>
+											</div>
+														
 										</div>
 									</div>
-								</a>
 								</div>
 							</c:forEach>
 	
 	
 	
+							</div>
 						</div>
     				</div>
   				</div>
 		  </div>
+		  
+		  
+			<div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Aggiungi indirizzo</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form id="address-form">
+			          
+			          <div class="form-group">
+			          	
+			          	<label for="namelastname">Nome</label>
+			            <input type="text" name="namelastname"  class="form-control" id="namelastname" placeholder="Inserisci nome e cognome" required>
+			          </div>
+			          <div class="form-group">
+				          <label for="address">Indirizzo</label>
+				          <input id="address" type="text" name="address" class="form-control"  placeholder="Inserisci indirizzo" required>
+			          </div>
+			          <div class="form-group">
+				          <label for="city">Citta'</label>
+				          <input id="city" type="text" name="city" class="form-control"  placeholder="Inserisci citta"required >
+			          </div>
+										
+					<div class="form-group">
+				          <label for="province">Provincia</label>
+				          <input id="province" type="text" name="province" class="form-control"  placeholder="Inserisci provincia" required>
+			          </div>
+										
+					<div class="form-group">
+				          <label for="zipcode">Codice postale</label>
+				          <input id="zipcode" type="text" name="zipcode" class="form-control"  placeholder="Inserisci codice postale" required>
+			          </div>
+										
+					<div class="form-group">
+				          <label for="tel">Telefono</label>
+				          <input id="tel" type="text" name="tel" class="form-control"  placeholder="Inserisci numero di telefono" required>
+			        </div>
+			        
+			        <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+				        <button id="btn-add-address" type="submit" class="btn btn-primary">Salva indirizzo</button>
+			      	</div>
+			      	
+			        </form>
+			        
+			      </div>
+			      
+			    </div>
+			  </div>
+			</div>
           
           
           <br>
@@ -310,5 +372,3 @@
         }, false);
       })();
     </script>
-  </body>
-</html>
