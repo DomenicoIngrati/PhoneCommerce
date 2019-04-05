@@ -123,6 +123,8 @@ $( document ).ready(function() {
 	
 	$(".btn-address-delete").click(function(){
 		var id = $(this).data('id');
+		
+		console.log("ciaooooo");
 		console.log(id);
 		
 		
@@ -159,7 +161,9 @@ $( document ).ready(function() {
 		var name = button.data('name'); // Extract info from data-* attributes
 		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		
 		console.log(name);
+		
 		if(name=="modify")
 		{
 			
@@ -241,10 +245,14 @@ $( document ).ready(function() {
 	
 });
 
-$( document ).ready(function() {
-	$("#add-address").click(function(){
-		$("#btn-add-address").removeAttr("data-idaddresstomodidy");
-	});
+
+
+
+
+$(function () {
+$("#add-address").on('click', function() {
+  $('#general-modal').modal('hide');
+});
 });
 
 $( document ).ready(function() {

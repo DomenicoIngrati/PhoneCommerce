@@ -174,6 +174,8 @@ public class Home extends HttpServlet {
     	}
     	else{
     		page="checkout";
+    		List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
+        	session.setAttribute("allAddress", allAddress);
     	}
     	
     	break;
