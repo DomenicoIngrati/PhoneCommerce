@@ -207,7 +207,7 @@ $( document ).ready(function() {
 				
 			});
 		}
-		else{
+		else if (name=="add"){
 			$("#address-form").submit(function(e){
 				
 				
