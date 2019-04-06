@@ -45,7 +45,7 @@ public class Wishlist extends HttpServlet {
 			break;
 		}
 		case "AddProductOnList": {
-
+			System.out.println(json);
 			result = AccountService.addProductOnList(user, json);
 			break;
 		}

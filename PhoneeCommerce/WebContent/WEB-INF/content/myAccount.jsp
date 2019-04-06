@@ -34,7 +34,7 @@
 
 	
 	<div class="col-sm">
-	<a href="#">
+	<a href="home?action=list">
 		<div class="account-button">
 			<div class="row">
 				<div class="col-auto"> <!-- DIV IMMAGINE -->

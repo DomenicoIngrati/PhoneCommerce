@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
  <script src="js/cart.js" type="text/javascript"></script>
+ <script src="js/wishlist.js" type="text/javascript"></script>
+ 
  <!-- CAROSELLO -->
 <div class="bd-example">
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -66,8 +69,8 @@
 							<h5 class="card-title">${i.name} ${i.price}0 €</h5>
 							<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 
 						    <p class="card-text">${i.description}</p>
-						   	<input class="btn btn-primary add-product-on-cart" type="button" value="Add to cart" data-name="${i.name}" />
-						  	<a href="#" class="btn btn-primary">Preferiti</a>
+						   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-name="${i.name}"> carrello </button> 
+				  			<button type="button" class="btn btn-sm btn-warning btn-add-product-on-wishlist" data-idproduct="${i.id}" data-idwishlist="${wishlist.id}">Preferiti </button>
 						</div>
 	        	 </div>
 	        </div>

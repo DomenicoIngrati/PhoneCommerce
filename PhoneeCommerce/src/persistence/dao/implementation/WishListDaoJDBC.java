@@ -234,7 +234,7 @@ public class WishListDaoJDBC implements WishlistDAO {
 	public boolean deleteProductInWishlist(Wishlist wishlist, Product p) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "delete from CONTIENE where product = ? and wishlist = ?)";
+			String update = "delete from CONTIENE where product = ? and wishlist = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 
 			statement.setLong(2, wishlist.getId());
@@ -255,7 +255,7 @@ public class WishListDaoJDBC implements WishlistDAO {
 		Wishlist w = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from Wishlist where users = ? and type = default";
+			String query = "select * from Wishlist where users = ? and type = 'default'";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, user.getId());
 			
@@ -280,6 +280,7 @@ public class WishListDaoJDBC implements WishlistDAO {
 				ResultSet inresult = instatement.executeQuery();
 				while(inresult.next()) {
 					Product p = productDao.findById(inresult.getLong("product"));
+					System.out.println(p);
 					w.getProducts().add(p);
 				}
 				
@@ -291,6 +292,31 @@ public class WishListDaoJDBC implements WishlistDAO {
 			DAOUtility.close(connection);
 		}	
 		return w;
+	}
+
+	@Override
+	public boolean isThereProduct(Wishlist w, Product p) {
+		Connection connection = this.dataSource.getConnection();
+		int cont = 0;
+		try {
+			PreparedStatement instatement;
+			String inquery = "select * from CONTIENE where wishlist = ? and product = ?";
+			instatement = connection.prepareStatement(inquery);
+			instatement.setLong(1, w.getId());
+			instatement.setLong(2, p.getId());
+			
+			ResultSet inresult = instatement.executeQuery();
+			while(inresult.next()) {
+				++cont;
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		if(cont > 0)
+			return true;
+		return false;
 	}
 
 

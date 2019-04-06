@@ -201,23 +201,32 @@ public class AccountService {
 	public static JsonObject addProductOnList(User user, String json) {
 		JsonObject result = new JsonObject();
 		try {
+			System.out.println(json);
 			JSONObject jObject = new JSONObject(json);
 			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 			
 			WishlistDAO dao = factory.getWishlistDAO();
 			ProductDAO productDao = factory.getProductDAO();
 			
-			Product tmpProduct = productDao.findById(jObject.getLong("id-product"));
-			Wishlist tmpWishlist = dao.findById(jObject.getLong("id-wishlist"));
-			if(dao.updateWishProduct(tmpWishlist, tmpProduct)) {
-				
+			Product tmpProduct = productDao.findById(jObject.getLong("idproduct"));
+			Wishlist tmpWishlist = dao.findById(jObject.getLong("idwishlist"));
+			if(dao.isThereProduct(tmpWishlist, tmpProduct))
+			{
 				result.addProperty("result", "SUCCESS");
-				result.addProperty("message", "Product has been added succefully to your wishlist!");
+				result.addProperty("message", "Product is just there!");
 			}
 			else {
-				result.addProperty("result", "FAIL");
-				result.addProperty("reason", "Sorry, something went wrong!");
+				if(dao.updateWishProduct(tmpWishlist, tmpProduct)) {
+					
+					result.addProperty("result", "SUCCESS");
+					result.addProperty("message", "Product has been added succefully to your wishlist!");
+				}
+				else {
+					result.addProperty("result", "FAIL");
+					result.addProperty("reason", "Sorry, something went wrong!");
+				}
 			}
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -235,8 +244,8 @@ public class AccountService {
 			WishlistDAO dao = factory.getWishlistDAO();
 			ProductDAO productDao = factory.getProductDAO();
 			
-			Wishlist tmpWishlist = dao.findById(jObject.getLong("id-wishlist"));
-			Product tmpProduct = productDao.findById(jObject.getLong("id-product"));
+			Wishlist tmpWishlist = dao.findById(jObject.getLong("idwishlist"));
+			Product tmpProduct = productDao.findById(jObject.getLong("idproduct"));
 			if(tmpWishlist.getType() != "default")
 			{
 				if(dao.deleteProductInWishlist(tmpWishlist, tmpProduct)) {
@@ -270,8 +279,8 @@ public class AccountService {
 			WishlistDAO dao = factory.getWishlistDAO();
 			ProductDAO productDao = factory.getProductDAO();
 			
-			Product tmpProduct = productDao.findById(jObject.getLong("id-product"));
-			Wishlist tmpWishlist = dao.findById(jObject.getLong("id-wishlist"));
+			Product tmpProduct = productDao.findById(jObject.getLong("idproduct"));
+			Wishlist tmpWishlist = dao.findById(jObject.getLong("idwishlist"));
 			if(dao.deleteProductInWishlist(tmpWishlist, tmpProduct)) {
 				
 				result.addProperty("result", "SUCCESS");

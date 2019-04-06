@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Wishlist {
@@ -9,16 +10,16 @@ public class Wishlist {
     private String type;
 	private List <Product> products;
     
+    public Wishlist() {
+		this.products = new ArrayList<Product>();
+	}
+    
     public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-	}
-    
-    public Wishlist() {
-		
 	}
 
 	public long getId() {

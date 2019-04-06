@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.jdt.internal.compiler.ast.WhileStatement;
-
 import model.Cart;
 import model.Product;
 import model.ProductCategory;
@@ -53,6 +51,7 @@ public class Home extends HttpServlet {
     cats = ProductCategoryService.findAllCategory();
     
     request.setAttribute("brands", cats);
+    Wishlist wishlist = null;
     
     HttpSession session = request.getSession();
     Cart cart = (Cart) session.getAttribute("cart");
@@ -79,6 +78,10 @@ public class Home extends HttpServlet {
 //			catDao.deleteById(old);
 //			result.addProperty("oldnamecategory", old.getId());
 //		}
+    	if(user != null) {
+    		wishlist = AccountService.getDefaultWishlist(user);
+    		session.setAttribute("wishlist", wishlist);
+    	}
     	
     	page="index";
     	break;
@@ -156,6 +159,11 @@ public class Home extends HttpServlet {
     	brandProducts=ProductService.findProductsByCategory(productCat);
     	request.setAttribute("brandProducts", brandProducts);
     	request.setAttribute("pageTitle",brandName);
+    	
+    	if(user != null) {
+    		wishlist = AccountService.getDefaultWishlist(user);
+    		session.setAttribute("wishlist", wishlist);
+    	}
 
     	break;
       
@@ -196,6 +204,9 @@ public class Home extends HttpServlet {
 //        		allAddress = AccountService.getAllAddressesFromUser(user);
         	
         	session.setAttribute("allAddress", allAddress);
+        	
+        	wishlist = AccountService.getDefaultWishlist(user);
+    		session.setAttribute("wishlist", wishlist);
     	}
     	
     	break;
@@ -207,8 +218,8 @@ public class Home extends HttpServlet {
     	else //if(user.getType() == Type.Customer)
     	{
     		page = "list";
-    		Wishlist wishlist = AccountService.getDefaultWishlist(user);
-    		request.setAttribute("whislist", wishlist);
+    		wishlist = AccountService.getDefaultWishlist(user);
+    		request.setAttribute("wishlist", wishlist);
     	}
     	
     	break;

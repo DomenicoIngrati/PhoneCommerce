@@ -23,5 +23,7 @@ public interface WishlistDAO {
     public boolean updateWishProduct(Wishlist wishlist, Product p);
     
     public boolean deleteProductInWishlist(Wishlist wishlist, Product p);
+    
+    public boolean isThereProduct(Wishlist wishlist, Product p);
 
 }
