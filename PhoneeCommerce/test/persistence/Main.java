@@ -1,10 +1,14 @@
 package persistence;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import model.*;
+import persistence.dao.UserDAO;
+import persistence.dao.WishlistDAO;
 import persistence.dao.implementation.*;
+import persistence.*;
 
 import persistence.util.*;
 
@@ -66,6 +70,20 @@ public class Main {
 //				adminDAO.delete(ad);
 //			}
 //////		
+			
+//			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+//			UserDAO userDao = factory.getUserDAO();
+//			ArrayList <User> users = (ArrayList<User>) userDao.findAll();
+//			WishlistDAO wishDao= factory.getWishlistDAO();
+//			for(User u: users) {
+//				
+//				Wishlist tmp = new Wishlist();
+//				tmp.setTitle("la mia lista");
+//				tmp.setUser(u);
+//				wishDao.create(tmp);
+//			}
+			
+			
 			
 			
 					

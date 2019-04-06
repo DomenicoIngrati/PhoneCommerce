@@ -2,14 +2,21 @@ package service;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import model.Type;
 import model.User;
+import model.Wishlist;
 import model.Address;
+import model.Product;
 import persistence.dao.AddressDAO;
+import persistence.dao.ProductDAO;
 import persistence.dao.UserDAO;
+import persistence.dao.WishlistDAO;
 import persistence.util.DAOfactory;
 
 public class AccountService {
@@ -153,4 +160,132 @@ public class AccountService {
 		return result;
 	}
 
+	public static List<Wishlist> getAllListFromUser(User user) {
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		WishlistDAO dao = factory.getWishlistDAO();
+		return dao.findByUser(user);
+	}
+	
+
+	public static Wishlist getDefaultWishlist(User user) {
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		WishlistDAO dao = factory.getWishlistDAO();
+		return dao.findDefaultWishlist(user);
+	}
+
+	public static JsonObject addList(User user, String json) {
+		JsonObject result = new JsonObject();
+
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		WishlistDAO dao = factory.getWishlistDAO();
+		
+		Gson gson = new Gson();
+		Wishlist tmp = gson.fromJson(json, Wishlist.class);
+		
+		tmp.setUser(user);
+		if(dao.create(tmp)) {
+			
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been created succefully!");
+		}
+		else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong!");
+		}
+		
+		return result;
+		
+		
+	}
+
+	public static JsonObject addProductOnList(User user, String json) {
+		JsonObject result = new JsonObject();
+		try {
+			JSONObject jObject = new JSONObject(json);
+			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+			
+			WishlistDAO dao = factory.getWishlistDAO();
+			ProductDAO productDao = factory.getProductDAO();
+			
+			Product tmpProduct = productDao.findById(jObject.getLong("id-product"));
+			Wishlist tmpWishlist = dao.findById(jObject.getLong("id-wishlist"));
+			if(dao.updateWishProduct(tmpWishlist, tmpProduct)) {
+				
+				result.addProperty("result", "SUCCESS");
+				result.addProperty("message", "Product has been added succefully to your wishlist!");
+			}
+			else {
+				result.addProperty("result", "FAIL");
+				result.addProperty("reason", "Sorry, something went wrong!");
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+
+	public static JsonObject deleteList(User user, String json) {
+		JsonObject result = new JsonObject();
+		try {
+			JSONObject jObject = new JSONObject(json);
+			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+			
+			WishlistDAO dao = factory.getWishlistDAO();
+			ProductDAO productDao = factory.getProductDAO();
+			
+			Wishlist tmpWishlist = dao.findById(jObject.getLong("id-wishlist"));
+			Product tmpProduct = productDao.findById(jObject.getLong("id-product"));
+			if(tmpWishlist.getType() != "default")
+			{
+				if(dao.deleteProductInWishlist(tmpWishlist, tmpProduct)) {
+					
+					result.addProperty("result", "SUCCESS");
+					result.addProperty("message", "Product has been added succefully to your wishlist!");
+				}
+				else {
+					result.addProperty("result", "FAIL");
+					result.addProperty("reason", "Sorry, something went wrong!");
+				}
+			}
+			else {
+				result.addProperty("result", "FAIL");
+				result.addProperty("reason", "Sorry, something went wrong!");
+			}
+			
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static JsonObject deleteProductFromList(User user, String json) {
+		JsonObject result = new JsonObject();
+		try {
+			JSONObject jObject = new JSONObject(json);
+			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+			
+			WishlistDAO dao = factory.getWishlistDAO();
+			ProductDAO productDao = factory.getProductDAO();
+			
+			Product tmpProduct = productDao.findById(jObject.getLong("id-product"));
+			Wishlist tmpWishlist = dao.findById(jObject.getLong("id-wishlist"));
+			if(dao.deleteProductInWishlist(tmpWishlist, tmpProduct)) {
+				
+				result.addProperty("result", "SUCCESS");
+				result.addProperty("message", "Product has been deleted succefully from your wishlist!");
+			}
+			else {
+				result.addProperty("result", "FAIL");
+				result.addProperty("reason", "Sorry, something went wrong!");
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 }

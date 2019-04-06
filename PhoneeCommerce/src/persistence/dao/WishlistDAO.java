@@ -1,24 +1,27 @@
 package persistence.dao;
 
-import java.util.Set;
+import java.util.List;
 
 import model.Product;
+import model.User;
 import model.Wishlist;
 
 public interface WishlistDAO {
 	
-	public void create(Wishlist modelObject);
+	public boolean create(Wishlist modelObject);
 
-    public void delete(Wishlist wishlist);
+    public boolean delete(Wishlist wishlist);
 
-    public void update(Wishlist wishlist);
+    public boolean update(Wishlist wishlist);
 
-    public Wishlist findById(Integer id);
+    public Wishlist findById(Long id);
 
-    public Set<Wishlist> findByUser(Integer id);
-
-    public void updateWishProduct(Wishlist wishlist, Product p);
+    public List<Wishlist> findByUser(User user);
     
-    public void deleteProductInWishlist(Wishlist wishlist, Product p);
+    public Wishlist findDefaultWishlist(User user);
+
+    public boolean updateWishProduct(Wishlist wishlist, Product p);
+    
+    public boolean deleteProductInWishlist(Wishlist wishlist, Product p);
 
 }

@@ -1,12 +1,21 @@
 package model;
 
-import java.util.Set;
+import java.util.List;
 
 public class Wishlist {
 	private long id;
     private String title;
     private User user;
-    private Set <Product> products;
+    private String type;
+	private List <Product> products;
+    
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
     
     public Wishlist() {
 		
@@ -36,11 +45,18 @@ public class Wishlist {
 		this.user = user;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	
+	@Override
+	public String toString() {
+		String out = "id: " + id + ", title: " + title + ", user: " + user;
+		return out;
+ 	}
+	
 }

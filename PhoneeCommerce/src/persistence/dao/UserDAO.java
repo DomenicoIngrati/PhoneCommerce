@@ -1,5 +1,7 @@
 package persistence.dao;
 
+import java.util.List;
+
 import model.User;
 
 public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
@@ -11,6 +13,8 @@ public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
 	    public User findByUsername(String username);
 
 	    public User findByEmail(String email);
+	    
+	    public List<User> findAll();
 
 	    public void update(User user); //Update
 

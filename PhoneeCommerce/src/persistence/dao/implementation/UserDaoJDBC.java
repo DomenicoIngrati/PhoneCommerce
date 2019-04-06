@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Type;
 import model.User;
+import model.Wishlist;
 import persistence.util.PersistenceException;
 import persistence.dao.UserDAO;
 import persistence.util.DAOUtility;
@@ -28,7 +31,6 @@ public class UserDaoJDBC implements UserDAO {
 		String query;
 		PreparedStatement statement;
 		try {
-
 		    long id = IdBroker.getId(connection);
 			u.setId(id);
 
@@ -40,8 +42,15 @@ public class UserDaoJDBC implements UserDAO {
 		    statement.setString(4, u.getName());
 		    statement.setString(5, u.getSurname());
 		    statement.setLong(6, u.getId());
-//		    statement.executeUpdate();
-		    return (statement.executeUpdate() > 0) ? true : false;
+
+		    boolean ok =  (statement.executeUpdate() > 0) ? true : false;
+		    if(ok) {
+			    WishListDaoJDBC wishlistDao = new WishListDaoJDBC(dataSource);
+			    Wishlist w = new Wishlist();
+			    w.setUser(u);
+			    wishlistDao.create(w);
+		    }
+		    return ok;
 		} catch (SQLException e) {
 		    e.printStackTrace();
 
@@ -190,6 +199,40 @@ public class UserDaoJDBC implements UserDAO {
 		} finally {
 			DAOUtility.close(connection);
 		}
+	}
+
+	@Override
+	public List<User> findAll() {
+		Connection connection = this.dataSource.getConnection();
+		List<User> users = new ArrayList<User>();
+		User u = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from users";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				u = new User();
+				u.setId(result.getLong("id"));				
+				u.setName(result.getString("name"));
+				u.setSurname(result.getString("surname"));
+				u.setUsername(result.getString("username"));
+				u.setEmail(result.getString("email"));
+				u.setPassword(result.getString("password"));
+				
+				if(result.getBoolean("admin"))
+					u.setType(Type.Organizer);
+				else
+					u.setType(Type.Customer);
+				
+				users.add(u);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return users;
 	}
 
 }

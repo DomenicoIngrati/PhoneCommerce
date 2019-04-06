@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.ast.WhileStatement;
+
 import model.Cart;
 import model.Product;
 import model.ProductCategory;
 import model.Type;
 import model.User;
+import model.Wishlist;
 import model.Address;
 import service.AccountService;
 import service.ProductCategoryService;
@@ -193,6 +196,19 @@ public class Home extends HttpServlet {
 //        		allAddress = AccountService.getAllAddressesFromUser(user);
         	
         	session.setAttribute("allAddress", allAddress);
+    	}
+    	
+    	break;
+    	
+    case "list":
+    	if(user == null) {
+    		page = "index";
+    	}
+    	else //if(user.getType() == Type.Customer)
+    	{
+    		page = "list";
+    		Wishlist wishlist = AccountService.getDefaultWishlist(user);
+    		request.setAttribute("whislist", wishlist);
     	}
     	
     	break;
