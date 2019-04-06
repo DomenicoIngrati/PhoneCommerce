@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="css/productsViewStyle.css">
-<script src="js/cart.js" type="text/javascript"></script>
+ <script src="js/cart.js" type="text/javascript"></script>
+ <script src="js/wishlist.js" type="text/javascript"></script>
 
  
  	
@@ -25,8 +26,8 @@
 							<h5 class="card-title">${brandProduct.name} ${brandProduct.price}0 €</h5>
 							<h6 class="card-subtitle mb-2 text-muted">${brandProduct.category.name}</h6> <!-- category --> 
 						    <p class="card-text">${brandProduct.description}</p>
-						   	<input class="btn btn-primary add-product-on-cart" type="button" value="Add to cart" data-name="${brandProduct.name}" /> 
-						  	<a href="#" class="btn btn-primary">Preferiti</a>
+						   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-name="${i.name}"> carrello </button> 
+				  			<button type="button" class="btn btn-sm btn-warning btn-add-product-on-wishlist" data-idproduct="${i.id}" data-idwishlist="${wishlist.id}">Preferiti </button>
 						</div>
 	        	 </div>
 	        </div>
