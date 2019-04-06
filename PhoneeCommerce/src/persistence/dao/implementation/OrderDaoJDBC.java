@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+import model.Item;
 import model.Order;
 import model.Product;
 import persistence.util.*;
@@ -55,7 +56,7 @@ public class OrderDaoJDBC implements OrderDAO {
 	}
 
 	@Override
-	public void create(Order o) {
+	public boolean create(Order o) {
 		Connection connection;
 		String query;
 		PreparedStatement statement;
@@ -77,7 +78,7 @@ public class OrderDaoJDBC implements OrderDAO {
 		    statement.setLong(4, o.getId());
 		    statement.executeUpdate();
 		    
-		    for(Product p : o.getProducts())
+		    for(Item p : o.getProducts())
 		    {
 		    	long idp = IdBroker.getId(connection);
 				
@@ -91,13 +92,15 @@ public class OrderDaoJDBC implements OrderDAO {
 		    	statement2.executeUpdate();
 		    }
 		    
-		    
+		    return ok;
 		    
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		} finally {
 		    DAOUtility.close(connection);
 		}
+		
+		return false;
 		
 	}
 

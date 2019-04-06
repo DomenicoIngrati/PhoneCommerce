@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
 	<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 	<script src="js/account.js" type="text/javascript"></script>
+	<script src="js/checkout.js" type="text/javascript"></script>
+	
 
     <!-- Custom styles for this templatekj -->
     <link href="css/checkOutStyle.css" rel="stylesheet">
@@ -53,15 +55,110 @@
               <strong><c:out value=" $${cart.total}0" /></strong>
             </li>
             
-            <li class="list-group-item d-flex justify-content-between">
-             	<button class="btn btn-primary  btn-block" >Paga</button>
-            </li>
+           <c:choose>
+	           	<c:when test="${addressChosen != null}">
+		            <li class="list-group-item d-flex justify-content-between">
+		             	<button class="btn btn-primary  btn-block" id="new-order"> Paga</button>
+		            </li>
+	            </c:when>
+	            
+	            <c:when test="${addressChosen == null}">
+		            <li class="list-group-item d-flex justify-content-between">
+		             	<button class="btn btn-primary  btn-block" disabled> Paga</button>
+		            </li>
+	            </c:when>
+           </c:choose>
+            
            </ul>
         </div>
         
         
         <div class="col-md-8 order-md-1">
           <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#general-modal">Scegli un indirizzo</button>
+        	
+          <hr class="mr-4">
+        
+          <c:if test="${addressChosen != null}">
+          <h4><strong>Riepilogo indirizzo</strong></h4>
+          <div class="col-auto"> <!-- DIV IMMAGINE -->
+				<p> <strong>Nome e cognome: </strong><c:out value="${addressChosen.namelastname}" />  </p> 
+				<p> <strong>Indirizzo: </strong><c:out value="${addressChosen.address}" /></p>
+				<p> <strong>Città: </strong><c:out value="${addressChosen.city}" />,<c:out value="${addressChosen.province}" /> ,<c:out value="${addressChosen.zipcode}" /> </p>
+				<p> <strong>Paese: </strong>Italia </p>
+				<p> <strong>Numero di telefono: </strong><c:out value="${addressChosen.tel}" /></p>
+		  </div>  
+		  
+		  <hr class="mr-4">
+		  <h4 class="mb-3"><strong>Scegli un metodo di pagamento</strong></h4>
+		  
+		  <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                <label class="custom-control-label" for="credit">Carta di credito</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="debit">Carta di debito</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="paypal">PayPal</label>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Nome instestatario</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                <small class="text-muted">Specifica l'intero nome scritto sulla carta</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Numero carta</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Scadenza</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-cvv">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
+          </div>
+          
+          
+          <hr class="mr-4">
+		  <h4 class="mb-3"><strong>Scegli una modalità di spedizione</strong></h4>
+		  
+		  <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="normal-delivery" name="deliveryMethod" type="radio" class="custom-control-input" checked="" required="">
+                <label class="custom-control-label" for="normal-delivery">Normale <small>(dai 3 ai 5 giorni lavorativi)</small></label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="express-delivery" name="deliveryMethod" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="express-delivery">Express <small>(2 giorni lavorativi)</small></label>
+              </div>
+          </div>
+		  
+		  
+		  </c:if>
+		  
         </div>
  	  </div>
  	</div>
@@ -90,11 +187,12 @@
 									</div>
 							</button>
 						</div>
-					
+						
+
 						<c:forEach var="address" items="${allAddress}">
 							<div id="address-${address.id}" class="col-sm-4">
-								<div class="address-box">
-									<div class="row">
+								<div class="address-box" data-id="${address.id}">
+									<div class="row">	
 										<div class="col-auto"> <!-- DIV IMMAGINE -->
 											<p> <strong>${address.namelastname}</strong> </p> 
 											<p> ${address.address}</p>
@@ -106,13 +204,10 @@
 											<button type="button" class="btn btn-sm btn-address btn-address-modify" data-name="modify" data-idaddress="${address.id}" data-namelastname="${address.namelastname}" data-address="${address.address}" data-city="${address.city}" data-province="${address.province}" data-zipcode="${address.zipcode}" data-tel="${address.tel}" data-dismiss="modal" data-toggle="modal" data-target="#add-address-modal" >modifica</button>
 							        		<button type="submit" class="btn btn-sm btn-address btn-address-delete" data-id="${address.id}">elimina</button>
 										</div>
-													
 									</div>
 								</div>
-						<!-- 	</a> -->
 							</div>
 						</c:forEach>
-						
 						
 						
 					</div>

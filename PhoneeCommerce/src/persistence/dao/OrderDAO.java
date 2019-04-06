@@ -8,7 +8,7 @@ import model.Product;
 
 public interface OrderDAO {
 	
-	public void create(Order modelObject);
+	public boolean create(Order modelObject);
 
     public void delete(Order o);
 

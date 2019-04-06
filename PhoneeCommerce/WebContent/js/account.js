@@ -117,6 +117,8 @@ function operation_alert(result, callback) {
             callback();
         });
     }
+    
+    
 }
 
 $( document ).ready(function() {
@@ -225,10 +227,13 @@ $( document ).ready(function() {
 			        success: function(data){
 			        	$("#add-address-modal").modal('hide');
 			        	var newData=data.comingFromCart;
-			        	
+			       
 			        	operation_alert(data, function(){
 			        		window.location.reload();
+
 			        	});
+			        	
+
 			        	
 			        },
 			        error: function(){	
@@ -239,8 +244,6 @@ $( document ).ready(function() {
 
 		});
 		}
-		
-		
 	});
 	
 });

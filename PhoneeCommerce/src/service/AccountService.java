@@ -112,6 +112,18 @@ public class AccountService {
 		return addresses;
 		
 	}
+	
+	public static Address getAddressFromId(String json) {
+		Address address = null;
+		
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		AddressDAO dao = factory.getAddressDAO();
+		
+		address = dao.findById(Long.parseLong(json));
+		
+		return address;
+		
+	}
 
 	public static JsonObject deleteAddress(User user, String id) {
 		

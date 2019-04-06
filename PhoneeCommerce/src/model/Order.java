@@ -10,8 +10,8 @@ public class Order {
     private Date date;
     private User user;
     private float total;
-    
-    private Set<Product> products;
+    private Set<Item> products;
+    private Address address;
     
     public Order() {
 		
@@ -29,8 +29,8 @@ public class Order {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date date2) {
+		this.date = date2;
 	}
 
 	public User getUser() {
@@ -45,16 +45,24 @@ public class Order {
 		return total;
 	}
 
-	public void setTotal(float total) {
-		this.total = total;
+	public void setTotal(double d) {
+		this.total = (float) d;
 	}
 
-	public Set<Product> getProducts() {
+	public Set<Item> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(Set<Item> products) {
 		this.products = products;
+	}
+	
+	public Address getAddress() {
+		return address;
+	}
+	
+	public void setAddress(Address a) {
+		this.address=a;
 	}
     
     

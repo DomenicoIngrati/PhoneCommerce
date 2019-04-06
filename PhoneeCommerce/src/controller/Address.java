@@ -32,6 +32,7 @@ public class Address extends HttpServlet {
 			json = br.readLine();
 		}
 		String action = request.getParameter("action");
+		model.Address addressChosen=null;
 		JsonObject result = new JsonObject();
 		
 		
@@ -53,6 +54,21 @@ public class Address extends HttpServlet {
 		{
 			System.out.println(json);
 			result=AccountService.deleteAddress(user, json);
+			break;
+		}
+		
+		case "choseAddress":
+		{
+			addressChosen=AccountService.getAddressFromId(json);
+			
+			if(addressChosen!=null) {
+				session.setAttribute("addressChosen", addressChosen);
+				result.addProperty("result", "SUCCESS");
+			}
+			else {
+				result.addProperty("result", "FAIL");
+			}
+			
 			break;
 		}
 
