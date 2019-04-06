@@ -26,8 +26,8 @@
 							<h5 class="card-title">${brandProduct.name} ${brandProduct.price}0 €</h5>
 							<h6 class="card-subtitle mb-2 text-muted">${brandProduct.category.name}</h6> <!-- category --> 
 						    <p class="card-text">${brandProduct.description}</p>
-						   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-name="${i.name}"> carrello </button> 
-				  			<button type="button" class="btn btn-sm btn-warning btn-add-product-on-wishlist" data-idproduct="${i.id}" data-idwishlist="${wishlist.id}">Preferiti </button>
+						   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-name="${brandProduct.name}"> carrello </button> 
+				  			<button type="button" class="btn btn-sm btn-warning btn-add-product-on-wishlist" data-idproduct="${brandProduct.id}" data-idwishlist="${wishlist.id}">Preferiti </button>
 						</div>
 	        	 </div>
 	        </div>
