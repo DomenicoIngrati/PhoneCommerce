@@ -5,7 +5,7 @@
 
 $( document ).ready(function() {
 	
-	$('.address-box').on('click', function () {
+	$('.clickable').on('click', function () {
 		
 		var idProduct= $(this).data('id');
 		console.log(idProduct);
