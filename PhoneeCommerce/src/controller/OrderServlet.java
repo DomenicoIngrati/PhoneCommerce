@@ -64,6 +64,7 @@ public class OrderServlet extends HttpServlet {
 		{
 			
 			 orderCompleted = OrderService.makeNewOrder(cart,addressChosen,user,result);
+			 session.setAttribute("cart" , null);
 			 session.setAttribute("orderCompleted", orderCompleted);
 			 
 			break;
