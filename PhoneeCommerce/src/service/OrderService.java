@@ -3,6 +3,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import model.Type;
@@ -14,6 +16,7 @@ import persistence.dao.AddressDAO;
 import persistence.dao.OrderDAO;
 import persistence.dao.UserDAO;
 import persistence.util.DAOfactory;
+import persistence.util.DatabaseManager;
 public class OrderService {
 
 
@@ -32,12 +35,36 @@ public class OrderService {
 
 			if (dao.create(newOrder)) {
 				result.addProperty("result", "SUCCESS");
-				result.addProperty("message", "You have successfully signed-up, will be redirected soon !");
 			} else {
 				result.addProperty("result", "FAIL");
 			}
 			
 			return newOrder;
+		}
+
+		public static Set<Order> findAllMyOrders(User user, JsonObject result) {
+			OrderDAO orderDao = DatabaseManager.getInstance().getDaoFactory().getOrderDAO();
+			return orderDao.findByUser(user.getId());
+		}
+
+
+		
+		public static Order findOrderByID(String json,JsonObject result) {
+			Order order = null;
+			
+			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+			OrderDAO dao = factory.getOrderDAO();
+			
+			
+			order = dao.findById(Long.parseLong(json));
+			
+			if (order!=null) {
+				result.addProperty("result", "SUCCESS");
+			} else {
+				result.addProperty("result", "FAIL");
+			}
+			
+			return order;	
 		}
 
 }

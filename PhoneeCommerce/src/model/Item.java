@@ -26,5 +26,6 @@ public class Item {
 	public void increaseQuantity(int q) {
 		this.quantity += q;
 	}
+	
 
 }

@@ -12,6 +12,7 @@ import model.Order;
 import model.Product;
 import model.Wishlist;
 import persistence.util.*;
+import persistence.dao.AddressDAO;
 import persistence.dao.OrderDAO;
 import persistence.dao.ProductDAO;
 import persistence.dao.UserDAO;
@@ -161,13 +162,13 @@ public class OrderDaoJDBC implements OrderDAO {
 	}
 
 	@Override
-	public Set<Order> findByUser(long id, Integer offset, Integer limit) {
+	public Set<Order> findByUser(long id) {
 		Connection connection = this.dataSource.getConnection();
 		Set<Order> orders = new HashSet<Order>();
 		try {
 			Order order;
 			PreparedStatement statement;
-			String query = "select * from Order where users=?";
+			String query = "select * from Orders where users=?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
@@ -177,8 +178,12 @@ public class OrderDaoJDBC implements OrderDAO {
 				order.setDate(result.getDate("date"));
 				order.setTotal(result.getFloat("total"));
 				
-//				product.setReviews(result.getString("review"));
-				//category
+				UserDAO usersDAO = DatabaseManager.getInstance().getDaoFactory().getUserDAO();
+				order.setUser(usersDAO.findById(id));
+				
+				AddressDAO addressDao = DatabaseManager.getInstance().getDaoFactory().getAddressDAO();
+				order.setAddress(addressDao.findById(result.getLong("address")));
+			
 				
 				orders.add(order);
 			}
@@ -199,16 +204,36 @@ public class OrderDaoJDBC implements OrderDAO {
 		Order order = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from Order where id = ?";
+			String query = "select * from Orders where id = ?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				order = new Order();
-				order.setId(result.getInt("id"));				
+				order.setId(id);				
 				order.setDate(result.getDate("date"));
 				order.setTotal(result.getFloat("total"));
-
+				
+				UserDAO usersDAO = DatabaseManager.getInstance().getDaoFactory().getUserDAO();
+				order.setUser(usersDAO.findById(result.getLong("users")));
+				
+				AddressDAO addressDao = DatabaseManager.getInstance().getDaoFactory().getAddressDAO();
+				order.setAddress(addressDao.findById(result.getLong("address")));
+				
+				ProductDAO productDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+				
+				PreparedStatement instatement;
+				String inquery = "select * from include where orders = ?";
+				instatement = connection.prepareStatement(inquery);
+				instatement.setLong(1, id);
+				ResultSet inresult = instatement.executeQuery();
+				Set<Item> products= new HashSet<Item>();
+				while(inresult.next()) {
+					Item i=new Item(productDao.findById(inresult.getLong("product")),inresult.getInt("quantity"));
+					products.add(i);
+				}
+				
+				order.setProducts(products);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

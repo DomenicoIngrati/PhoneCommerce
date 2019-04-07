@@ -220,6 +220,16 @@ public class Home extends HttpServlet {
     	page="orderCompleted";
     	
     	break;
+    	
+    case "myOrdersView":
+    	page="myOrdersView";
+  
+    	break;
+    
+    case "singleOrderView":
+    	page="singleOrderView";
+    	
+    	break;
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();
