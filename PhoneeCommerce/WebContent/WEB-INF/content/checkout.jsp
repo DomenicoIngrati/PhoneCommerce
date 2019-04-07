@@ -20,7 +20,7 @@
 	<script src="js/checkout.js" type="text/javascript"></script>
 	
 
-    <!-- Custom styles for this templatekj -->
+    <!-- Custom styles for this template -->
     <link href="css/checkOutStyle.css" rel="stylesheet">
     <link rel="stylesheet" href="css/productsViewStyle.css">
     <link rel="stylesheet" href="css/address.css">

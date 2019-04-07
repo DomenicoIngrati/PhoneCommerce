@@ -17,7 +17,7 @@ import persistence.util.DAOfactory;
 public class OrderService {
 
 
-		public static JsonObject makeNewOrder(Cart cart,Address addressChosen) {
+		public static Order makeNewOrder(Cart cart,Address addressChosen,User u,JsonObject result) {
 			
 			
 			Long time= new java.util.Date().getTime();
@@ -26,10 +26,9 @@ public class OrderService {
 			Order newOrder=new Order();
 			newOrder.setProducts(cart.getProducts());
 			newOrder.setTotal(cart.getTotal());
-			newOrder.setUser(cart.getUser());
+			newOrder.setUser(u);
 			newOrder.setAddress(addressChosen);
 			newOrder.setDate(new java.util.Date(time));
-			JsonObject result = new JsonObject();
 
 			if (dao.create(newOrder)) {
 				result.addProperty("result", "SUCCESS");
@@ -38,7 +37,7 @@ public class OrderService {
 				result.addProperty("result", "FAIL");
 			}
 			
-			return result;
+			return newOrder;
 		}
 
 }

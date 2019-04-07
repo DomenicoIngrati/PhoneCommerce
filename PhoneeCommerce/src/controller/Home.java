@@ -223,6 +223,11 @@ public class Home extends HttpServlet {
     	}
     	
     	break;
+    	
+    case "orderCompleted":
+    	page="orderCompleted";
+    	
+    	break;
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();

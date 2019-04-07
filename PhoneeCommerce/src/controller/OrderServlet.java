@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 
 import model.Cart;
 import model.Item;
+import model.Order;
 import model.User;
 import service.AccountService;
 import service.OrderService;
@@ -54,12 +55,19 @@ public class OrderServlet extends HttpServlet {
 		JsonObject result = new JsonObject();
 		model.Address addressChosen= (model.Address) session.getAttribute("addressChosen");
 		Cart cart=(Cart) session.getAttribute("cart");
+		User user=(User) session.getAttribute("user");
+		Order orderCompleted=null;
+		
 		switch (action) {
 		case "newOrder": {
-			result = OrderService.makeNewOrder(cart,addressChosen);
+			
+			 orderCompleted = OrderService.makeNewOrder(cart,addressChosen,user,result);
+			 session.setAttribute("orderCompleted", orderCompleted);
+			 
 			break;
 		}
-		case "UPDATE": {
+		case "UPDATE": 
+		{
 
 			break;
 		}
