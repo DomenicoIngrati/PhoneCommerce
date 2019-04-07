@@ -14,12 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Cart;
+import model.Order;
 import model.Product;
 import model.ProductCategory;
 import model.Type;
 import model.User;
 import model.Address;
 import service.AccountService;
+import service.OrderService;
 import service.ProductCategoryService;
 import service.ProductService;
 
@@ -217,18 +219,36 @@ public class Home extends HttpServlet {
     	break;
     	
     case "orderCompleted":
-    	page="orderCompleted";
-    	
+    	if(user == null) {
+    		page = "index";
+    	}
+    	else //if(user.getType() == Type.Customer)
+    	{
+    		page="orderCompleted";
+    	}
     	break;
     	
     case "myOrdersView":
-    	page="myOrdersView";
+    	if(user != null) {
+    		Set<Order> myOrders = OrderService.findAllMyOrders(user);
+    		session.setAttribute("myOrders",myOrders);
+        	page="myOrdersView";
+    	}
+    	else {
+    		page = "index";
+    	}
+    	
   
     	break;
     
     case "singleOrderView":
-    	page="singleOrderView";
-    	
+    	if(user == null) {
+    		page = "index";
+    	}
+    	else
+    	{
+    		page="singleOrderView";
+    	}
     	break;
 
     default:

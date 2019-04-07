@@ -42,7 +42,7 @@ public class OrderService {
 			return newOrder;
 		}
 
-		public static Set<Order> findAllMyOrders(User user, JsonObject result) {
+		public static Set<Order> findAllMyOrders(User user) {
 			OrderDAO orderDao = DatabaseManager.getInstance().getDaoFactory().getOrderDAO();
 			return orderDao.findByUser(user.getId());
 		}

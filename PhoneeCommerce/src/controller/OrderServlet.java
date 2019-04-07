@@ -62,19 +62,9 @@ public class OrderServlet extends HttpServlet {
 		switch (action) {
 		case "newOrder": 
 		{
-			
 			 orderCompleted = OrderService.makeNewOrder(cart,addressChosen,user,result);
 			 session.setAttribute("cart" , null);
 			 session.setAttribute("orderCompleted", orderCompleted);
-			 
-			break;
-		}
-		
-		case "myOrdersView":
-		{
-			
-			Set<Order> myOrders = OrderService.findAllMyOrders(user,result);
-			session.setAttribute("myOrders",myOrders);
 			break;
 		}
 		

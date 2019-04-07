@@ -73,7 +73,6 @@ public class Wishlist extends HttpServlet {
 			System.out.println(cart);
 			break;
 		}
-			
 
 		default:
 			break;

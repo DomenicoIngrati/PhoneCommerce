@@ -73,7 +73,7 @@
 			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
 			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
 			          <a class="dropdown-item" href="home?action=myAccount">Il mio account</a>
-			          <a class="dropdown-item show-my-orders">I miei ordini</a>
+			          <a class="dropdown-item" href="home?action=myOrdersView">I miei ordini</a>
 			          <a class="dropdown-item" href="account?action=logout">Esci</a>
 			          
 			        </div>          
