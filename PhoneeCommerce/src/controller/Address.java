@@ -35,24 +35,19 @@ public class Address extends HttpServlet {
 		model.Address addressChosen=null;
 		JsonObject result = new JsonObject();
 		
-		
 		User user = (User) session.getAttribute("user");
 
 		switch (action) {
 		case "CREATE": {
-			
 			result = AccountService.addAddress(user, json);
-			
 			break;
 		}
 		case "UPDATE": {
-
 			result = AccountService.updateAddress(user, json);
 			break;
 		}
 		case "DELETE":
 		{
-			System.out.println(json);
 			result=AccountService.deleteAddress(user, json);
 			break;
 		}

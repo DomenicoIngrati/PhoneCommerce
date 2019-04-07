@@ -18,7 +18,6 @@ import model.Product;
 import model.ProductCategory;
 import model.Type;
 import model.User;
-import model.Wishlist;
 import model.Address;
 import service.AccountService;
 import service.ProductCategoryService;
@@ -51,7 +50,7 @@ public class Home extends HttpServlet {
     cats = ProductCategoryService.findAllCategory();
     
     request.setAttribute("brands", cats);
-    Wishlist wishlist = null;
+//    Wishlist wishlist = null;
     
     HttpSession session = request.getSession();
     Cart cart = (Cart) session.getAttribute("cart");
@@ -70,17 +69,9 @@ public class Home extends HttpServlet {
     case "index":
     	List <Product> newProducts = ProductService.getLastSixProducts();
     	request.setAttribute("newproducts", newProducts);
-    	
-//    	ProductCategory old = catDao.findByName(jsonProduct.getString("oldnamecategory"));
-//		List <Product> totalProduct = dao.findFormCategory(old);
-//		if(totalProduct.isEmpty())
-//		{
-//			catDao.deleteById(old);
-//			result.addProperty("oldnamecategory", old.getId());
-//		}
-    	if(user != null) {
-    		wishlist = AccountService.getDefaultWishlist(user);
-    		session.setAttribute("wishlist", wishlist);
+    	if(user != null)
+    	{
+    		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
     	
     	page="index";
@@ -161,8 +152,7 @@ public class Home extends HttpServlet {
     	request.setAttribute("pageTitle",brandName);
     	
     	if(user != null) {
-    		wishlist = AccountService.getDefaultWishlist(user);
-    		session.setAttribute("wishlist", wishlist);
+    		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
 
     	break;
@@ -172,6 +162,10 @@ public class Home extends HttpServlet {
     	selectedProductName=request.getParameter("productName");
     	selectedProduct=ProductService.findProductByName(selectedProductName);
     	request.setAttribute("selectedProduct",selectedProduct);
+    	if(user != null)
+    	{
+    		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
+    	}
     	break;
     
     case "cart":
@@ -205,8 +199,7 @@ public class Home extends HttpServlet {
         	
         	session.setAttribute("allAddress", allAddress);
         	
-        	wishlist = AccountService.getDefaultWishlist(user);
-    		session.setAttribute("wishlist", wishlist);
+    		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
     	
     	break;
@@ -218,8 +211,7 @@ public class Home extends HttpServlet {
     	else //if(user.getType() == Type.Customer)
     	{
     		page = "list";
-    		wishlist = AccountService.getDefaultWishlist(user);
-    		request.setAttribute("wishlist", wishlist);
+    		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
     	
     	break;
@@ -232,6 +224,10 @@ public class Home extends HttpServlet {
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();
     	request.setAttribute("newproducts", newProducts2);
+    	if(user != null)
+    	{
+    		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
+    	}
     	page="index";
     }
     

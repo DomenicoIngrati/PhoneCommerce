@@ -10,7 +10,7 @@
  <!--  RIGA NUOVI PRODOTTI  -->
  
 
-<div id="managebox" class="mx-md-5 my-md-5" >
+<div id="managebox" class="container boxcontainer mt-5" >
 	<h1> Modifica o elimina prodotti </h1>
 	<hr>
 	<div class="listProduct">

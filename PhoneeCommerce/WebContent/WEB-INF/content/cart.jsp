@@ -1,20 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
 <!DOCTYPE html>
-<link rel="stylesheet" href="css/admin.css">
+
 <script src="js/administrator.js" type="text/javascript"></script>
 <script src="js/cart.js" type="text/javascript"></script>
-<script>
-    $("input[type='number']").inputSpinner()
-</script>
 
- 
- 	
- <!--  RIGA NUOVI PRODOTTI  -->
- 
-
-<div id="managebox" class="mx-md-5 my-md-5" >
+<div class="container boxcontainer mt-5" >
 	<h1> Carrello </h1>
 	<hr>
 	<div class="listProduct">
@@ -31,9 +24,7 @@
 				</thead>
 		
 		<tbody>
-		<c:forEach var="productOnCart" items="${productsOnCart}">
-
-			
+		<c:forEach var="productOnCart" items="${cart.products}">
 				<tr>
 				<td data-th="Product">
 					<div class="row">

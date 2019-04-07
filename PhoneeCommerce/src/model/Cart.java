@@ -6,7 +6,7 @@ import java.util.Set;
 public class Cart {
 	private User user;
 	
-	private Set<Item> itemsOnCart;
+	private Set<Item> products;
 	
 	private double total;
 	
@@ -14,13 +14,13 @@ public class Cart {
 	
 	public Cart() {
 		user = null;
-		itemsOnCart=new HashSet<Item>();
+		products=new HashSet<Item>();
 		total = 0;
 		size = 0;
 	}
 
-	public void setProducts(Set<Item> itemsOnCart) {
-		this.itemsOnCart = itemsOnCart;
+	public void setProducts(Set<Item> products) {
+		this.products = products;
 	}
 
 	public User getUser() {
@@ -32,7 +32,7 @@ public class Cart {
 	}
 
 	public Set<Item> getProducts() {
-		return itemsOnCart;
+		return products;
 	}
 
 	public double getTotal() {
@@ -55,7 +55,7 @@ public class Cart {
     
     public void addProducts(Product p,int quantita) {
     	boolean ce = false;
-    	for(Item prod: this.itemsOnCart)
+    	for(Item prod: this.products)
     	{
     		if(prod.getProduct().equals(p))
     		{
@@ -68,26 +68,26 @@ public class Cart {
     	{
     		Item i=new Item(p,quantita);
         	sumTotal(p.getPrice()*quantita);
-        	itemsOnCart.add(i);
+        	products.add(i);
     	}
     }
     
     public void deleteProduct(Product p) {
         // TODO Auto-generated method stub
     	  Set<Item> toRemove = new HashSet<Item>();
-          for (Item i : this.itemsOnCart){
+          for (Item i : this.products){
             if(i.getProduct().equals(p)){
                decrementTotal(i.getProduct().getPrice()*i.getQuantity());
                toRemove.add(i);
             }
           }  
-          this.itemsOnCart.removeAll(toRemove);
+          this.products.removeAll(toRemove);
     }
     
    @Override
 	public String toString() {
 	   String out = "";
-	   for(Item prod: this.itemsOnCart) {
+	   for(Item prod: this.products) {
 		   out += prod.getProduct().getName() + ": " + prod.getQuantity()+"\n";
 	   }
 	   return out;
@@ -95,7 +95,7 @@ public class Cart {
 
 	public int getSize() {
 		this.size = 0;
-		for(Item it: this.itemsOnCart) {
+		for(Item it: this.products) {
 			this.size += it.getQuantity();
 		}
 		return this.size;

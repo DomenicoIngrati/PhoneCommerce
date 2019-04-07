@@ -54,13 +54,13 @@ public class CartServlet extends HttpServlet {
 	    switch (action) {
 	    case "addProductOnCart":
 	    	result=CartService.addProductOnCart(json, cart);
-	    	session.setAttribute("productsOnCart", cart.getProducts());
+	    	session.setAttribute("cart", cart);
 	    	response.getWriter().write(result.toString());
 	    	break;
 	    	
 	    case "deleteProduct":
 	    	  result=CartService.deleteProductFromCart(json,cart);
-	    	  session.setAttribute("productsOnCart", cart.getProducts());
+	    	  session.setAttribute("cart", cart);
 	    	  response.getWriter().write(result.toString());
 	    	break;
 	    

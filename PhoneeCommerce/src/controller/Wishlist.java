@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
+import model.Cart;
 import model.User;
 import service.AccountService;
 
@@ -25,18 +26,24 @@ public class Wishlist extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
 		String json = ""; // parse request in json format
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		if (br != null) {
 			json = br.readLine();
 		}
+		
+		HttpSession session = request.getSession();
+	    Cart cart = (Cart) session.getAttribute("cart");
+	    if (cart == null) {
+	      cart = new Cart();
+	      session.setAttribute("cart", cart);
+	    }
+	    
+	    User user = (User) session.getAttribute("user");
+		
 		String action = request.getParameter("action");
 		JsonObject result = new JsonObject();
 		
-		
-		User user = (User) session.getAttribute("user");
-
 		switch (action) {
 		case "createList": {
 			
@@ -45,7 +52,6 @@ public class Wishlist extends HttpServlet {
 			break;
 		}
 		case "AddProductOnList": {
-			System.out.println(json);
 			result = AccountService.addProductOnList(user, json);
 			break;
 		}
@@ -57,6 +63,14 @@ public class Wishlist extends HttpServlet {
 		case "deleteProductFromList":
 		{
 			result=AccountService.deleteProductFromList(user, json);
+			break;
+		}
+		
+		case "addAllToCart":
+		{
+			result=AccountService.addAllToCart(AccountService.getDefaultWishlist(user), cart);
+			session.setAttribute("cart", cart);
+			System.out.println(cart);
 			break;
 		}
 			

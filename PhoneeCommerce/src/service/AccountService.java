@@ -12,6 +12,7 @@ import model.Type;
 import model.User;
 import model.Wishlist;
 import model.Address;
+import model.Cart;
 import model.Product;
 import persistence.dao.AddressDAO;
 import persistence.dao.ProductDAO;
@@ -297,6 +298,8 @@ public class AccountService {
 				
 				result.addProperty("result", "SUCCESS");
 				result.addProperty("message", "Product has been deleted succefully from your wishlist!");
+				tmpWishlist = dao.findById(jObject.getLong("idwishlist"));
+				result.addProperty("size", tmpWishlist.getProducts().size());
 			}
 			else {
 				result.addProperty("result", "FAIL");
@@ -307,6 +310,29 @@ public class AccountService {
 		}
 		
 		
+		return result;
+	}
+
+	public static JsonObject addAllToCart(Wishlist wishlist, Cart cart) {
+		
+		JsonObject result = new JsonObject();
+		
+		if(wishlist.getProducts().isEmpty()) {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "The wishlist is empty!");
+		}
+		else {
+			for(Product p : wishlist.getProducts()) {
+				cart.addProducts(p, 1);
+			}
+			
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "All products has been added succefully in the cart!");
+			
+			int totProduct = cart.getSize();
+			result.addProperty("size", String.valueOf(totProduct));
+			
+		}
 		return result;
 	}
 }

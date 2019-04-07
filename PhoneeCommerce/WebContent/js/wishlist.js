@@ -29,10 +29,7 @@ $( document ).ready(function() {
 				idwishlist: $(this).data('idwishlist')
 		}
 		
-		
-		
-		console.log(info);
-		
+		console.log(info);	
 		
 		$.ajax({
 	        url: "wishlist?action=AddProductOnList",
@@ -41,6 +38,7 @@ $( document ).ready(function() {
 	        data: JSON.stringify(info),
 	        success: function(result){
 	        	operation_alert(result, function(){
+	        		console.log(result);
 //	        		window.location.reload
 	        	});
 	        },
@@ -70,6 +68,31 @@ $( document ).ready(function() {
 	        data: JSON.stringify(info),
 	        success: function(result){
 	        	$("#card-"+info.idproduct).fadeOut();
+	        	if(result.size == 0){
+	        		$(".btn-add-all-cart").attr("disabled", true);
+	        	}
+	        },
+	        error: function(){	
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }    	
+	    });
+	});
+	
+});
+
+$( document ).ready(function() {
+	
+	$(".btn-add-all-cart").click(function(){
+		
+		$.ajax({
+	        url: "wishlist?action=addAllToCart",
+	        type: "POST",
+	        success: function(data){
+	        	result = JSON.parse(data);
+	        	console.log(result);
+	        	operation_alert(result, function(){
+//	        		window.location.reload
+	        	});
 	        },
 	        error: function(){	
 	        	alert("Errore di richiesta al server! Riprovare.");

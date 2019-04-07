@@ -2,36 +2,22 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Checkout example for Bootstrap</title>
-
+    
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/checkout/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" >
-	<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 	<script src="js/account.js" type="text/javascript"></script>
 	<script src="js/checkout.js" type="text/javascript"></script>
 	
 
     <!-- Custom styles for this template -->
     <link href="css/checkOutStyle.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/productsViewStyle.css">
+<!--     <link rel="stylesheet" href="css/productsViewStyle.css"> -->
     <link rel="stylesheet" href="css/address.css">
 
-
-    <div class="container">
-      <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>Checkout form</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
-      </div>
+    <div class="container boxcontainer mt-5">
+	<h2>Checkout</h2>
+	<hr>
 
       <div class="row">
       
@@ -41,7 +27,7 @@
           </h4>
           <ul class="list-group mb-3">
           
-          	<c:forEach var="productOnCart" items="${productsOnCart}">
+          	<c:forEach var="productOnCart" items="${cart.products}">
 	            <li class="list-group-item d-flex justify-content-between lh-condensed">
 	              <div>
 	                <h6 class="my-0">${productOnCart.product.name} x ${productOnCart.quantity}</h6>
