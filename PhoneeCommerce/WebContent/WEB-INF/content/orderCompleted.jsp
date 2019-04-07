@@ -106,8 +106,16 @@
                                     <td class="emptyrow text-center"><strong>Totale</strong></td>
                                     <td class="emptyrow text-right">$<c:out value="${orderCompleted.total}" /></td>
                                 </tr>
+                                
+                                
                             </tbody>
+                            
+                            
+                            
                         </table>
+                        <a href="home?action=index" >
+                        <button type="button" class="btn btn-sm btn-warning justify-content-center" style="margin:auto;display:block"  > Torna alla home </button>
+                    	</a>
                     </div>
                 </div>
             </div>
