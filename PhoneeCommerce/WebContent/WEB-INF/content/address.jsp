@@ -69,7 +69,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="address-form">
+        <form id="address-form" class="submit-by-class">
           
           <div class="form-group">
           	
@@ -100,14 +100,16 @@
 	          <input id="tel" type="text" name="tel" class="form-control"  placeholder="Inserisci numero di telefono" required>
         </div>
         
-        <div class="modal-footer">
+ 		<div class="modal-footer">
 	        <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
 	        <button id="btn-add-address" type="submit" class="btn btn-primary">Salva indirizzo</button>
       	</div>
       	
         </form>
         
+        
       </div>
+     
       
     </div>
   </div>

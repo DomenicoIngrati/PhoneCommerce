@@ -154,16 +154,22 @@
  	<div class="modal fade" id="general-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">
+			    <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Seleziona indirizzo</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			    </div>
 		      
 		        <!-- INIZIOO CONTAINER ADDRESS -->
 		        
 		        
-		        <div class="boxcontainer container mt-5">
+		        <div class="boxcontainer container mt-0">
 					
 					<div class="row">
 						
 						<div class="col-sm-4">
-							<button id="add-address" type="button" class="btn btn-block" data-name="add" data-toggle="modal" data-target="#add-address-modal">
+							<button id="add-address" type="button" class="btn btn-block" style="min-height: 220px;" data-name="add" data-toggle="modal" data-target="#add-address-modal">
 									<div class="row">
 										<div class="col"> <!-- DIV TESTO -->
 											<div class="d-flex justify-content-center"> <img src="img/plus.png" height="50" width="50"> </div>
@@ -177,9 +183,9 @@
 
 						<c:forEach var="address" items="${allAddress}">
 							<div id="address-${address.id}" class="col-sm-4">
-								<div class="address-box" data-id="${address.id}">
+								<div class="address-box">
 									<div class="row">	
-										<div class="col-auto"> <!-- DIV IMMAGINE -->
+										<div class="clickable col-auto" data-id="${address.id}"> <!-- DIV IMMAGINE -->
 											<p> <strong>${address.namelastname}</strong> </p> 
 											<p> ${address.address}</p>
 											<p> ${address.city}, ${address.province}, ${address.zipcode}</p>
@@ -214,7 +220,7 @@
 	
 	
 		<div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
+		  <div class="modal-dialog modal-dialog-scrollable" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h5 class="modal-title" id="exampleModalLabel">Aggiungi indirizzo</h5>
@@ -254,7 +260,7 @@
 			          <input id="tel" type="text" name="tel" class="form-control"  placeholder="Inserisci numero di telefono" required>
 		        </div>
 		        
-		        <div class="modal-footer">
+		         <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
 			        <button id="btn-add-address" type="submit" class="btn btn-primary">Salva indirizzo</button>
 		      	</div>
@@ -262,6 +268,8 @@
 		        </form>
 		        
 		      </div>
+		      
+		       
 		      
 		    </div>
 		  </div>
