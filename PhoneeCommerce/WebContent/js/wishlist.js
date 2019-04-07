@@ -89,7 +89,8 @@ $( document ).ready(function() {
 	        type: "POST",
 	        success: function(data){
 	        	result = JSON.parse(data);
-	        	console.log(result);
+	        	var size = result.size;
+	        	$("#countCart").text(size);
 	        	operation_alert(result, function(){
 //	        		window.location.reload
 	        	});

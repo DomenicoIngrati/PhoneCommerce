@@ -55,7 +55,6 @@ public class AccountService {
 		UserDAO dao = factory.getUserDAO();
 		Gson gson = new Gson();
 		User tmp = gson.fromJson(data, User.class);
-		System.out.println(tmp);
 		
 		if (!tmp.getEmail().equals("") || !tmp.getPassword().equals("")) {
 			user = dao.findByEmail(tmp.getEmail());
@@ -214,7 +213,6 @@ public class AccountService {
 	public static JsonObject addProductOnList(User user, String json) {
 		JsonObject result = new JsonObject();
 		try {
-			System.out.println(json);
 			JSONObject jObject = new JSONObject(json);
 			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 			

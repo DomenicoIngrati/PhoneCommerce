@@ -309,7 +309,6 @@ public class ProductDaoJDBC implements ProductDAO {
 			String query = "select * from product where category = ?";
 			
 			statement = connection.prepareStatement(query);
-			System.out.println("STO SETTANDO nella query: "+pc.getId());
 			statement.setLong(1, pc.getId());
 			
 			ResultSet result = statement.executeQuery();

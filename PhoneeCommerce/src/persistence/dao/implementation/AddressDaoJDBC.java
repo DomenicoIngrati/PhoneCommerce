@@ -35,7 +35,6 @@ public class AddressDaoJDBC implements AddressDAO {
 
 		    long id = IdBroker.getId(connection);
 			u.setId(id);
-			System.out.println(u);
 		    query = "insert into address (namelastname, address, city, province, zipcode, tel, id, users) values (?,?,?,?,?,?,?,?)";
 		    statement = connection.prepareStatement(query);
 		    statement.setString(1, u.getNamelastname());

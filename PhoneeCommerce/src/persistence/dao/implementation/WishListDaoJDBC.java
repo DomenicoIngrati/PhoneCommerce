@@ -280,7 +280,6 @@ public class WishListDaoJDBC implements WishlistDAO {
 				ResultSet inresult = instatement.executeQuery();
 				while(inresult.next()) {
 					Product p = productDao.findById(inresult.getLong("product"));
-					System.out.println(p);
 					w.getProducts().add(p);
 				}
 				

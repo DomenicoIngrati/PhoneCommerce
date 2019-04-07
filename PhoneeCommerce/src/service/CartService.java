@@ -40,7 +40,6 @@ public abstract class CartService {
 		  String productName= json.substring(1, json.length()-1);
 		  p=dao.findByName(productName);
 		  
-		  System.out.println(p.getName());
 		  
 	      cart.deleteProduct(p);
 	      result.addProperty("result", "SUCCESS");
