@@ -70,7 +70,7 @@
                                 
                                <div class="input-group-append" id="add-product">
                                	<!-- Da modificare la quantità passata alla servlet. Va preso il valore contenuto in value qui sopra  -->
-			    					<input class="btn btn-outline-secondary add-product-on-cart" type="button" value="Add to cart" data-name="${selectedProduct.name}" /> 
+			    					<input class="btn btn-outline-secondary add-product-on-cart" type="button" value="Add to cart" data-id="${selectedProduct.id}" /> 
 			 				   </div>	
                             </div>
 

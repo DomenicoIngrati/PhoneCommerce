@@ -57,6 +57,13 @@ public class CartServlet extends HttpServlet {
 	    	session.setAttribute("cart", cart);
 	    	response.getWriter().write(result.toString());
 	    	break;
+	    
+	    case "decreaseQuantity":
+	    	result=CartService.decreaseQuantity(json, cart);
+	    	session.setAttribute("cart", cart);
+	    	response.getWriter().write(result.toString());
+	    	
+	    	break;
 	    	
 	    case "deleteProduct":
 	    	  result=CartService.deleteProductFromCart(json,cart);

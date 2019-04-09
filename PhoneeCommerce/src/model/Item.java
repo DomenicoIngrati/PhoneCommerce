@@ -26,6 +26,12 @@ public class Item {
 	public void increaseQuantity(int q) {
 		this.quantity += q;
 	}
+
+	public void decreaseQuantity() {
+		if(this.quantity > 0)
+			this.quantity -= 1;
+		
+	}
 	
 
 }

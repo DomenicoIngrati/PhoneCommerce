@@ -53,15 +53,41 @@ public class Cart {
     	this.total-=f;
     }
     
+    public void calculateTotal() {
+    	double tmp = 0;
+    	for(Item prod: this.products) {
+    		tmp += (prod.getQuantity() * prod.getProduct().getPrice());
+    	}
+    	this.total = tmp;
+    }
+    
+    public void decreaseProduct(Product p) {
+    	for(Item prod: this.products)
+    	{
+    		if(prod.getProduct().equals(p))
+    		{
+    			if(prod.getQuantity() > 1)
+    				prod.decreaseQuantity();
+    			break;
+    			
+    		}
+    	}
+    	calculateTotal();
+    }
+    
     public void addProducts(Product p,int quantita) {
     	boolean ce = false;
     	for(Item prod: this.products)
     	{
     		if(prod.getProduct().equals(p))
     		{
-    			prod.increaseQuantity(quantita);
+    			if(prod.getQuantity() < 10)
+    			{
+    				prod.increaseQuantity(quantita);
+    				sumTotal(p.getPrice()*quantita);
+    			}
     			ce = true;
-    			sumTotal(p.getPrice()*quantita);
+    			
     		}
     	}
     	if(!ce)

@@ -19,7 +19,7 @@ public abstract class CartService {
 		try {
 			jsonProduct = new JSONObject(json);
 			Product p = new Product();
-			p=dao.findByName(jsonProduct.getString("name"));
+			p=dao.findById(Long.parseLong(jsonProduct.getString("id")));
 			int quantity=jsonProduct.getInt("quantity");
 			
 			cart.addProducts(p, quantity);
@@ -27,6 +27,7 @@ public abstract class CartService {
 			result.addProperty("result", "SUCCESS");
 			result.addProperty("message", "Product has been added into the cart successfully!");
 			result.addProperty("size", String.valueOf(totProduct));
+			result.addProperty("total", String.valueOf(cart.getTotal()));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} 
@@ -46,5 +47,28 @@ public abstract class CartService {
 	      result.addProperty("message", "Product has been added into the cart successfully!");
 		  
 		  return result;
+	}
+	
+	public static JsonObject decreaseQuantity(String json, Cart cart) {
+		JsonObject result = new JsonObject();
+		JSONObject jsonProduct;
+		ProductDAO dao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+		try {
+			jsonProduct = new JSONObject(json);
+			Product p = new Product();
+			p=dao.findById(Long.parseLong(jsonProduct.getString("id")));
+			
+			cart.decreaseProduct(p);
+			int totProduct = cart.getSize();
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been added into the cart successfully!");
+			result.addProperty("size", String.valueOf(totProduct));
+			result.addProperty("total", String.valueOf(cart.getTotal()));
+			result.addProperty("total", String.valueOf(cart.getTotal()));
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} 
+		return result;
 	}
 }

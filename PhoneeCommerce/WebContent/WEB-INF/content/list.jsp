@@ -46,7 +46,7 @@
 					<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 
 				    <p class="card-text">${i.description}</p>
 				    <div class="button-footer">
-					   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-name="${i.name}">Carrello</button> 
+					   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-id="${i.id}">Carrello</button> 
 					  	<button type="button" class="btn btn-sm btn-danger btn-rmv-product" data-idproduct="${i.id}" data-idwishlist="${wishlist.id}">Rimuovi dai preferiti </button>
 					</div>
 				</div>

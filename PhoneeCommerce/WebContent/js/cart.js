@@ -26,7 +26,7 @@ $(document).ready(function(){
 	$(".add-product-on-cart").on('click',function(){
 		
 		var prodotto = {
-				name : $(this).data('name'),
+				id : $(this).data('id'),
 				quantity: $('#qty_input').val()
 			};
 		
@@ -88,6 +88,83 @@ $(document).ready(function () {
 	});
   });
 });
+
+$(document).ready(function () {
+	
+	$(".step-up").on('click',function(e){
+		var id = $(this).data('id');
+		
+		var prodotto = {
+				id : $(this).data('id'),
+				quantity: 1
+			};
+		
+		
+		$.ajax({
+			url: "cart?action=addProductOnCart",
+			type: "POST",
+			datatype: "json",
+			data: JSON.stringify(prodotto),
+	        success: function(result){
+	        	var data = JSON.parse(result);
+	        	var size = data.size;
+	        	var totalcart = data.total;
+	        	$("#countCart").text(size);
+	        	$("#total-cart").text(totalcart);
+	        	$("#subtotal-" + id).text("€ " + ($("#qty-" + id).val() * $("#qty-" + id).data('price')));
+	        	
+	        },
+	        error: function(){	
+	        	alert("Errore di richiesta al server! Riprovare.");
+	        }
+		});
+		
+		
+		
+		
+	});
+	
+});
+
+$(document).ready(function () {
+	
+	$(".step-down").on('click',function(e){
+		var id = $(this).data('id');
+		var qty = $("#qty-" + id).val();
+		
+			var prodotto = {
+					id : $(this).data('id'),
+					quantity: 1
+			}
+			$.ajax({
+				url: "cart?action=decreaseQuantity",
+				type: "POST",
+				datatype: "json",
+				data: JSON.stringify(prodotto),
+		        success: function(result){
+		        	var data = JSON.parse(result);
+		        	var size = data.size;
+		        	var totalcart = data.total;
+		        	$("#countCart").text(size);
+		        	$("#total-cart").text(totalcart);
+		        	$("#subtotal-" + id).text("€ " + ($("#qty-" + id).val() * $("#qty-" + id).data('price')));
+		        	
+		        },
+		        error: function(){	
+		        	alert("Errore di richiesta al server! Riprovare.");
+		        }
+			});
+		
+		
+		
+		
+		
+	});
+	
+});
+
+
+
 
 
 //$(function () {
