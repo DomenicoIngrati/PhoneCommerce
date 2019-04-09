@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
 import model.Cart;
 import model.Order;
 import model.Product;
@@ -24,6 +27,7 @@ import service.AccountService;
 import service.OrderService;
 import service.ProductCategoryService;
 import service.ProductService;
+import service.SearchService;
 
 /* Servlet implementation class Home
  */
@@ -44,7 +48,14 @@ public class Home extends HttpServlet {
     ProductCategory productCat=new ProductCategory(); 
     Set<Product> brandProducts = new HashSet<Product>();
     
- 
+	BufferedReader br = new BufferedReader(request.getReader());
+	String json = "";
+	if (br != null) {
+		json = br.readLine();
+	}
+	
+	JsonObject result = new JsonObject();
+	
     Product selectedProduct = new Product();
     String selectedProductName;
     
@@ -67,6 +78,7 @@ public class Home extends HttpServlet {
     action = (action == null) ? "" : action;
     String page = "";
     User user = (User) session.getAttribute("user");
+    
     switch (action) {
     case "index":
     	List <Product> newProducts = ProductService.getLastSixProducts();
@@ -250,6 +262,24 @@ public class Home extends HttpServlet {
     		page="singleOrderView";
     	}
     	break;
+    
+    case "search":
+	    {
+	    	Set<Product> searchResult=SearchService.findProducts(json, result,session);
+	    	
+	    	session.setAttribute("searchResult", searchResult);
+	    	request.setAttribute("pageTitle",json);
+			
+	    	result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "You have successfully signed-up, will be redirected soon !");
+			response.getWriter().write(result.toString()); 
+			
+	    }
+    case "searchCompleted":
+	    {
+	    	page="searchCompleted";
+	    	break;
+	    }
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();

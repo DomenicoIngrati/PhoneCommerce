@@ -14,6 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
         <script src="js/order.js" type="text/javascript"></script>
+        <script src="js/search.js" type="text/javascript"></script>
         
         <!-- <script src="js/cart.js" type="text/javascript"></script> -->
 
@@ -106,8 +107,8 @@
           </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Cosa cerchi?" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" id="search">
+          <input class="form-control mr-sm-2" id="uniqueID" type="search" placeholder="Cosa cerchi?" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
         </form>
       </div>

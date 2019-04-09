@@ -17,7 +17,7 @@
 	<div class="row account-button-box">
 		
 		<div class="col-sm">
-		<a href="#">
+		<a href="home?action=myOrdersView">
 			<div class="account-button">
 				<div class="row">
 					<div class="col-auto"> <!-- DIV IMMAGINE -->

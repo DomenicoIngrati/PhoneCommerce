@@ -23,6 +23,8 @@ public interface ProductCategoryDAO {
 	
 	public ProductCategory findByName(String name);
 	
+	public Set<String> findAllNames();
+	
 //	public Set<ProductCategory> showCategory();
 
 }

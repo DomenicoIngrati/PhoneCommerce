@@ -25,6 +25,8 @@ public interface ProductDAO {
 	public List<Product> findAll();
 	
 	public List<Product> findFormCategory(ProductCategory pc);
+	
+	public Set<String> findAllNames();
 
 //	public Integer soldProduct(Event e, ProductCategory idCategory);
 

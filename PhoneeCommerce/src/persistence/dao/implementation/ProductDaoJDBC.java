@@ -334,5 +334,29 @@ public class ProductDaoJDBC implements ProductDAO {
 		return products;
 	}
 
+	@Override
+	public Set<String> findAllNames() {	
+		Connection connection = this.dataSource.getConnection();
+		Set<String> productsNames = new HashSet<String>();
+		try {
+			PreparedStatement statement;
+			String query = "select product.name from Product";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+
+				
+				productsNames.add(result.getString("name"));
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return productsNames;
+	}
+
 
 }
