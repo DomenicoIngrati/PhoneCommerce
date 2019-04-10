@@ -5,8 +5,17 @@ public class ProductCategory {
 	private long id;
 	private String name;
 	private ProductCategory anchestorCategory;
+	private boolean visible;
 	
 	
+	public boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 	public long getId() {
 		return id;
 	}

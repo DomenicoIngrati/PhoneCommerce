@@ -1,18 +1,16 @@
 package service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
-import model.Item;
 import model.Product;
 import model.ProductCategory;
 import persistence.dao.ProductCategoryDAO;
 import persistence.dao.ProductDAO;
-import persistence.dao.UserDAO;
 import persistence.util.DAOfactory;
 
 public class SearchService {
@@ -21,17 +19,17 @@ public class SearchService {
 		
 	}
 	
-	public static Set<Product> findProducts(String json,JsonObject result, HttpSession session){
+	public static List<Product> findProducts(String json,JsonObject result, HttpSession session){
 		
 		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
 		ProductDAO dao = factory.getProductDAO();
 		ProductCategoryDAO catDao = factory.getProductCategoryDAO();
 		
-		Set<Product> productsFound=new HashSet<Product>();
+		List<Product> productsFound=new ArrayList<Product>();
 		
-		Set<String> productsNames=dao.findAllNames();
+		List<String> productsNames=dao.findAllNames();
 		
-		Set<String> categoriesNames=catDao.findAllNames();
+		List<String> categoriesNames=catDao.findAllNames();
 		
 		String stringToBeFound;
 		

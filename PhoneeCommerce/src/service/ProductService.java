@@ -3,7 +3,6 @@ package service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +51,7 @@ public abstract class ProductService {
 		return result;
 	}
 	
-	public static Set<Product> findProductsByCategory(ProductCategory category) {
+	public static List<Product> findProductsByCategory(ProductCategory category) {
 	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
 	    return brandProductsDAO.findByCategory(category);
 	}
@@ -92,7 +91,7 @@ public abstract class ProductService {
 			result.addProperty("result", "SUCCESS");
 			result.addProperty("message", "Product has been deleted succefully!");
 
-			List <Product> totalProduct = ProductDao.findFormCategory(p.getCategory());
+			List <Product> totalProduct = ProductDao.findFromCategory(p.getCategory());
 			if(totalProduct.isEmpty())
 				result.addProperty("category", p.getCategory().getId());
 		} 
@@ -133,7 +132,7 @@ public abstract class ProductService {
 			if (dao.update(p)) {
 				
 				ProductCategory old = catDao.findByName(jsonProduct.getString("oldnamecategory"));
-				List <Product> totalProduct = dao.findFormCategory(old);
+				List <Product> totalProduct = dao.findFromCategory(old);
 				if(totalProduct.isEmpty())
 				{
 					catDao.deleteById(old);

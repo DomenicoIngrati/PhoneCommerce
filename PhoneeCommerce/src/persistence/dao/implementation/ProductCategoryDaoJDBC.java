@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import model.ProductCategory;
 import persistence.dao.ProductCategoryDAO;
@@ -35,13 +33,13 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 			long id = IdBroker.getId(connection);
 			o.setId(id);
 			
-		    query = " INSERT INTO ProductCategory ( name) VALUES ( ?)";
+		    query = " INSERT INTO ProductCategory (id,name, visible) VALUES (?, ?, ?)";
 		    
 		    statement = connection.prepareStatement(query);
 		    
 		    statement.setLong(1, o.getId());
-		    statement.setString(1, o.getName());
-
+		    statement.setString(2, o.getName());
+		    statement.setBoolean(3, o.getVisible());
 		    statement.executeUpdate();
 		    
 		} catch (SQLException e) {
@@ -146,8 +144,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 				category = new ProductCategory();
 				category.setId(result.getInt("id"));				
 				category.setName(result.getString("name"));
-				
-
+				category.setVisible(result.getBoolean("visible"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -172,6 +169,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 				
 				cat.setId(result.getInt("id"));				
 				cat.setName(result.getString("name"));
+				cat.setVisible(result.getBoolean("visible"));
 				categories.add(cat);
 			}
 		} catch (SQLException e) {
@@ -197,8 +195,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 				category = new ProductCategory();
 				category.setId(result.getInt("id"));				
 				category.setName(result.getString("name"));
-				
-
+				category.setVisible(result.getBoolean("visible"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -211,9 +208,9 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 	
 	
 	@Override
-	public Set<String> findAllNames() {	
+	public List<String> findAllNames() {	
 		Connection connection = this.dataSource.getConnection();
-		Set<String> categoriesNames = new HashSet<String>();
+		List<String> categoriesNames = new ArrayList<String>();
 		try {
 			PreparedStatement statement;
 			String query = "select productcategory.name from productcategory";
@@ -230,6 +227,74 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDAO{
 			DAOUtility.close(connection);
 		}
 		return categoriesNames;
+	}
+
+	@Override
+	public List<ProductCategory> findAll(boolean visible) {
+		Connection connection = this.dataSource.getConnection();
+		List <ProductCategory> categories = new ArrayList<ProductCategory>();
+		try {
+			PreparedStatement statement;
+			String query = "select * from ProductCategory where visible = ?";
+			statement = connection.prepareStatement(query);
+			statement.setBoolean(1, visible);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				ProductCategory cat = new ProductCategory();
+				
+				cat.setId(result.getInt("id"));				
+				cat.setName(result.getString("name"));
+				cat.setVisible(result.getBoolean("visible"));
+				categories.add(cat);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return categories;
+	}
+
+	@Override
+	public List<String> findAllNames(boolean visible) {
+		Connection connection = this.dataSource.getConnection();
+		List<String> categoriesNames = new ArrayList<String>();
+		try {
+			PreparedStatement statement;
+			String query = "select productcategory.name from productcategory";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				categoriesNames.add(result.getString("name"));
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return categoriesNames;
+	}
+
+	@Override
+	public void updateVisible(ProductCategory tc) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update ProductCategory SET visible = ? WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+	
+			statement.setBoolean(1, tc.getVisible());
+			statement.setLong(2, tc.getId());
+
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}
+		
 	}
 
 }

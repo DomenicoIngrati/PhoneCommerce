@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 
 public class Order {
@@ -10,7 +10,7 @@ public class Order {
     private Date date;
     private User user;
     private float total;
-    private Set<Item> products;
+    private List<Item> products;
     private Address address;
     
     public Order() {
@@ -49,11 +49,11 @@ public class Order {
 		this.total = (float) d;
 	}
 
-	public Set<Item> getProducts() {
+	public List<Item> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Item> products) {
+	public void setProducts(List<Item> products) {
 		this.products = products;
 	}
 	

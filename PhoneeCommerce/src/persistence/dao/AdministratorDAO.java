@@ -1,8 +1,7 @@
 package persistence.dao;
 
-import java.util.Set;
+import java.util.List;
 
-import model.Order;
 import model.Product;
 import model.User;
 
@@ -18,11 +17,11 @@ public interface AdministratorDAO {
 
     public User findById(long id);
     
-    public Set<User> findAll();
+    public List<User> findAll();
     
     public void putProduct(User admin, Product product);
     
-//    public void putProducts(Set <Product> product);
+//    public void putProducts(List <Product> product);
     
     public void deleteProduct(Product product);
     

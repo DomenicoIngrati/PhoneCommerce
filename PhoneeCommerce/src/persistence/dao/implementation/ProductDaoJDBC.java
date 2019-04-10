@@ -5,9 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 import model.Product;
 import model.ProductCategory;
@@ -38,7 +37,7 @@ public class ProductDaoJDBC implements ProductDAO {
 			if(temp)
 			{
 				ProductCategoryDAO prodCat = new ProductCategoryDaoJDBC(dataSource);
-				List <Product> totalProduct = findFormCategory(t.getCategory());
+				List <Product> totalProduct = findFromCategory(t.getCategory());
 				if(totalProduct.isEmpty())
 					prodCat.deleteById(t.getCategory());
 			}
@@ -55,12 +54,12 @@ public class ProductDaoJDBC implements ProductDAO {
 	public boolean update(Product t) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			//Non mi ricordo come vengono trattati gli array nel database per quanto riguarda reviews
-			String update = "update Product SET name = ?, description = ?, price = ?, category = ? WHERE id=?";
+			String update = "update Product SET name = ?, description = ?, price = ?, category = ?, visible = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, t.getName());
 			statement.setString(2, t.getDescription());
 			statement.setDouble(3,  t.getPrice());
+			statement.setBoolean(4,  t.getVisible());
 			
 			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
 			ProductCategory pcat = cat.findByName(t.getCategory().getName());
@@ -70,10 +69,26 @@ public class ProductDaoJDBC implements ProductDAO {
 				cat.create(t.getCategory());
 			}
 			
+			
 			statement.setLong(4, pcat.getId());
 			statement.setLong(5, t.getId());
 			
-			return (statement.executeUpdate() > 0) ? true : false;
+			boolean ok;
+			ok = (statement.executeUpdate() > 0) ? true : false;
+			
+			if(ok && !t.getVisible()) {
+				ProductDaoJDBC daoProd = new ProductDaoJDBC(dataSource);
+				List<Product> allProd = daoProd.findByCategory(pcat);
+				List<Product> allProdNotVisible = daoProd.findByCategory(pcat, false);
+				if(allProd.size() == allProdNotVisible.size()) {
+					
+					pcat.setVisible(false);
+					cat.updateVisible(pcat);
+					
+				}
+			}
+			
+			return ok;
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -97,6 +112,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
 
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -126,6 +142,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -140,10 +157,10 @@ public class ProductDaoJDBC implements ProductDAO {
 		return product;
 	}
 	
-	public Set<Product> findByPrice(float price){
+	public List<Product> findByPrice(float price){
 		
 		Connection connection = this.dataSource.getConnection();
-		Set<Product> products = new HashSet<Product>();
+		List<Product> products = new ArrayList<Product>();
 		try {
 			Product product;
 			PreparedStatement statement;
@@ -157,6 +174,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -173,10 +191,10 @@ public class ProductDaoJDBC implements ProductDAO {
 		return products;
 	}
 	
-	public Set<Product> findByCategory(ProductCategory idCategory){
+	public List<Product> findByCategory(ProductCategory idCategory){
 		
 		Connection connection = this.dataSource.getConnection();
-		Set<Product> products = new HashSet<Product>();
+		List<Product> products = new ArrayList<Product>();
 		try {
 			Product product;
 			PreparedStatement statement;
@@ -190,6 +208,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -283,6 +302,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -300,7 +320,7 @@ public class ProductDaoJDBC implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> findFormCategory(ProductCategory pc) {
+	public List<Product> findFromCategory(ProductCategory pc) {
 		Connection connection = this.dataSource.getConnection();
 		List<Product> products = new ArrayList<Product>();
 		try {
@@ -318,6 +338,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setName(result.getString("name"));
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -335,9 +356,9 @@ public class ProductDaoJDBC implements ProductDAO {
 	}
 
 	@Override
-	public Set<String> findAllNames() {	
+	public List<String> findAllNames() {	
 		Connection connection = this.dataSource.getConnection();
-		Set<String> productsNames = new HashSet<String>();
+		List<String> productsNames = new ArrayList<String>();
 		try {
 			PreparedStatement statement;
 			String query = "select product.name from Product";
@@ -356,6 +377,142 @@ public class ProductDaoJDBC implements ProductDAO {
 			DAOUtility.close(connection);
 		}
 		return productsNames;
+	}
+
+	@Override
+	public Product findById(Long id, boolean visible) {
+		Connection connection = this.dataSource.getConnection();
+		Product product = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from Product where id = ? and visible = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			statement.setBoolean(2, visible);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				product = new Product();
+				product.setId(result.getInt("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
+
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
+//				product.setReviews(result.getString("reviews"));
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}	
+		return product;
+	}
+
+	@Override
+	public List<Product> findByCategory(ProductCategory idCategory, boolean visible) {
+		Connection connection = this.dataSource.getConnection();
+		List<Product> products = new ArrayList<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from Product where category=? and visible = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, idCategory.getId());
+			statement.setBoolean(2, visible);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getLong("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		}	 finally {
+			DAOUtility.close(connection);
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> findAll(boolean visible) {
+		Connection connection = this.dataSource.getConnection();
+		List<Product> products = new ArrayList<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from Product where visible = ?";
+			statement = connection.prepareStatement(query);
+			statement.setBoolean(1, visible);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getLong("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
+				products.add(product);
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> findFromCategory(ProductCategory pc, boolean visible) {
+		Connection connection = this.dataSource.getConnection();
+		List<Product> products = new ArrayList<Product>();
+		try {
+			Product product;
+			PreparedStatement statement;
+			String query = "select * from product where category = ? and visible = ?";
+			
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, pc.getId());
+			statement.setBoolean(2, visible);
+			
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				product = new Product();
+				product.setId(result.getLong("id"));				
+				product.setName(result.getString("name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getFloat("price"));
+				product.setVisible(result.getBoolean("visible"));
+				
+				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
+				product.setCategory(ProdCatDao.findById(result.getLong("category")));
+				
+				products.add(product);
+			}
+		}
+		catch (SQLException e){
+			throw new PersistenceException(e.getMessage());
+		}
+		finally {
+			DAOUtility.close(connection);
+		}
+		return products;
 	}
 
 

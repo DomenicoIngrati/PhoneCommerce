@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import model.Order;
 import model.Product;
 import model.Type;
 import model.User;
@@ -172,7 +171,7 @@ public class AdministratorDaoJDBC implements AdministratorDAO {
 	}
 
 //	@Override
-//	public void putProducts(Set<Product> product) {
+//	public void putProducts(List<Product> product) {
 //		// TODO Auto-generated method stub
 //		
 //	}
@@ -198,9 +197,9 @@ public class AdministratorDaoJDBC implements AdministratorDAO {
 	}
 
 	@Override
-	public Set<User> findAll() {
+	public List<User> findAll() {
 		Connection connection = this.dataSource.getConnection();
-		Set<User> admins = new HashSet<User>();
+		List<User> admins = new ArrayList<User>();
 		try {
 			PreparedStatement statement;
 			String query = "select * from Administrator";

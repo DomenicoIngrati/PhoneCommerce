@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Item;
 import model.Order;
-import model.Product;
-import model.Wishlist;
 import persistence.util.*;
 import persistence.dao.AddressDAO;
 import persistence.dao.OrderDAO;
@@ -162,9 +160,9 @@ public class OrderDaoJDBC implements OrderDAO {
 	}
 
 	@Override
-	public Set<Order> findByUser(long id) {
+	public List<Order> findByUser(long id) {
 		Connection connection = this.dataSource.getConnection();
-		Set<Order> orders = new HashSet<Order>();
+		List<Order> orders = new ArrayList<Order>();
 		try {
 			Order order;
 			PreparedStatement statement;
@@ -227,7 +225,7 @@ public class OrderDaoJDBC implements OrderDAO {
 				instatement = connection.prepareStatement(inquery);
 				instatement.setLong(1, id);
 				ResultSet inresult = instatement.executeQuery();
-				Set<Item> products= new HashSet<Item>();
+				List<Item> products= new ArrayList<Item>();
 				while(inresult.next()) {
 					Item i=new Item(productDao.findById(inresult.getLong("product")),inresult.getInt("quantity"));
 					products.add(i);

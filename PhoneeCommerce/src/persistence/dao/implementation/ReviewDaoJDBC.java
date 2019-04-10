@@ -5,8 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Review;
 import model.User;
@@ -122,9 +122,9 @@ public class ReviewDaoJDBC implements ReviewDAO {
 	}
 
 	@Override
-	public Set<Review> findByUser(User user) {
+	public List<Review> findByUser(User user) {
 		Connection connection = this.dataSource.getConnection();
-		Set<Review> reviews = new HashSet<Review>();
+		List<Review> reviews = new ArrayList<Review>();
 		try {
 			Review r;
 			PreparedStatement statement;
@@ -152,9 +152,9 @@ public class ReviewDaoJDBC implements ReviewDAO {
 	}
 
 	@Override
-	public Set<Review> findByTitle(String title) {
+	public List<Review> findByTitle(String title) {
 		Connection connection = this.dataSource.getConnection();
-		Set<Review> reviews = new HashSet<Review>();
+		List<Review> reviews = new ArrayList<Review>();
 		try {
 			Review r;
 			PreparedStatement statement;
@@ -182,9 +182,9 @@ public class ReviewDaoJDBC implements ReviewDAO {
 	}
 
 	@Override
-	public Set<Review> findByFeedback(int feedback) {
+	public List<Review> findByFeedback(int feedback) {
 		Connection connection = this.dataSource.getConnection();
-		Set<Review> reviews = new HashSet<Review>();
+		List<Review> reviews = new ArrayList<Review>();
 		try {
 			Review r;
 			PreparedStatement statement;

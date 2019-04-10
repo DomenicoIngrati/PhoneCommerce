@@ -1,12 +1,12 @@
 package model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cart {
 	private User user;
 	
-	private Set<Item> products;
+	private List<Item> products;
 	
 	private double total;
 	
@@ -14,12 +14,12 @@ public class Cart {
 	
 	public Cart() {
 		user = null;
-		products=new HashSet<Item>();
+		products=new ArrayList<Item>();
 		total = 0;
 		size = 0;
 	}
 
-	public void setProducts(Set<Item> products) {
+	public void setProducts(List<Item> products) {
 		this.products = products;
 	}
 
@@ -31,7 +31,7 @@ public class Cart {
 		this.user = user;
 	}
 
-	public Set<Item> getProducts() {
+	public List<Item> getProducts() {
 		return products;
 	}
 
@@ -100,7 +100,7 @@ public class Cart {
     
     public void deleteProduct(Product p) {
         // TODO Auto-generated method stub
-    	  Set<Item> toRemove = new HashSet<Item>();
+    	  List<Item> toRemove = new ArrayList<Item>();
           for (Item i : this.products){
             if(i.getProduct().equals(p)){
                decrementTotal(i.getProduct().getPrice()*i.getQuantity());

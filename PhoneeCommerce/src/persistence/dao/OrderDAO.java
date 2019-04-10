@@ -1,10 +1,8 @@
 package persistence.dao;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 import model.Order;
-import model.Product;
 
 public interface OrderDAO {
 	
@@ -14,7 +12,7 @@ public interface OrderDAO {
 
     public void update(Order o);
 
-    public Set<Order> findByUser(long id);
+    public List<Order> findByUser(long id);
 
     public Order findById(long id);
 }

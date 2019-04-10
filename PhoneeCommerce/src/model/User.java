@@ -1,7 +1,7 @@
 package model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
@@ -13,9 +13,9 @@ public class User {
     private String surname;
     private Type type;
 
-    private Set<Order> orders;
-    private Set<Wishlist> whishlists;
-    private Set<Review> reviews;
+    private List<Order> orders;
+    private List<Wishlist> whishlists;
+    private List<Review> reviews;
     private Cart cart;
 
     public User() {
@@ -24,9 +24,9 @@ public class User {
 	email = "";
 	name = "";
 	surname = "";
-	orders = new HashSet<>();
-	reviews = new HashSet<>();
-	whishlists = new HashSet<>();
+	orders = new ArrayList<>();
+	reviews = new ArrayList<>();
+	whishlists = new ArrayList<>();
 	type = Type.Customer;
 
     }
@@ -104,37 +104,37 @@ public class User {
 	}
 
 
-	public Set<Order> getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
 
 
 
-	public void setOrders(Set<Order> orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 
 
 
-	public Set<Wishlist> getWhishlists() {
+	public List<Wishlist> getWhishlists() {
 		return whishlists;
 	}
 
 
 
-	public void setWhishlists(Set<Wishlist> whishlists) {
+	public void setWhishlists(List<Wishlist> whishlists) {
 		this.whishlists = whishlists;
 	}
 
 
 
-	public Set<Review> getReviews() {
+	public List<Review> getReviews() {
 		return reviews;
 	}
 
 
 
-	public void setReviews(Set<Review> reviews) {
+	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
 

@@ -3,7 +3,6 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
 
 import model.Cart;
-import model.Item;
 import model.Order;
 import model.User;
-import service.AccountService;
 import service.OrderService;
 
 /**

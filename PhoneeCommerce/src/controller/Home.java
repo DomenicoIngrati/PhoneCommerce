@@ -3,9 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,7 +44,7 @@ public class Home extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     ProductCategory productCat=new ProductCategory(); 
-    Set<Product> brandProducts = new HashSet<Product>();
+    List<Product> brandProducts = new ArrayList<Product>();
     
 	BufferedReader br = new BufferedReader(request.getReader());
 	String json = "";
@@ -242,7 +240,7 @@ public class Home extends HttpServlet {
     	
     case "myOrdersView":
     	if(user != null) {
-    		Set<Order> myOrders = OrderService.findAllMyOrders(user);
+    		List<Order> myOrders = OrderService.findAllMyOrders(user);
     		session.setAttribute("myOrders",myOrders);
         	page="myOrdersView";
     	}
@@ -265,7 +263,7 @@ public class Home extends HttpServlet {
     
     case "search":
 	    {
-	    	Set<Product> searchResult=SearchService.findProducts(json, result,session);
+	    	List<Product> searchResult=SearchService.findProducts(json, result,session);
 	    	
 	    	session.setAttribute("searchResult", searchResult);
 	    	request.setAttribute("pageTitle",json);

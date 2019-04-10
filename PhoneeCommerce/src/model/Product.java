@@ -10,7 +10,16 @@ public class Product {
 	private ArrayList<Review> reviews;
 	private ProductCategory category;
 	private String image;
+	private boolean visible;
 	
+	public boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 	public String getImage() {
 		return image;
 	}

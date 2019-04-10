@@ -1,20 +1,12 @@
 package service;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import model.Type;
 import model.User;
 import model.Address;
 import model.Cart;
 import model.Order;
-import persistence.dao.AddressDAO;
 import persistence.dao.OrderDAO;
-import persistence.dao.UserDAO;
 import persistence.util.DAOfactory;
 import persistence.util.DatabaseManager;
 public class OrderService {
@@ -42,7 +34,7 @@ public class OrderService {
 			return newOrder;
 		}
 
-		public static Set<Order> findAllMyOrders(User user) {
+		public static List<Order> findAllMyOrders(User user) {
 			OrderDAO orderDao = DatabaseManager.getInstance().getDaoFactory().getOrderDAO();
 			return orderDao.findByUser(user.getId());
 		}
