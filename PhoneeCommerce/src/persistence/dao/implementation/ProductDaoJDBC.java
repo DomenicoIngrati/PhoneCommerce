@@ -59,7 +59,9 @@ public class ProductDaoJDBC implements ProductDAO {
 			statement.setString(1, t.getName());
 			statement.setString(2, t.getDescription());
 			statement.setDouble(3,  t.getPrice());
-			statement.setBoolean(4,  t.getVisible());
+			statement.setLong(4,  t.getCategory().getId());
+			statement.setBoolean(5,  t.getVisible());
+			
 			
 			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
 			ProductCategory pcat = cat.findByName(t.getCategory().getName());
@@ -69,9 +71,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				cat.create(t.getCategory());
 			}
 			
-			
-			statement.setLong(4, pcat.getId());
-			statement.setLong(5, t.getId());
+			statement.setLong(6, t.getId());
 			
 			boolean ok;
 			ok = (statement.executeUpdate() > 0) ? true : false;
@@ -266,7 +266,14 @@ public class ProductDaoJDBC implements ProductDAO {
 			
 			statement.setLong(5, pcat.getId());
 		
-			return (statement.executeUpdate() > 0) ? true : false;
+			boolean ok = (statement.executeUpdate() > 0) ? true : false;
+			if(ok) {
+				if(pcat.getVisible() == false) {
+					pcat.setVisible(true);
+					cat.updateVisible(pcat);
+				}
+			}
+			return ok;
 
 		} catch (SQLException e) {
 			if (connection != null) {

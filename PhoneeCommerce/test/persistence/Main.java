@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import model.*;
+import persistence.dao.ProductDAO;
 import persistence.dao.UserDAO;
 import persistence.dao.WishlistDAO;
 import persistence.dao.implementation.*;
@@ -83,6 +84,18 @@ public class Main {
 //				wishDao.create(tmp);
 //			}
 			
+//			DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+//			ProductDAO prdDao = factory.getProductDAO();
+//			ArrayList <Product> products = (ArrayList<Product>) prdDao.findAll();
+////			WishlistDAO wishDao= factory.getWishlistDAO();
+//			for(Product p: products) {
+//				
+//				Product tmp = new Product();
+//				tmp.setVisible(true);
+//				tmp.setUser(u);
+//				wishDao.create(tmp);
+//			}
+//			
 			
 			
 			

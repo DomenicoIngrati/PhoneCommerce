@@ -12,7 +12,7 @@ public abstract class ProductCategoryService {
 	
 	public static List<ProductCategory> findAllCategory() {
 	    ProductCategoryDAO cat = DatabaseManager.getInstance().getDaoFactory().getProductCategoryDAO();
-	    return cat.findAll();
+	    return cat.findAll(true);
 	}
 	
 	public static ProductCategory findCategoryByName(String categoryName) {

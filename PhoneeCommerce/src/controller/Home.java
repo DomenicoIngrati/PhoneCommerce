@@ -278,6 +278,12 @@ public class Home extends HttpServlet {
 	    	page="searchCompleted";
 	    	break;
 	    }
+	    
+//    case "upload":
+//    	{
+//    		page="upload";
+//    		break;
+//    	}
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();

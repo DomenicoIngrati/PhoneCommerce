@@ -53,7 +53,7 @@ public abstract class ProductService {
 	
 	public static List<Product> findProductsByCategory(ProductCategory category) {
 	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
-	    return brandProductsDAO.findByCategory(category);
+	    return brandProductsDAO.findByCategory(category, true);
 	}
 	
 	public static Product findProductByName(String name) {
@@ -65,7 +65,7 @@ public abstract class ProductService {
 		
 		ProductDAO ProductDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
 		List<Product> products = new ArrayList<Product>();
-		products = ProductDao.findAll();
+		products = ProductDao.findAll(true);
 		
 		Collections.reverse(products);
 		
@@ -75,7 +75,7 @@ public abstract class ProductService {
 	public static List<Product> getAllProducts(){
 		ProductDAO ProductDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
 		List<Product> products = new ArrayList<Product>();
-		products = ProductDao.findAll();
+		products = ProductDao.findAll(true);
 		
 		return products;
 	}
@@ -84,14 +84,15 @@ public abstract class ProductService {
 		
 		ProductDAO ProductDao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
 		Product p = ProductDao.findById(Long.parseLong(json));
+		p.setVisible(false);
 		JsonObject result = new JsonObject();
 		
-		if(ProductDao.delete(p))
+		if(ProductDao.update(p))
 		{
 			result.addProperty("result", "SUCCESS");
-			result.addProperty("message", "Product has been deleted succefully!");
+			result.addProperty("message", "Product has been deleted (hidden) succefully!");
 
-			List <Product> totalProduct = ProductDao.findFromCategory(p.getCategory());
+			List <Product> totalProduct = ProductDao.findFromCategory(p.getCategory(), true);
 			if(totalProduct.isEmpty())
 				result.addProperty("category", p.getCategory().getId());
 		} 
@@ -127,15 +128,23 @@ public abstract class ProductService {
 			p.setPrice(Double.parseDouble(jsonProduct.getString("price")));
 			p.setImage(jsonProduct.getString("image"));
 			p.setId(Long.parseLong(jsonProduct.getString("id")));
+			p.setVisible(true);
 			//nel DB non c'e' l'attributo image
 
 			if (dao.update(p)) {
 				
+				if(cat.getVisible() == false) {
+					cat.setVisible(true);
+					catDao.updateVisible(cat);
+					
+				}
+				
 				ProductCategory old = catDao.findByName(jsonProduct.getString("oldnamecategory"));
-				List <Product> totalProduct = dao.findFromCategory(old);
+				List <Product> totalProduct = dao.findFromCategory(old,true);
 				if(totalProduct.isEmpty())
 				{
-					catDao.deleteById(old);
+					old.setVisible(false);
+					catDao.updateVisible(old);
 					result.addProperty("oldnamecategory", old.getId());
 				}
 				result.addProperty("result", "SUCCESS");

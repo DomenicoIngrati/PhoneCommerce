@@ -15,7 +15,7 @@ public class HomeService {
 			
 			ProductCategoryDAO cat = DatabaseManager.getInstance().getDaoFactory().getProductCategoryDAO();
 			List<ProductCategory> cats = new ArrayList<ProductCategory>();
-			cats = cat.findAll();
+			cats = cat.findAll(true);
 			return cats;
 		}
 }
