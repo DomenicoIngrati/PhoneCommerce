@@ -31,9 +31,6 @@ public class UploadServlet extends HttpServlet {
         Part file = request.getPart("file");
         String filename = getFilename(file);
         InputStream filecontent = file.getInputStream();
-        // ... Do your file saving job here.
-        
-        System.out.println(filename);
         
         File fileimg = new File("/Users/RokyMac/git/PhoneCommerce/PhoneeCommerce/WebContent/img/products/" + filename);
         FileUtils.copyInputStreamToFile(filecontent, fileimg);

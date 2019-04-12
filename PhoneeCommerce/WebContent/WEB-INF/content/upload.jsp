@@ -26,6 +26,7 @@
 
                 for (var i = 0; i < files.length; i++) {
                     upload(files[i]);
+/*                     console.log(i); */
                 }
             }
 
@@ -34,6 +35,7 @@
 
                 var formData = new FormData();
                 formData.append("file", file);
+                console.log(formData);
 
                 var xhr = new XMLHttpRequest();
                 xhr.upload.addEventListener("progress", uploadProgress, false);
