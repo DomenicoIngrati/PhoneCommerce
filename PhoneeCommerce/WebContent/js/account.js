@@ -310,6 +310,10 @@ $( document ).ready(function() {
 	$("#log-in").submit(function(e) {
 	    e.preventDefault();
 	    var frm = $(this).serializeFormJSON();
+	    
+	    console.log(frm);
+	    console.log(JSON.stringify(frm));
+	    
 	    $.ajax({
 	        url: "account?action=signin",
 	        type: "POST",

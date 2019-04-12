@@ -40,12 +40,20 @@
     <servlet-name>Address</servlet-name>
     <url-pattern>/address</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>Wishlist</servlet-name>
     <servlet-class>controller.Wishlist</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Wishlist</servlet-name>
     <url-pattern>/wishlist</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>uploadServlet</servlet-name>
+    <servlet-class>controller.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>uploadServlet</servlet-name>
+    <url-pattern>/uploadServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -279,11 +279,11 @@ public class Home extends HttpServlet {
 	    	break;
 	    }
 	    
-//    case "upload":
-//    	{
-//    		page="upload";
-//    		break;
-//    	}
+    case "upload":
+    	{
+    		page="upload";
+    		break;
+    	}
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();
