@@ -18,6 +18,7 @@ import model.Cart;
 import model.Order;
 import model.Product;
 import model.ProductCategory;
+import model.Review;
 import model.Type;
 import model.User;
 import model.Address;
@@ -44,6 +45,7 @@ public class Home extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     ProductCategory productCat=new ProductCategory(); 
+    
     List<Product> brandProducts = new ArrayList<Product>();
     
 	BufferedReader br = new BufferedReader(request.getReader());
@@ -61,9 +63,11 @@ public class Home extends HttpServlet {
     cats = ProductCategoryService.findAllCategory();
     
     request.setAttribute("brands", cats);
+    
 //    Wishlist wishlist = null;
     
     HttpSession session = request.getSession();
+    
     Cart cart = (Cart) session.getAttribute("cart");
     if (cart == null) {
       cart = new Cart();
@@ -173,9 +177,15 @@ public class Home extends HttpServlet {
     	page="product";
     	selectedProductName=request.getParameter("productName");
     	selectedProduct=ProductService.findProductByName(selectedProductName);
+    	List<Review> productReviews=ProductService.findReviewsByProduct(selectedProduct);
+    	float feedbackAverage=ProductService.countFeedbackAverage(productReviews);
     	request.setAttribute("selectedProduct",selectedProduct);
+    	request.setAttribute("productReviews", productReviews);
+    	request.setAttribute("feedbackAverage", feedbackAverage);
     	if(user != null)
     	{
+    		boolean productBought=ProductService.checkIfUserBoughtProduct(selectedProduct,user);
+    		request.setAttribute("productAlreadyBought", productBought);
     		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
     	break;
@@ -279,11 +289,11 @@ public class Home extends HttpServlet {
 	    	break;
 	    }
 	    
-    case "upload":
-    	{
-    		page="upload";
-    		break;
-    	}
+//    case "upload":
+//    	{
+//    		page="upload";
+//    		break;
+//    	}
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();

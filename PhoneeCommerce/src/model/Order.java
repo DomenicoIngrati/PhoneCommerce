@@ -64,6 +64,17 @@ public class Order {
 	public void setAddress(Address a) {
 		this.address=a;
 	}
+	
+	public boolean checkIfOrderContainsProduct(Product p) {
+		
+		for(int i=0;i<products.size();i++) {
+			if(products.get(i).getProduct().getId()==p.getId())
+			{
+				return true;
+			}		
+		}
+		return false;
+	}
     
     
 }

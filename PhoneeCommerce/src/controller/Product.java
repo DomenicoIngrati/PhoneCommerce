@@ -69,6 +69,14 @@ public class Product extends HttpServlet {
 			result=ProductService.deleteProduct(json);
 			break;
 		}
+		
+		case "newReview":
+		{
+			if(user!=null) {
+			result=ProductService.addNewReview(json,user);
+			}
+			break;
+		}
 //		case "SUSPEND":
 //		{
 //			EventService eventservice = new EventService(json);

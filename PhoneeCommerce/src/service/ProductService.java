@@ -7,12 +7,22 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import model.Address;
+import model.Order;
 import model.Product;
 import model.ProductCategory;
+import model.Review;
+import model.User;
+import persistence.dao.AddressDAO;
+import persistence.dao.OrderDAO;
 import persistence.dao.ProductCategoryDAO;
 import persistence.dao.ProductDAO;
+import persistence.dao.ReviewDAO;
+import persistence.dao.UserDAO;
+import persistence.util.DAOfactory;
 import persistence.util.DatabaseManager;
 
 public abstract class ProductService {
@@ -54,6 +64,11 @@ public abstract class ProductService {
 	public static List<Product> findProductsByCategory(ProductCategory category) {
 	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
 	    return brandProductsDAO.findByCategory(category, true);
+	}
+	
+	public static List<Review> findReviewsByProduct(Product p) {
+	    ReviewDAO reviewDao=  DatabaseManager.getInstance().getDaoFactory().getReviewDAO();//ByDOMENICO
+	    return reviewDao.findByProduct(p);
 	}
 	
 	public static Product findProductByName(String name) {
@@ -163,6 +178,66 @@ public abstract class ProductService {
 		
 		
 		return result;
+	}
+
+	public static boolean checkIfUserBoughtProduct(Product selectedProduct,User user) {
+		
+		OrderDAO orderDao = DatabaseManager.getInstance().getDaoFactory().getOrderDAO();
+		List<Order> userOrders= orderDao.findByUser(user.getId());
+		
+		for (int i = 0; i < userOrders.size(); i++) {
+			Order o=orderDao.findById(userOrders.get(i).getId());
+			
+			if(o.checkIfOrderContainsProduct(selectedProduct)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static JsonObject addNewReview(String json,User user) {
+		
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+		ReviewDAO dao = factory.getReviewDAO();
+		ProductDAO productDao=factory.getProductDAO();
+		JsonObject result = new JsonObject();
+		
+		try {
+		JSONObject jsonProduct=new JSONObject(json);
+		
+		Review tmp=new Review();
+		
+		tmp.setTitle(jsonProduct.getString("title"));
+		tmp.setText(jsonProduct.getString("text"));
+		tmp.setUser(user);
+		tmp.setProduct(productDao.findById(Long.parseLong(jsonProduct.getString("id"))));
+		tmp.setFeedback(1);
+		
+
+		if(dao.create(tmp)) {
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Recensione aggiunta con successo!");
+		} else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Ops, qualcosa è andato storto!");
+		}	
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} 
+		
+		return result;
+	}
+	
+	public static float countFeedbackAverage(List<Review> reviews) {
+		
+		float total=0;
+		for(int i=0;i<reviews.size();i++) {
+			total+=reviews.get(i).getFeedback();
+		}
+		
+		total=(total/reviews.size());
+		return total;
 	}
 
 }
