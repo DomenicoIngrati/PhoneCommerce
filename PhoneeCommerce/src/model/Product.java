@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -38,15 +40,9 @@ public class Product {
 
 	public void setImage(byte[] image) {
 		this.image = image;
-	
-//		String ciao = "";
-//        try {
-//			 ciao = new String(encodeBase64, "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-        this.imageString = "data:image/png;base64," + Base64.getEncoder().encodeToString(image);
-        
+
+		this.imageString = "data:image/png;base64," + Base64.getEncoder().encodeToString(image);
+
         System.out.println(this.imageString);
 		
 	}

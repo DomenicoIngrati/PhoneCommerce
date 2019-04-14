@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -77,11 +78,20 @@ public class Product extends HttpServlet {
 					Part imagePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 					String filename = getFilename(imagePart);
 				    InputStream fileContent = imagePart.getInputStream();
-				    
-				    tmp.setImage(new byte[(int) imagePart.getSize()]);
+
+				    byte[] imgbyte = new byte[(int) imagePart.getSize()];
+
+
+
+                    fileContent.read(imgbyte, 0, imgbyte.length);
+                    fileContent.close();
+
+                    tmp.setImage(imgbyte);
+
+					System.out.println(Base64.getEncoder().encodeToString(tmp.getImage()));
 					
 //				    System.out.println(filename);
-				    
+
 					result = ProductService.createProduct(tmp);
 				    request.setAttribute("page", "content/index.jsp");
 				}

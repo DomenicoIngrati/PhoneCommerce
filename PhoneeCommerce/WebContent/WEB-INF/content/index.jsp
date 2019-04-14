@@ -64,7 +64,7 @@
 		 			<a href="home?action=singleProductView&productName=${i.name}" >
 					
 					</a>
-					<div class="image"  style=" background-image:url(${i.imageString});"> </div>
+					<div class="image"  style=" background-image: url('${i.imageString}');"> </div>
 					<img src="${i.imageString}">
 						<div class="card-body flex-fill ">
 							<h5 class="card-title">${i.name} ${i.price}0 €</h5>
