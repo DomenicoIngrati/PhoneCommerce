@@ -1,8 +1,6 @@
 body{
-	
 	padding-bottom:4.2rem;
 	background:rgba(0, 0, 0, 0.76);
-
 }
 
 .boxcontainer{
@@ -15,9 +13,15 @@ body{
 	
 }
 
-image {
+.image {
     background-repeat:no-repeat;
     background-position: center center;
-    
     background-size: contain;
+}
+
+.img-preview{
+    min-height: 200px;
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size: cover;
 }

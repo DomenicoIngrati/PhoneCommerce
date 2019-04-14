@@ -4,6 +4,7 @@
  
  <script src="js/cart.js" type="text/javascript"></script>
  <script src="js/wishlist.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/common.css">
  
  <!-- CAROSELLO -->
 <div class="bd-example">
@@ -64,8 +65,8 @@
 		 			<a href="home?action=singleProductView&productName=${i.name}" >
 					
 					</a>
-					<div class="image"  style=" background-image: url('${i.imageString}');"> </div>
-					<img src="${i.imageString}">
+					<div class="img-preview" style=" background-image: url('${i.imageString}');"> </div>
+					<%--<img src="${i.imageString}">--%>
 						<div class="card-body flex-fill ">
 							<h5 class="card-title">${i.name} ${i.price}0 €</h5>
 							<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 

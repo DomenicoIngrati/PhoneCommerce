@@ -14,13 +14,13 @@
  
    	
    	<div class="boxcontainer container mt-5">
-   	<h2 class="text-center" style="margin-bottom:40px;"> ${pageTitle} </h1>
+   	<h2 class="text-center" style="margin-bottom:40px;"> ${pageTitle} </h2>
 	    <div class="row justify-content-center">
 	        <c:forEach var="brandProduct" items="${brandProducts}">
 	        <div class="col-auto mb-3">
 	            <div class="card" style="width: 20rem;">
 		 			<a href="home?action=singleProductView&productName=${brandProduct.name}" >
-					<img src="https://source.unsplash.com/category/nature/" class="card-img-top" alt="...">
+						<div class="img-preview" style=" background-image: url('${brandProduct.imageString}');"> </div>
 					</a>
 						<div class="card-body flex-fill ">
 							<h5 class="card-title">${brandProduct.name} ${brandProduct.price}0 €</h5>
