@@ -20,7 +20,7 @@
 							<h1>Aggiungi Prodotto</h1>
 						 </div>
 					</div>
-                   <form id="add-product" action="#" method="post" name="login">
+                   <form id="add-product" action="product?action=CREATE" method="post" name="login" enctype="multipart/form-data">
                            <div class="form-group">
                               <label for="name">Nome</label>
                               <input type="text" name="name"  class="form-control" id="name" placeholder="Inserisci nome">
@@ -50,8 +50,8 @@
 							<div class="form-group">
 								<label for="photos">Immagine</label>
 								<div class="custom-file">
-									<input  type="file" class="custom-file-input" id="customFile" accept="image/x-png,image/jpeg">
-									<label id="#label" class="custom-file-label" for="customFile">Scegli immagine</label>
+									<input  type="file" class="custom-file-input" name="file" id="image" accept="image/x-png,image/jpeg">
+									<label id="label" class="custom-file-label" for="image">Scegli immagine</label>
 								</div>
 
 							</div>

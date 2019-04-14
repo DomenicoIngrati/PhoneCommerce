@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -113,6 +114,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -143,6 +152,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -175,6 +192,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -209,6 +234,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -248,7 +281,7 @@ public class ProductDaoJDBC implements ProductDAO {
 			Long id = IdBroker.getId(connection);
 			p.setId(id); 
 			
-			String insert = "insert into Product(id, name, description, price, category) values (?,?,?,?,?)";
+			String insert = "insert into Product(id, name, description, price, category, image) values (?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 
 			statement.setLong(1, p.getId());
@@ -265,7 +298,8 @@ public class ProductDaoJDBC implements ProductDAO {
 			}
 			
 			statement.setLong(5, pcat.getId());
-		
+			statement.setBytes(6, p.getImage());
+
 			boolean ok = (statement.executeUpdate() > 0) ? true : false;
 			if(ok) {
 				if(pcat.getVisible() == false) {
@@ -310,6 +344,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -346,6 +388,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -404,6 +454,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -437,6 +495,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -469,6 +535,15 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));
@@ -506,6 +581,14 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setDescription(result.getString("description"));
 				product.setPrice(result.getFloat("price"));
 				product.setVisible(result.getBoolean("visible"));
+				if(result.getBytes("image") != null) {
+					product.setImage(result.getBytes("image"));
+//					System.out.println(product.getImage());
+//					if(product.getImage() != null)
+//						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
+					
+				}
+				
 				
 				ProductCategoryDAO ProdCatDao = new ProductCategoryDaoJDBC(dataSource);
 				product.setCategory(ProdCatDao.findById(result.getLong("category")));

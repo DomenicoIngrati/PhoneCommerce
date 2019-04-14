@@ -1,6 +1,9 @@
 package model;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Base64;
+
 
 public class Product {
 	private long id;
@@ -9,9 +12,18 @@ public class Product {
 	private double price;
 	private ArrayList<Review> reviews;
 	private ProductCategory category;
-	private String image;
+	private byte[] image;
 	private boolean visible;
+	private String imageString;
 	
+	public String getImageString() {
+		return imageString;
+	}
+
+	public void setImageString(String imageString) {
+		this.imageString = imageString;
+	}
+
 	public boolean getVisible() {
 		return visible;
 	}
@@ -20,12 +32,23 @@ public class Product {
 		this.visible = visible;
 	}
 
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
+	
+//		String ciao = "";
+//        try {
+//			 ciao = new String(encodeBase64, "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+        this.imageString = "data:image/png;base64," + Base64.getEncoder().encodeToString(image);
+        
+        System.out.println(this.imageString);
+		
 	}
 
 	public ProductCategory getCategory() {

@@ -144,30 +144,30 @@ $( document ).ready(function() {
 	
 });
 
-$( document ).ready(function() {
-	
-	$("#add-product").submit(function(e) {
-	    e.preventDefault();
-	    
-	    var frm = $(this).serializeFormJSON();
-	    
-	    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
-	    frm.image = filename;
-	    console.log(frm);
-	    
-	    $.ajax({
-	        url: "product?action=CREATE",
-	        type: "POST",
-	        dataType: "JSON",
-	        data: JSON.stringify(frm),
-	        success: function(result){
-	        	operation_alert(result, function(){
-	        	    	window.location.href = "home?action=aggiungiProdotto";
-	        	});
-	        },
-	        error: function(){	
-	        	alert("Errore di richiesta al server! Riprovare.");
-	        }
-	    });
-	});
-});
+//$( document ).ready(function() {
+//	
+//	$("#add-product").submit(function(e) {
+//	    e.preventDefault();
+//	    
+//	    var frm = $(this).serializeFormJSON();
+//	    
+//	    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
+//	    frm.image = filename;
+//	    console.log(frm);
+//	    
+//	    $.ajax({
+//	        url: "product?action=CREATE",
+//	        type: "POST",
+//	        dataType: "JSON",
+//	        data: JSON.stringify(frm),
+//	        success: function(result){
+//	        	operation_alert(result, function(){
+//	        	    	window.location.href = "home?action=aggiungiProdotto";
+//	        	});
+//	        },
+//	        error: function(){	
+//	        	alert("Errore di richiesta al server! Riprovare.");
+//	        }
+//	    });
+//	});
+//});

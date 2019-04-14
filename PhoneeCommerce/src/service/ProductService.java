@@ -27,36 +27,21 @@ import persistence.util.DatabaseManager;
 
 public abstract class ProductService {
 	
-	public static JsonObject createProduct(String product)
+	public static JsonObject createProduct(Product p)
 	{
 		JsonObject result = new JsonObject();
 		ProductDAO dao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
-		JSONObject jsonProduct;
-		try {
-			jsonProduct = new JSONObject(product);
+
+		if (dao.create(p)) {
 			
-			Product source = new Product();
-			source.setName(jsonProduct.getString("name"));
-			source.setCategory(new ProductCategory(jsonProduct.getString("category")));
-			source.setDescription(jsonProduct.getString("description"));
-			source.setPrice(Double.parseDouble(jsonProduct.getString("price")));
-			source.setImage(jsonProduct.getString("image"));
-			
-			Product destination = source;
-			if (dao.create(destination)) {
-				
-				result.addProperty("result", "SUCCESS");
-				result.addProperty("message", "Product has been insert succefully!");
-			} else {
-				result.addProperty("result", "FAIL");
-				destination = source;
-				result.addProperty("reason", "Sorry, something went wrong!");
-			}
-			System.err.println(source);	
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been insert succefully!");
+		} else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong!");
 		}
+		System.err.println(p);	
+
 
 		return result;
 	}
@@ -141,7 +126,7 @@ public abstract class ProductService {
 			
 			p.setDescription(jsonProduct.getString("description"));
 			p.setPrice(Double.parseDouble(jsonProduct.getString("price")));
-			p.setImage(jsonProduct.getString("image"));
+//			p.setImage(jsonProduct.getString("image"));
 			p.setId(Long.parseLong(jsonProduct.getString("id")));
 			p.setVisible(true);
 			//nel DB non c'e' l'attributo image
@@ -219,7 +204,7 @@ public abstract class ProductService {
 			result.addProperty("message", "Recensione aggiunta con successo!");
 		} else {
 			result.addProperty("result", "FAIL");
-			result.addProperty("reason", "Ops, qualcosa è andato storto!");
+			result.addProperty("reason", "Ops, qualcosa ï¿½ andato storto!");
 		}	
 			
 		} catch (JSONException e) {
