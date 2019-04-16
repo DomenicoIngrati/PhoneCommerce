@@ -81,8 +81,6 @@ public class Product extends HttpServlet {
 
 				    byte[] imgbyte = new byte[(int) imagePart.getSize()];
 
-
-
                     fileContent.read(imgbyte, 0, imgbyte.length);
                     fileContent.close();
 
