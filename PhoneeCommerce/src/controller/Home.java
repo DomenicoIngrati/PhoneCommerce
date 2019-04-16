@@ -179,9 +179,11 @@ public class Home extends HttpServlet {
     	selectedProduct=ProductService.findProductByName(selectedProductName);
     	List<Review> productReviews=ProductService.findReviewsByProduct(selectedProduct);
     	float feedbackAverage=ProductService.countFeedbackAverage(productReviews);
+    	int feedbackAverageInt = Math.round(feedbackAverage);
     	request.setAttribute("selectedProduct",selectedProduct);
     	request.setAttribute("productReviews", productReviews);
     	request.setAttribute("feedbackAverage", feedbackAverage);
+    	request.setAttribute("feedbackAverageInt", feedbackAverageInt);
     	if(user != null)
     	{
     		boolean productBought=ProductService.checkIfUserBoughtProduct(selectedProduct,user);

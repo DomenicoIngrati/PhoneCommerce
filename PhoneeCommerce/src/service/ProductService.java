@@ -1,8 +1,11 @@
 package service;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -196,7 +199,7 @@ public abstract class ProductService {
 		tmp.setText(jsonProduct.getString("text"));
 		tmp.setUser(user);
 		tmp.setProduct(productDao.findById(Long.parseLong(jsonProduct.getString("id"))));
-		tmp.setFeedback(1);
+		tmp.setFeedback(jsonProduct.getInt("feedback"));
 		
 
 		if(dao.create(tmp)) {
@@ -222,7 +225,14 @@ public abstract class ProductService {
 		}
 		
 		total=(total/reviews.size());
-		return total;
+		NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+		formatter.setMaximumFractionDigits(1);
+		formatter.setMinimumFractionDigits(1);
+		formatter.setRoundingMode(RoundingMode.HALF_UP); 
+		Float formatedFloat = new Float(formatter.format(total));
+		
+	
+		return formatedFloat;
 	}
 
 }

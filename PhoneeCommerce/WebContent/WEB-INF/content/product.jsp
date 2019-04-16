@@ -168,21 +168,17 @@
 									<div class="rating-block">
 										<h4>Feedback</h4>
 										<h2 class="bold padding-bottom-7">${feedbackAverage}<small>/ 5</small></h2>
-										<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-										  <i class="fa fa-star" aria-hidden="true"> </i>
-										</button>
-										<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-										  <i class="fa fa-star" aria-hidden="true"> </i>
-										</button>
-										<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-										  <i class="fa fa-star" aria-hidden="true"> </i>
-										</button>
-										<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-										  <i class="fa fa-star" aria-hidden="true"> </i>
-										</button>
-										<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-										  <i class="fa fa-star" aria-hidden="true"> </i>
-										</button>
+													      <c:forEach var = "i" begin = "1" end = "${feedbackAverageInt}">
+													         		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+																	  <i class="fa fa-star" aria-hidden="true"> </i>
+																	</button>
+													      </c:forEach>
+													      
+													      <c:forEach var = "i" begin = "${feedbackAverageInt+1}" end = "5">
+      																<button type="button" class="btn btn-default btn-grey btn-sm" width="12" height="12" aria-label="Left Align">
+													  					<i class="fa fa-star" aria-hidden="true"> </i>
+																	</button>
+													      </c:forEach>
 									</div>
 								</div>
 								<div class="col-sm-3">
@@ -269,21 +265,18 @@
 											</div>
 											<div class="col-sm-9">
 												<div class="review-block-rate">
-													<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-													  <i class="fa fa-star" aria-hidden="true"> </i>
-													</button>
-													<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-													  <i class="fa fa-star" aria-hidden="true"> </i>
-													</button>
-													<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-													  <i class="fa fa-star" aria-hidden="true"> </i>
-													</button>
-													<button type="button" class="btn btn-default btn-grey btn-sm" width="12" height="12" aria-label="Left Align">
-													  <i class="fa fa-star" aria-hidden="true"> </i>
-													</button>
-													<button type="button" class="btn btn-default btn-grey btn-sm" width="12" height="12" aria-label="Left Align">
-													  <i class="fa fa-star" aria-hidden="true"> </i>
-													</button>
+												
+													      <c:forEach var = "i" begin = "1" end = "${productReview.feedback}">
+													         		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+																	  <i class="fa fa-star" aria-hidden="true"> </i>
+																	</button>
+													      </c:forEach>
+													      
+													      <c:forEach var = "i" begin = "${productReview.feedback+1}" end = "5">
+      																<button type="button" class="btn btn-default btn-grey btn-sm" width="12" height="12" aria-label="Left Align">
+													  					<i class="fa fa-star" aria-hidden="true"> </i>
+																	</button>
+													      </c:forEach>
 											
 												</div>
 												<div class="review-block-title">${productReview.title}</div>
@@ -322,8 +315,7 @@
       <div class="modal-body">
         <form id="review-form" class="submit-by-class">
           
-          <div class="form-group">
-          	
+          <div class="form-group">	
           	<label for="title">Titolo</label>
             <input type="text" name="title"  class="form-control" id="title" placeholder="Inserisci il titolo della recensione" required>
           </div>
@@ -331,7 +323,16 @@
 	          <label for="text">Testo</label>
 	          <textarea id="text" name="text" class="form-control " style="height:200px;" placeholder="Inserisci il testo della tua recensione" required> </textarea>
           </div>
-          
+		  <div class="form-group">
+		    <label for="feedback">FeedBack</label>
+		    <select class="form-control" id="feedback">
+		      <option value="1">1</option>
+		      <option value="2">2</option>
+		      <option value="3">3</option>
+		      <option value="4">4</option>
+		      <option value="5">5</option>
+		    </select>
+		  </div>
         
  		<div class="modal-footer">
 	        <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>

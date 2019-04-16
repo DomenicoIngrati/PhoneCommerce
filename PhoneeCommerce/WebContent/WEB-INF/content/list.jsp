@@ -32,29 +32,42 @@
 	</div>
 <hr>
 
-<div class="row">
-	
 
-<c:forEach var="i" items="${wishlist.products}">
-	<div class="col-auto mb-3" id="card-${ i.id }">
-           <div class="card" style="width: 20rem;">
- 			<a href="home?action=singleProductView&productName=${i.name}" >
-			</a>
-			<div class="image"  style=" background-image:url(https://source.unsplash.com/category/nature/);"> </div>
-				<div class="card-body flex-fill ">
-					<h5 class="card-title">${i.name} ${i.price}0 €</h5>
-					<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 
-				    <p class="card-text">${i.description}</p>
-				    <div class="button-footer">
-					   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-id="${i.id}">Carrello</button> 
-					  	<button type="button" class="btn btn-sm btn-danger btn-rmv-product" data-idproduct="${i.id}" data-idwishlist="${wishlist.id}">Rimuovi dai preferiti </button>
-					</div>
-				</div>
-       	 </div>
-       </div>
-</c:forEach>
-	
-	
-	
-</div>
+
+			<c:choose>
+			    <c:when test="${fn:length(wishlist.products) eq 0}">
+						<h2>Non hai inserito nessun prodotto nella tua lista desideri.</h2>
+						<a href="home?action=index" >
+                        <button type="button" class="btn btn-sm btn-warning justify-content-center" style="margin:auto;display:block"  > Torna alla home </button>
+                    	</a>
+			    </c:when>
+			    
+			    <c:when test="${fn:length(wishlist.products) gt 0}">
+			    		
+			    		<div class="row">
+							<c:forEach var="i" items="${wishlist.products}">
+								<div class="col-auto mb-3" id="card-${ i.id }">
+							           <div class="card" style="width: 20rem;">
+							 			<a href="home?action=singleProductView&productName=${i.name}" >
+										</a>
+										<div class="image"  style=" background-image:url(https://source.unsplash.com/category/nature/);"> </div>
+											<div class="card-body flex-fill ">
+												<h5 class="card-title">${i.name} ${i.price}0 €</h5>
+												<h6 class="card-subtitle mb-2 text-muted">${i.category.name}</h6> <!-- category --> 
+											    <p class="card-text">${i.description}</p>
+											    <div class="button-footer">
+												   	<button type="button" class="btn btn-sm btn-primary add-product-on-cart" data-id="${i.id}">Carrello</button> 
+												  	<button type="button" class="btn btn-sm btn-danger btn-rmv-product" data-idproduct="${i.id}" data-idwishlist="${wishlist.id}">Rimuovi dai preferiti </button>
+												</div>
+											</div>
+							       	 </div>
+							       </div>
+							</c:forEach>
+						</div>
+			    
+
+			    </c:when>
+			</c:choose>
+
+
 </div>

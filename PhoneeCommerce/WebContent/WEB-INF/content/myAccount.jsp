@@ -41,7 +41,7 @@
 						<img src="img/lockMyAccount.png" class="img-fluid">
 					</div>
 					<div class="col"> <!-- DIV TESTO -->
-						<h4 class="card-title">Whislist</h4>
+						<h4 class="card-title">Wishlist</h4>
 		                 <p>  Crea e visualizza le tue liste dei desideri </p>
 					</div>  			
 				</div>

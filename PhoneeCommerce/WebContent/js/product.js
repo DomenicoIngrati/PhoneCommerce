@@ -32,6 +32,9 @@ $( document ).ready(function() {
 			    var button = $("#btn-add-review");
 			    frm.id =  button.data('idproduct');
 			    frm.user= button.data('iduser');
+			    frm.feedback=$( "#feedback" ).val();
+			    
+			    
 			    
 			   
 			    console.log(frm);
