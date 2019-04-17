@@ -63,7 +63,6 @@ public class ProductDaoJDBC implements ProductDAO {
 			statement.setLong(4,  t.getCategory().getId());
 			statement.setBoolean(5,  t.getVisible());
 			
-			
 			ProductCategoryDaoJDBC cat = new ProductCategoryDaoJDBC(dataSource);
 			ProductCategory pcat = cat.findByName(t.getCategory().getName());
 			
@@ -97,7 +96,25 @@ public class ProductDaoJDBC implements ProductDAO {
 		}
 		
 	}
-	
+
+	public boolean updateImage (Product t){
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update Product SET image = ? WHERE id=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+
+			statement.setBytes(1, t.getImage());
+			statement.setLong(2, t.getId());
+
+			return (statement.executeUpdate() > 0) ? true : false;
+
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			DAOUtility.close(connection);
+		}
+	}
+
 	public Product findById(Long id) {
 		Connection connection = this.dataSource.getConnection();
 		Product product = null;
@@ -116,7 +133,7 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
+
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -154,7 +171,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -194,7 +210,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -236,7 +251,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -346,7 +360,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -390,7 +403,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -456,7 +468,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -497,7 +508,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -538,7 +548,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					
@@ -583,7 +592,6 @@ public class ProductDaoJDBC implements ProductDAO {
 				product.setVisible(result.getBoolean("visible"));
 				if(result.getBytes("image") != null) {
 					product.setImage(result.getBytes("image"));
-//					System.out.println(product.getImage());
 //					if(product.getImage() != null)
 //						product.setImageString("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(product.getImage()));
 					

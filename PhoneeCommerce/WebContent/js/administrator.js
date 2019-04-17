@@ -63,6 +63,19 @@ $( document ).ready(function() {
 });
 
 $( document ).ready(function() {
+
+	$('#modifyImgModal').on('show.bs.modal', function (event) {
+
+		var button = $(event.relatedTarget); // Button that triggered the modal
+
+		var modal = $(this);
+		modal.find('#submitImgModify').attr('data-idproduct',button.data('id'));
+
+	});
+
+});
+
+$( document ).ready(function() {
 	
 	$(".delete").click(function(){
 		var id = $(this).data('id');
@@ -100,16 +113,13 @@ $( document ).ready(function() {
 	    
 	    var frm = $(this).serializeFormJSON();
 	    
-	    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
-	    frm.image = filename;
-	    
 	    var idproduct = $('#submitModify').data('idproduct');
 	    var oldNameCategory = $('#submitModify').data('oldnamecategory');
 	    
 	    frm.id = idproduct;
 	    frm.oldnamecategory = oldNameCategory;
 	    $('#modifyModal').modal('hide');
-//	    console.log(frm);
+	    console.log(frm);
 
 	    $.ajax({
 	        url: "product?action=UPDATE",
@@ -144,30 +154,56 @@ $( document ).ready(function() {
 	
 });
 
-//$( document ).ready(function() {
-//	
-//	$("#add-product").submit(function(e) {
-//	    e.preventDefault();
-//	    
-//	    var frm = $(this).serializeFormJSON();
-//	    
-//	    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
-//	    frm.image = filename;
-//	    console.log(frm);
-//	    
-//	    $.ajax({
-//	        url: "product?action=CREATE",
-//	        type: "POST",
-//	        dataType: "JSON",
-//	        data: JSON.stringify(frm),
-//	        success: function(result){
-//	        	operation_alert(result, function(){
-//	        	    	window.location.href = "home?action=aggiungiProdotto";
-//	        	});
-//	        },
-//	        error: function(){	
-//	        	alert("Errore di richiesta al server! Riprovare.");
-//	        }
-//	    });
-//	});
-//});
+$( document ).ready(function() {
+
+	$("#btn-add-product").on('click',function(e) {
+	    e.preventDefault();
+		var option = {
+			url: "productforimage?action=CREATE",
+
+			success: function(data){
+				var result = JSON.parse(data);
+				operation_alert(result, function(){
+					window.location.href = "home?action=addProduct";
+				});
+			},
+			error: function(){
+				alert("Errore di richiesta al server! Riprovare.");
+			}
+		}
+	    $("#add-product").ajaxSubmit(option);
+	});
+});
+
+$( document ).ready(function() {
+
+
+	$("#submitImgModify").on('click',function(e) {
+		e.preventDefault();
+
+		var formdata = new FormData();
+		formdata.append("idproduct", $("#submitImgModify").data("idproduct"));
+		formdata.append("file", $("#modifyProductImage")[0].files[0]);
+		// console.log($("#modifyProductImage")[0].files[0].name);
+
+		$.ajax({
+			type: "POST",
+			url: "productforimage?action=updateImage",
+			data: formdata,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				$("#modifyImgModal").modal('hide');
+				var result = JSON.parse(data);
+				operation_alert(result, function(){
+					window.location.href = "home?action=modifydelete";
+				});
+			},
+			error: function(){
+				alert("Errore di richiesta al server! Riprovare.");
+			}
+		});
+
+		// $("#modifyImgProduct").ajaxSubmit(option);
+	});
+});

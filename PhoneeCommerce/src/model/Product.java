@@ -40,11 +40,7 @@ public class Product {
 
 	public void setImage(byte[] image) {
 		this.image = image;
-
 		this.imageString = "data:image/png;base64," + Base64.getEncoder().encodeToString(image);
-
-        System.out.println(this.imageString);
-		
 	}
 
 	public ProductCategory getCategory() {

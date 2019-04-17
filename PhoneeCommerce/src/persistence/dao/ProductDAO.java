@@ -12,6 +12,8 @@ public interface ProductDAO {
 	public boolean delete(Product t);
 	
 	public boolean update (Product t);
+
+	public boolean updateImage (Product t);
 	
 	public Product findById(Long id);
 	

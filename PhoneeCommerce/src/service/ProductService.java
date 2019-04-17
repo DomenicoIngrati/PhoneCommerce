@@ -168,6 +168,25 @@ public abstract class ProductService {
 		return result;
 	}
 
+	public static JsonObject updateProductImage(byte[] imgbyte, Long idProduct) {
+		JsonObject result = new JsonObject();
+		ProductDAO dao = DatabaseManager.getInstance().getDaoFactory().getProductDAO();
+
+		Product p = dao.findById(idProduct);
+
+		p.setImage(imgbyte);
+
+		if (dao.updateImage(p)) {
+			result.addProperty("result", "SUCCESS");
+			result.addProperty("message", "Product has been updated succefully!");
+		} else {
+			result.addProperty("result", "FAIL");
+			result.addProperty("reason", "Sorry, something went wrong!");
+		}
+
+		return result;
+	}
+
 	public static boolean checkIfUserBoughtProduct(Product selectedProduct,User user) {
 		
 		OrderDAO orderDao = DatabaseManager.getInstance().getDaoFactory().getOrderDAO();
@@ -234,5 +253,4 @@ public abstract class ProductService {
 	
 		return formatedFloat;
 	}
-
 }

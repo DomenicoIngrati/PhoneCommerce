@@ -70,7 +70,6 @@ public class Wishlist extends HttpServlet {
 		{
 			result=AccountService.addAllToCart(AccountService.getDefaultWishlist(user), cart);
 			session.setAttribute("cart", cart);
-			System.out.println(cart);
 			break;
 		}
 

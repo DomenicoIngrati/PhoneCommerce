@@ -52,154 +52,108 @@ public class Product extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		String json = ""; // parse request in json format
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		if (br != null) {
+			json = br.readLine();
+		}
+
+		System.out.println(json);
+
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-		
 
 		JsonObject result = new JsonObject();
 		User user = (User) session.getAttribute("user");
 		
 		System.out.println(action);
 		
-		if(action.equals("CREATE") || action.equals("UPDATE")) {
-			switch (action) {
-			case "CREATE": {
-				
-				if(user.getType() == Type.Organizer) {
-					model.Product tmp = new model.Product();
-					tmp.setName(request.getParameter("name"));
-					tmp.setCategory(new ProductCategory(request.getParameter("category")));
-					tmp.setDescription(request.getParameter("description"));
-					tmp.setPrice(Double.parseDouble(request.getParameter("price")));
-					
-					System.out.println(tmp.toString());
-					
-					Part imagePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-					String filename = getFilename(imagePart);
-				    InputStream fileContent = imagePart.getInputStream();
 
-				    byte[] imgbyte = new byte[(int) imagePart.getSize()];
-
-                    fileContent.read(imgbyte, 0, imgbyte.length);
-                    fileContent.close();
-
-                    tmp.setImage(imgbyte);
-
-					System.out.println(Base64.getEncoder().encodeToString(tmp.getImage()));
-					
-//				    System.out.println(filename);
-
-					result = ProductService.createProduct(tmp);
-				    request.setAttribute("page", "content/index.jsp");
-				}
-					
-				else
-				{
-					result.addProperty("result", "FAIL");
-					result.addProperty("message", "You are not administrator!");
-				}
-				break;
-			}
+		switch (action) {
 			case "UPDATE": {
 
-//				result = ProductService.updateProduct(json);
+			result = ProductService.updateProduct(json);
 				break;
-				}
 			}
-		}
-		else {
-			
-			String json = ""; // parse request in json format
-			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			if (br != null) {
-				json = br.readLine();
+
+			case "DELETE":
+			{
+				result=ProductService.deleteProduct(json);
+				break;
 			}
-			
 
-			switch (action) {
-				case "DELETE":
-				{
-					result=ProductService.deleteProduct(json);
-					break;
+			case "newReview":
+			{
+				if(user!=null) {
+				result=ProductService.addNewReview(json,user);
 				}
-				
-				case "newReview":
-				{
-					if(user!=null) {
-					result=ProductService.addNewReview(json,user);
-					}
-					break;
-				}
-		//		case "SUSPEND":
-		//		{
-		//			EventService eventservice = new EventService(json);
-		//			result=eventservice.suspendEvent();
-		//			break;
-		//		}
-		//		case "showCategory": {
-		//			EventService eventService2 = new EventService(json);
-		//			result = eventService2.showCategory();
-		//			break;
-		//		}
-		//		case "showTicketCategory": {
-		//			EventService service = new EventService(json);
-		//			result = service.showTicketCategory();
-		//			break;
-		//		}
-		//		case "showReviews": {
-		//			Event event = (Event) session.getAttribute("idevent");
-		//			EventService service = new EventService();
-		//			result = service.showReview(event);
-		//			break;
-		//		}
-		//		case "addReview": {
-		//			Event event = (Event) session.getAttribute("idevent");
-		//			User user = (User) session.getAttribute("user");
-		//			EventService service = new EventService();
-		//			result = service.addReview(user, event, json);
-		//			break;
-		//		}
-		//		case "showTicket": {
-		//			EventService eventservice = new EventService(json);
-		//			result = eventservice.showTicketOrganizer();			
-		//			break;
-		//
-		//		}
-		//		case "showGuest":{
-		//			EventService eventService= new EventService(json);
-		//			result=eventService.showGuest();
-		//			break;
-		//			
-		//		}
-		//		case "deleteguest":
-		//		{
-		//			EventService eventService= new EventService();		
-		//			result=eventService.deleteGuest(json);
-		//			break;
-		//		}
-		//		case "editguest":{
-		//			EventService eventservice = new EventService();
-		//			result = eventservice.editGuest(json);
-		//			break;
-		//		}
-		//		case "updatePrice":
-		//		{
-		//			EventService eventservice= new EventService();
-		//			result=eventservice.updatePriceTicketCategory(json);
-		//			break;
-		//		}
-		
-				default:
-					break;
-				}
-			response.getWriter().write(result.toString());
-		}
-		
-		
+				break;
+			}
+	//		case "SUSPEND":
+	//		{
+	//			EventService eventservice = new EventService(json);
+	//			result=eventservice.suspendEvent();
+	//			break;
+	//		}
+	//		case "showCategory": {
+	//			EventService eventService2 = new EventService(json);
+	//			result = eventService2.showCategory();
+	//			break;
+	//		}
+	//		case "showTicketCategory": {
+	//			EventService service = new EventService(json);
+	//			result = service.showTicketCategory();
+	//			break;
+	//		}
+	//		case "showReviews": {
+	//			Event event = (Event) session.getAttribute("idevent");
+	//			EventService service = new EventService();
+	//			result = service.showReview(event);
+	//			break;
+	//		}
+	//		case "addReview": {
+	//			Event event = (Event) session.getAttribute("idevent");
+	//			User user = (User) session.getAttribute("user");
+	//			EventService service = new EventService();
+	//			result = service.addReview(user, event, json);
+	//			break;
+	//		}
+	//		case "showTicket": {
+	//			EventService eventservice = new EventService(json);
+	//			result = eventservice.showTicketOrganizer();
+	//			break;
+	//
+	//		}
+	//		case "showGuest":{
+	//			EventService eventService= new EventService(json);
+	//			result=eventService.showGuest();
+	//			break;
+	//
+	//		}
+	//		case "deleteguest":
+	//		{
+	//			EventService eventService= new EventService();
+	//			result=eventService.deleteGuest(json);
+	//			break;
+	//		}
+	//		case "editguest":{
+	//			EventService eventservice = new EventService();
+	//			result = eventservice.editGuest(json);
+	//			break;
+	//		}
+	//		case "updatePrice":
+	//		{
+	//			EventService eventservice= new EventService();
+	//			result=eventservice.updatePriceTicketCategory(json);
+	//			break;
+	//		}
 
-		
-		
+			default:
+				break;
+			}
+
+		response.getWriter().write(result.toString());
 	}
 
 	/**

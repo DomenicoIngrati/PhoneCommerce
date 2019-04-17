@@ -6,6 +6,8 @@
 <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/administrator.js" type="text/javascript"></script>
+<script src="js/jquery_form.js" type="text/javascript"></script>
+<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>--%>
 
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 <link rel="stylesheet" href="css/insertProduct.css">
@@ -20,7 +22,7 @@
 							<h1>Aggiungi Prodotto</h1>
 						 </div>
 					</div>
-                   <form id="add-product" action="product?action=CREATE" method="post" name="login" enctype="multipart/form-data">
+                        <form id="add-product" url="productforimage?action=CREATE" method="post" name="addproduct" enctype="multipart/form-data">
                            <div class="form-group">
                               <label for="name">Nome</label>
                               <input type="text" name="name"  class="form-control" id="name" placeholder="Inserisci nome">
@@ -57,7 +59,7 @@
 							</div>
                            
                            <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Registra prodotto</button>
+                              <button id="btn-add-product" class=" btn btn-block mybtn btn-primary tx-tfm">Registra prodotto</button>
                            </div>
                            
                            

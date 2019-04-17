@@ -56,4 +56,12 @@
     <servlet-name>uploadServlet</servlet-name>
     <url-pattern>/uploadServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductForImage</servlet-name>
+    <servlet-class>controller.ProductForImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductForImage</servlet-name>
+    <url-pattern>/productforimage</url-pattern>
+  </servlet-mapping>
 </web-app>
