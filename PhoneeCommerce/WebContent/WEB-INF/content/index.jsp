@@ -62,10 +62,11 @@
 	        <c:forEach items="${newproducts}" var = "i" begin = "0" end = "5">
 	        <div class="col-auto mb-3">
 	            <div class="card" style="width: 20rem;">
-		 			<a href="home?action=singleProductView&productName=${i.name}" >
-					
-					</a>
-					<div class="img-preview" style=" background-image: url('${i.imageString}');"> </div>
+		 			<a href="home?action=singleProductView&productId=${i.id}" >
+                        <div style=" padding:10px;">
+                            <div class="img-preview" style=" background-image: url('${i.imageString}');"> </div>
+                        </div>
+                    </a>
 					<%--<img src="${i.imageString}">--%>
 						<div class="card-body flex-fill ">
 							<h5 class="card-title">${i.name} ${i.price}0 €</h5>

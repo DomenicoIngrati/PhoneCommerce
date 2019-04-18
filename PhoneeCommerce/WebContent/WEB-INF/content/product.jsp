@@ -23,9 +23,9 @@
       <div class="row wow fadeIn">
 
         <!--Grid column-->
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-4 image" style=" background-image: url('${selectedProduct.imageString}');">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+          <%--<img src="${selectedProduct.imageString}" class="img-fluid" alt="${selectedProduct.name}>--%>
 
         </div>
         <!--Grid column-->

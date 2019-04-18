@@ -19,8 +19,10 @@
 	        <c:forEach var="brandProduct" items="${brandProducts}">
 	        <div class="col-auto mb-3">
 	            <div class="card" style="width: 20rem;">
-		 			<a href="home?action=singleProductView&productName=${brandProduct.name}" >
-						<div class="img-preview" style=" background-image: url('${brandProduct.imageString}');"> </div>
+		 			<a href="home?action=singleProductView&productId=${brandProduct.id}" >
+						<div style=" padding:10px;">
+							<div class="img-preview" style=" background-image: url('${brandProduct.imageString}');"> </div>
+						</div>
 					</a>
 						<div class="card-body flex-fill ">
 							<h5 class="card-title">${brandProduct.name} ${brandProduct.price}0 €</h5>

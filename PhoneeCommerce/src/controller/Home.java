@@ -58,7 +58,7 @@ public class Home extends HttpServlet {
 	JsonObject result = new JsonObject();
 	
     Product selectedProduct = new Product();
-    String selectedProductName;
+    String selectedProductId;
     
     List<ProductCategory> cats = new ArrayList<ProductCategory>();
     cats = ProductCategoryService.findAllCategory();
@@ -177,8 +177,8 @@ public class Home extends HttpServlet {
       
     case "singleProductView":
     	page="product";
-    	selectedProductName=request.getParameter("productName");
-    	selectedProduct=ProductService.findProductByName(selectedProductName);
+    	selectedProductId=request.getParameter("productId");
+    	selectedProduct=ProductService.findProductById(Long.parseLong(selectedProductId));
     	List<Review> productReviews=ProductService.findReviewsByProduct(selectedProduct);
     	float feedbackAverage=ProductService.countFeedbackAverage(productReviews);
     	int feedbackAverageInt = Math.round(feedbackAverage);

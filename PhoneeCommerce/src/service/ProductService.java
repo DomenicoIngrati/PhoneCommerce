@@ -63,6 +63,11 @@ public abstract class ProductService {
 	    ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
 	    return brandProductsDAO.findByName(name);
 	}
+
+    public static Product findProductById(Long id) {
+        ProductDAO brandProductsDAO=  DatabaseManager.getInstance().getDaoFactory().getProductDAO();//ByDOMENICO
+        return brandProductsDAO.findById(id);
+    }
 	
 	public static List<Product> getLastSixProducts(){
 		
@@ -239,18 +244,21 @@ public abstract class ProductService {
 	public static float countFeedbackAverage(List<Review> reviews) {
 		
 		float total=0;
-		for(int i=0;i<reviews.size();i++) {
-			total+=reviews.get(i).getFeedback();
-		}
-		
-		total=(total/reviews.size());
-		NumberFormat formatter = NumberFormat.getInstance(Locale.US);
-		formatter.setMaximumFractionDigits(1);
-		formatter.setMinimumFractionDigits(1);
-		formatter.setRoundingMode(RoundingMode.HALF_UP); 
+		if(!reviews.isEmpty())
+        {
+            for(int i=0;i<reviews.size();i++) {
+                total+=reviews.get(i).getFeedback();
+            }
+            total=(total/reviews.size());
+        }
+
+        NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+        formatter.setMaximumFractionDigits(1);
+        formatter.setMinimumFractionDigits(1);
+        formatter.setRoundingMode(RoundingMode.HALF_UP);
+
 		Float formatedFloat = new Float(formatter.format(total));
-		
-	
-		return formatedFloat;
+
+        return formatedFloat;
 	}
 }
