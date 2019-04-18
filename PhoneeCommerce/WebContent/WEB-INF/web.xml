@@ -64,4 +64,12 @@
     <servlet-name>ProductForImage</servlet-name>
     <url-pattern>/productforimage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Carousel</servlet-name>
+    <servlet-class>controller.Carousel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Carousel</servlet-name>
+    <url-pattern>/carousel</url-pattern>
+  </servlet-mapping>
 </web-app>

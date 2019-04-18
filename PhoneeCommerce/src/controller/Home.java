@@ -23,11 +23,7 @@ import model.Review;
 import model.Type;
 import model.User;
 import model.Address;
-import service.AccountService;
-import service.OrderService;
-import service.ProductCategoryService;
-import service.ProductService;
-import service.SearchService;
+import service.*;
 
 /* Servlet implementation class Home
  */
@@ -59,6 +55,7 @@ public class Home extends HttpServlet {
 	
     Product selectedProduct = new Product();
     String selectedProductId;
+    List<model.Carousel> allBanners = new ArrayList<model.Carousel>();
     
     List<ProductCategory> cats = new ArrayList<ProductCategory>();
     cats = ProductCategoryService.findAllCategory();
@@ -90,6 +87,11 @@ public class Home extends HttpServlet {
     	{
     		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
+
+    	allBanners = CarouselService.getAllBanners();
+		if(allBanners != null)
+			Collections.reverse(allBanners);
+		request.setAttribute("banners",allBanners);
     	
     	page="index";
     	break;
@@ -287,17 +289,21 @@ public class Home extends HttpServlet {
 			response.getWriter().write(result.toString()); 
 			
 	    }
-    case "searchCompleted":
-	    {
-	    	page="searchCompleted";
-	    	break;
-	    }
-	    
-//    case "upload":
-//    	{
-//    		page="upload";
-//    		break;
-//    	}
+	case "searchCompleted":
+		{
+			page="searchCompleted";
+			break;
+		}
+
+	case "modifycarousel":
+	{
+		page="modifycarousel";
+		allBanners = CarouselService.getAllBanners();
+		if(allBanners != null)
+			Collections.reverse(allBanners);
+		request.setAttribute("banners",allBanners);
+		break;
+	}
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();
@@ -306,6 +312,12 @@ public class Home extends HttpServlet {
     	{
     		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
     	}
+
+		allBanners = CarouselService.getAllBanners();
+		if(allBanners != null)
+			Collections.reverse(allBanners);
+		request.setAttribute("banners",allBanners);
+
     	page="index";
     }
     

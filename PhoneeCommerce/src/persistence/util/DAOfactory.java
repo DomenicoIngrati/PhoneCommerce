@@ -53,6 +53,8 @@ public abstract class DAOfactory {
 		public abstract AdministratorDAO getAdministratorDAO();
 		
 		public abstract ProductCategoryDAO getProductCategoryDAO();
+
+		public abstract CarouselDAO getCarouselDAO();
 		
 		public abstract ProductDAO getProductDAO();
 		

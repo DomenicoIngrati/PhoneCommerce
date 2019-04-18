@@ -1,0 +1,46 @@
+img{
+    max-height: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.banner-box{
+    /*min-height:196px;*/
+    background-color: #eeeeee;
+    /* 	height: auto; */
+    border: 1px #ddd solid;
+    border-radius: 10px;
+
+    padding-top: 14px;
+    padding-right: 18px;
+    padding-left: 18px;
+    padding-bottom: 9px;
+    margin-bottom: 10px;
+}
+
+#add-banner{
+    background-color: #eeeeee;
+    /* 	height: auto; */
+    border: 2px #ddd solid;
+    border-radius: 10px;
+    border-style: dashed;
+    min-height:196px;
+
+    padding: 14px 18px;
+    margin-bottom: 10px;
+}
+
+.info-banner{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-box-banner{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-banner{
+    margin-right: 5px;
+    margin-bottom: 5px;
+}

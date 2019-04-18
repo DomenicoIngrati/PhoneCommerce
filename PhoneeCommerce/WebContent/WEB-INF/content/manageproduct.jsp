@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
+
 <link rel="stylesheet" href="css/admin.css">
 <script src="js/administrator.js" type="text/javascript"></script>
 <script src="js/jquery_form.js" type="text/javascript"></script>
@@ -99,7 +101,7 @@
 		</div>
 							
 		<div class="form-group">
-			<label for="Descrizione">Descrizione</label>
+			<label for="description">Descrizione</label>
 			<textarea id="description" name ="description" class="form-control" rows="5" id="comment" placeholder="Inserisci descrizione"></textarea>
 							
 							
@@ -130,10 +132,10 @@
 					<form id="modifyImgProduct" method="post" enctype="multipart/form-data">
 
 						<div class="form-group">
-							<label for="photos">Scegli immagine</label>
+							<label for="modifyProductImage">Scegli immagine</label>
 							<div class="custom-file">
 								<input id="modifyProductImage" type="file" name="file" class="custom-file-input" accept="image/x-png,image/jpeg" required>
-								<label class="custom-file-label" for="customFile">Scegli immagine</label>
+								<label class="custom-file-label" for="modifyProductImage">Scegli immagine</label>
 							</div>
 						</div>
 

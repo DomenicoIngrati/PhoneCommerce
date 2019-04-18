@@ -44,18 +44,11 @@
               Brands
             </a>
             <div class="dropdown-menu" aria-labelledby="prodottiDropdown">
-            
-              <!-- <a class="dropdown-item" href="#">Apple</a>
-              <a class="dropdown-item" href="#">Samsung</a>
-              <a class="dropdown-item" href="#">Hawai</a>
-              <a class="dropdown-item" href="#">Waiai</a> -->
-              
-              
+
               <c:forEach var="brand" items="${brands}">
               	<a id="${brand.id}" class="dropdown-item" href="home?action=productsView&brandName=${brand.name}&brandId=${brand.id}"> ${brand.name} </a>
               </c:forEach> 
-             
-              
+
             </div>
           </li>
 
@@ -82,10 +75,10 @@
 			    <c:when test="${user.type eq Type.Organizer}">
 			        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <c:out value="${user.name}" /> <c:out value="${user.surname}" /> </a>
 			        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-			          <a class="dropdown-item" href="home?action=addProduct">Aggiungi prodotto</a>
-			          <a class="dropdown-item" href="home?action=modifydelete">Modifica o elimina prodotti</a>
-			          <a class="dropdown-item" href="account?action=logout">Esci</a>
-			          
+                        <a class="dropdown-item" href="home?action=addProduct">Aggiungi prodotto</a>
+			            <a class="dropdown-item" href="home?action=modifydelete">Modifica o elimina prodotti</a>
+                        <a class="dropdown-item" href="home?action=modifycarousel">Modifica Banner/Carosello</a>
+			            <a class="dropdown-item" href="account?action=logout">Esci</a>
 			        </div>          
 			    </c:when>
 			</c:choose>

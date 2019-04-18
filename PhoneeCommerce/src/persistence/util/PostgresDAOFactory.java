@@ -1,14 +1,7 @@
 package persistence.util;
 
+import persistence.dao.*;
 import persistence.util.DataSource;
-import persistence.dao.AddressDAO;
-import persistence.dao.AdministratorDAO;
-import persistence.dao.OrderDAO;
-import persistence.dao.ProductCategoryDAO;
-import persistence.dao.ProductDAO;
-import persistence.dao.ReviewDAO;
-import persistence.dao.UserDAO;
-import persistence.dao.WishlistDAO;
 import persistence.dao.implementation.*;
 
 public class PostgresDAOFactory extends DAOfactory {
@@ -72,6 +65,9 @@ private static  DataSource dataSource;
 	public ProductCategoryDAO getProductCategoryDAO() {
 		return new ProductCategoryDaoJDBC(dataSource);
 	}
+
+	@Override
+	public CarouselDAO getCarouselDAO() { return new CarouselJDBC(dataSource); }
 
 	@Override
 	public AddressDAO getAddressDAO() {

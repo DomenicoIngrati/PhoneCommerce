@@ -8,34 +8,41 @@
  
  <!-- CAROSELLO -->
 <div class="bd-example">
-  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-    </ol>
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <c:forEach var="i" begin = "0" end = "${banners.size() -1}">
+                <c:if test="${i == 0}">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="${i}" class="active"></li>
+
+                </c:if>
+                <c:if test="${i > 0}">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="${i}"></li>
+                </c:if>
+            </c:forEach>
+        </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active"   data-interval= "10000" style="background-image: url(https://source.unsplash.com/category/nature/);">
-        <!-- <img src="..." class="d-block w-100" alt="..."> -->
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Offerta n1</h5>
-          <p>Desing, potenza e cancioffoli allo stato puro.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-interval= "10000" style="background-image: url(https://source.unsplash.com/category/food/);">
-        <!-- <img src="..." class="d-block w-100" alt="..."> -->
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Offerta n2</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-      </div>
-      <div class="carousel-item" style="background-image: url(https://source.unsplash.com/category/car/);">
-        <!-- <img src="..." class="d-block w-100" alt="..."> -->
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Offerta n3</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </div>
-      </div>
+        <c:forEach var="i" begin = "0" end = "${banners.size() -1}">
+            <c:if test="${i == 0}">
+                <div class="carousel-item active" data-interval= "10000" style="background-image: url('${banners[i].imageString}');">
+                    <!-- <img src="..." class="d-block w-100" alt="..."> -->
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="text-shadow">${banners[i].title}</h5>
+                        <p class="text-shadow">${banners[i].description}</p>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${i > 0}">
+                <div class="carousel-item" data-interval= "10000" style="background-image: url('${banners[i].imageString}');">
+                    <!-- <img src="..." class="d-block w-100" alt="..."> -->
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="text-shadow">${banners[i].title}</h5>
+                        <p class="text-shadow">${banners[i].description}</p>
+                    </div>
+                </div>
+            </c:if>
+
+        </c:forEach>
+
     </div>
     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
