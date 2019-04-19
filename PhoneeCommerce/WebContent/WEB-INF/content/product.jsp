@@ -38,7 +38,7 @@
 
             <div class="mb-3">
                 <h2 >${selectedProduct.name}</h2>
-                <h4>Apple</h4>
+                <h4>${selectedProduct.category}</h4>
 <!--               <a href="">
                 <span class="badge red mr-1">Bestseller</span>
               </a> -->
@@ -66,7 +66,7 @@
                                 <div class="input-group-prepend">
                                     <button class="btn btn-dark " id="minus-btn"><i class="fa fa-minus"></i></button>
                                 </div>
-                                <input type="number" id="qty_input" class="form-control form-control-mb" value="1" min="1">
+                                <input type="number" id="qty_input" class="form-control form-control-mb" value="1" min="1" max="10">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-dark " id="plus-btn"><i class="fa fa-plus"></i></button>
                                 </div>
