@@ -20,6 +20,7 @@ import model.Order;
 import model.Product;
 import model.ProductCategory;
 import model.Review;
+import model.ReviewStatistic;
 import model.Type;
 import model.User;
 import model.Address;
@@ -182,12 +183,14 @@ public class Home extends HttpServlet {
     	selectedProductId=request.getParameter("productId");
     	selectedProduct=ProductService.findProductById(Long.parseLong(selectedProductId));
     	List<Review> productReviews=ProductService.findReviewsByProduct(selectedProduct);
+    	List<ReviewStatistic> reviewsStatistic=ProductService.findReviewsStatistic(productReviews);
     	float feedbackAverage=ProductService.countFeedbackAverage(productReviews);
     	int feedbackAverageInt = Math.round(feedbackAverage);
     	request.setAttribute("selectedProduct",selectedProduct);
     	request.setAttribute("productReviews", productReviews);
     	request.setAttribute("feedbackAverage", feedbackAverage);
     	request.setAttribute("feedbackAverageInt", feedbackAverageInt);
+    	request.setAttribute("reviewsStatistic", reviewsStatistic);
     	if(user != null)
     	{
     		boolean productBought=ProductService.checkIfUserBoughtProduct(selectedProduct,user);

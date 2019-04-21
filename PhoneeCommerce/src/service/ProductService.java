@@ -18,6 +18,7 @@ import model.Order;
 import model.Product;
 import model.ProductCategory;
 import model.Review;
+import model.ReviewStatistic;
 import model.User;
 import persistence.dao.AddressDAO;
 import persistence.dao.OrderDAO;
@@ -260,5 +261,45 @@ public abstract class ProductService {
 		Float formatedFloat = new Float(formatter.format(total));
 
         return formatedFloat;
+	}
+
+	public static List<ReviewStatistic> findReviewsStatistic(List<Review> productReviews){
+		
+		int cont=0;
+		float p=0;
+		int feedback=0;
+		List<ReviewStatistic> reviewsStatistic=new ArrayList<ReviewStatistic>();
+		
+		for(int i=5;i>0;i--) {
+			
+			cont=0;
+			p=0;
+			feedback=i;
+			
+			for(int j=0;j<productReviews.size();j++) {
+				
+				if(productReviews.get(j).getFeedback()==i) {
+					cont++;
+				}
+			}
+			
+			if(productReviews.size()!=0) {
+			
+				 p=(cont*100)/productReviews.size();
+			}
+
+			
+			reviewsStatistic.add(new ReviewStatistic(feedback,p,cont));
+			
+		}
+		
+		
+		
+		for(int i=0;i<reviewsStatistic.size();i++) {
+			
+			System.out.println(reviewsStatistic.get(i).getFeedBack() + " " + reviewsStatistic.get(i).getWeight() + " " + reviewsStatistic.get(i).getNumOfReviews());
+		
+		}
+		return reviewsStatistic;
 	}
 }
