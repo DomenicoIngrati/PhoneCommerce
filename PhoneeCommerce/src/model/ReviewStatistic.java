@@ -13,8 +13,19 @@ public class ReviewStatistic {
 		numOfReviews=num;
 	}
 	
+	public void setFeedBack(int numOfFeed) {
+		numberOfFeedback=numOfFeed;
+	}
 	
-	public int getFeedBack() {
+	public void setWeight(float w) {
+		weight=w;
+	}
+	
+	public void setNumOfReviews(int numOfRev) {
+		numOfReviews=numOfRev;
+	}
+	
+	public int getNumberOfFeedback() {
 		return numberOfFeedback;
 	}
 	

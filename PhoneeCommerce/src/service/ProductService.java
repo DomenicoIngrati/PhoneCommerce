@@ -293,13 +293,6 @@ public abstract class ProductService {
 			
 		}
 		
-		
-		
-		for(int i=0;i<reviewsStatistic.size();i++) {
-			
-			System.out.println(reviewsStatistic.get(i).getFeedBack() + " " + reviewsStatistic.get(i).getWeight() + " " + reviewsStatistic.get(i).getNumOfReviews());
-		
-		}
 		return reviewsStatistic;
 	}
 }

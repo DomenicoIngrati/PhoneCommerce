@@ -182,12 +182,12 @@
 									</div>
 								</div>
 								<div class="col-sm-3">
-									<h4>Rating breakdown</h4>
+									<h4>Statistica recensioni</h4>
 									
 									<c:forEach var="reviewStatistic" items="${reviewsStatistic}">
 										<div class="pull-left">
 											<div class="pull-left" style="width:35px; line-height:1;">
-												<div style="height:9px; margin:5px 0;"> 1 <span class="glyphicon glyphicon-star"></span></div>
+												<div style="height:9px; margin:5px 0;"> ${reviewStatistic.numberOfFeedback} <span class="glyphicon glyphicon-star"></span></div>
 											</div>
 											<div class="pull-left" style="width:180px;">
 												<div class="progress" style="height:9px; margin:8px 0;">
