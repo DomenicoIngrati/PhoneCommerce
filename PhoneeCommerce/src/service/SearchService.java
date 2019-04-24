@@ -54,8 +54,9 @@ public class SearchService {
 		for(String n: categoriesNames) {
 			if(n.equalsIgnoreCase(stringToBeFound)) {
 				productCat=catDao.findByName(n);
-				session.setAttribute("suggestion", n);
-				return dao.findByCategory(productCat);
+				productsFound=dao.findByCategory(productCat);
+				session.setAttribute("numOfResults", productsFound.size());
+				return productsFound;
 			}
 		}
 		
@@ -66,7 +67,7 @@ public class SearchService {
 		for(String n: productsNames) {
 			if(n.equalsIgnoreCase(stringToBeFound)) {	
 				productsFound.add(dao.findByName(n));
-				session.setAttribute("suggestion", n);
+				session.setAttribute("numOfResults", productsFound.size());
 				return productsFound;
 			}
 		}
@@ -76,7 +77,7 @@ public class SearchService {
 		
 		
 		if(splited.length>1) {
-			session.setAttribute("suggestion", null);
+			session.setAttribute("numOfResults", productsFound.size());
 			return null;
 		}else {
 			
@@ -89,7 +90,7 @@ public class SearchService {
 				
 				if(n.toLowerCase().contains(stringToBeFound.toLowerCase()) && (n.length()- stringToBeFound.length())<=2) {
 					
-					session.setAttribute("suggestion", n);
+					session.setAttribute("numOfResults", productsFound.size());
 					return findProducts(n, result, session);
 				}
 			}
@@ -119,19 +120,20 @@ public class SearchService {
 			}
 			
 			if(foundSomething) {
-			session.setAttribute("suggestion", stringToBeFound);
+			session.setAttribute("numOfResults", productsFound.size());
 			return productsFound;
 			}
 			else {
 				for(String n: productsNames) {
 					if(n.toLowerCase().contains(stringToBeFound.toLowerCase()) && (n.length()- stringToBeFound.length())<=2) {
-						session.setAttribute("suggestion", n);
+						session.setAttribute("numOfResults", productsFound.size());
 						return null;
 					}
 				}
 			}
 						
 		}
+		session.setAttribute("numOfResults", productsFound.size());
 		return null;
 	}
 	

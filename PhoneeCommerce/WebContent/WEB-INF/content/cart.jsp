@@ -10,14 +10,17 @@
 
 <link rel="stylesheet" href="css/cart.css">
 
-<div class="container boxcontainer mt-5" >
+<div class="container boxcontainer mt-5 cart" >
 	<h1> Carrello </h1>
 	<hr>
 	<div class="listProduct">
 	
 		<c:choose>
 			    <c:when test="${fn:length(cart.products) eq 0}">
+			    		<br>
 						<h2>Il tuo carrello è vuoto</h2>
+						<br>
+						<br>
 						<a href="home?action=index" >
                         <button type="button" class="btn btn-sm btn-warning justify-content-center" style="margin:auto;display:block"  > Torna alla home </button>
                     	</a>

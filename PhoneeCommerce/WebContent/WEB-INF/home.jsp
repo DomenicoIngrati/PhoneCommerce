@@ -118,9 +118,10 @@
 	
 	
 	
-<%-- 	<!-- Footer -->
+  <!-- Footer -->
 	<%@ include file="content/footer.html"%>
- --%>
    </body>
+   
+   
 
 </html>
