@@ -16,8 +16,15 @@
 			    
 			    
                 <div class="boxcontainer container mt-5">
+                
+                			<c:if test="${numOfResults!=1}">
 						   	<h2 class="text-center" style="margin-bottom:30px;"> <c:out value="${numOfResults}" /> risultati trovati </h2>
-							    
+							</c:if>
+							
+							<c:if test="${numOfResults==1}">
+						   	<h2 class="text-center" style="margin-bottom:30px;"> <c:out value="${numOfResults}" /> risultato trovato </h2>
+							</c:if>
+							
 							   <c:choose>
 							    
 								   	<c:when test="${numOfResults==0}">
