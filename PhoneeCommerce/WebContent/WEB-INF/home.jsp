@@ -85,14 +85,6 @@
             
             
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Chi siamo?</a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="home?action=faq">FAQ</a>
-          </li>
           
           <li class="nav-item">
             <a class="nav-link" href="home?action=cart">Carrello <span id="countCart" class="badge badge-danger">${cart.size}</span> </a>

@@ -32,7 +32,7 @@
 	              <div>
 	                <h6 class="my-0">${productOnCart.product.name} x ${productOnCart.quantity}</h6>
 	              </div>
-	              <span class="text-muted">$${productOnCart.product.price}0</span>
+	              <span class="text-muted">${productOnCart.quantity * productOnCart.product.price}0</span>
 	            </li>
             </c:forEach> 
             
@@ -232,10 +232,10 @@
 		        <form id="address-form">
 		          
 		          <div class="form-group">
-		          	
-		          	<label for="namelastname">Nome</label>
+		          	<label for="namelastname">Nome </label>
 		            <input type="text" name="namelastname"  class="form-control" id="namelastname" placeholder="Inserisci nome e cognome" required>
 		          </div>
+		          
 		          <div class="form-group">
 			          <label for="address">Indirizzo</label>
 			          <input id="address" type="text" name="address" class="form-control"  placeholder="Inserisci indirizzo" required>

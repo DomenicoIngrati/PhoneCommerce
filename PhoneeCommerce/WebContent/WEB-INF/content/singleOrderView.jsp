@@ -9,7 +9,7 @@
         <div class="col-xs-12">
             <div class="text-center">
                 <i class="fa fa-search-plus pull-left icon"></i>
-                <h2>Riepilogo ordine n°: <c:out value="${orderSelected.id}" /></h2>
+                <h2>Riepilogo ordine nÂ°: <c:out value="${orderSelected.id}" /></h2>
             </div>
             <hr>
             <div class="row">
@@ -85,26 +85,20 @@
                                     <td>${productOnOrder.product.name}</td>
                                     <td class="text-center">${productOnOrder.product.price}</td>
                                     <td class="text-center">${productOnOrder.quantity}</td>
-                                    <td class="text-right">${productOnOrder.product.price}</td>
+                                    <td class="text-right">${productOnOrder.product.price * productOnOrder.quantity}0</td>
                                 </tr>
             				</c:forEach> 
                                 <tr>
                                     <td class="highrow"></td>
                                     <td class="highrow"></td>
                                     <td class="highrow text-center"><strong>Subtotale</strong></td>
-                                    <td class="highrow text-right">$<c:out value="${orderSelected.total}" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="emptyrow"></td>
-                                    <td class="emptyrow"></td>
-                                    <td class="emptyrow text-center"><strong>Spedizione</strong></td>
-                                    <td class="emptyrow text-right">$20</td>
+                                    <td class="highrow text-right">$<c:out value="${orderSelected.total}" />0</td>
                                 </tr>
                                 <tr>
                                     <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
                                     <td class="emptyrow"></td>
                                     <td class="emptyrow text-center"><strong>Totale</strong></td>
-                                    <td class="emptyrow text-right">$<c:out value="${orderSelected.total}" /></td>
+                                    <td class="emptyrow text-right">$<c:out value="${orderSelected.total}" />0</td>
                                 </tr>
                             </tbody>
                         </table>

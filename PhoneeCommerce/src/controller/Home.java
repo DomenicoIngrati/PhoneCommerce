@@ -307,6 +307,12 @@ public class Home extends HttpServlet {
 		request.setAttribute("banners",allBanners);
 		break;
 	}
+	
+	case "chisiamo":
+	{
+		page="chisiamo";
+		break;
+	}
 
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();

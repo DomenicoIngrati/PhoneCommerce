@@ -85,26 +85,20 @@
                                     <td>${productOnOrder.product.name}</td>
                                     <td class="text-center">${productOnOrder.product.price}</td>
                                     <td class="text-center">${productOnOrder.quantity}</td>
-                                    <td class="text-right">${productOnOrder.product.price}</td>
+                                    <td class="text-right">${productOnOrder.product.price * productOnOrder.quantity}0</td>
                                 </tr>
             				</c:forEach> 
                                 <tr>
                                     <td class="highrow"></td>
                                     <td class="highrow"></td>
                                     <td class="highrow text-center"><strong>Subtotale</strong></td>
-                                    <td class="highrow text-right">$<c:out value="${orderCompleted.total}" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="emptyrow"></td>
-                                    <td class="emptyrow"></td>
-                                    <td class="emptyrow text-center"><strong>Spedizione</strong></td>
-                                    <td class="emptyrow text-right">$20</td>
+                                    <td class="highrow text-right">$<c:out value="${orderCompleted.total}" />0</td>
                                 </tr>
                                 <tr>
                                     <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
                                     <td class="emptyrow"></td>
                                     <td class="emptyrow text-center"><strong>Totale</strong></td>
-                                    <td class="emptyrow text-right">$<c:out value="${orderCompleted.total}" /></td>
+                                    <td class="emptyrow text-right">$<c:out value="${orderCompleted.total}" />0</td>
                                 </tr>
                                 
                                 
