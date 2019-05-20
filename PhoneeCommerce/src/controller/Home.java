@@ -314,6 +314,12 @@ public class Home extends HttpServlet {
 		break;
 	}
 
+	case "findus":
+	{
+		page="findus";
+		break;
+	}
+
     default:
     	List <Product> newProducts2 = ProductService.getLastSixProducts();
     	request.setAttribute("newproducts", newProducts2);

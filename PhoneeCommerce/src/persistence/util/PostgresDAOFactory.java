@@ -18,9 +18,12 @@ private static  DataSource dataSource;
 //			dataSource=new DataSource("jdbc:postgresql://52.39.164.176:5432/xx","xx","p@xx");
 			
 			
-			//DA SOSTITUIRE CON I NOSTRI DATI 
+			//DA SOSTITUIRE CON I NOSTRI DATI
+			String url = "jdbc:postgresql://host:port/database";
 			dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
-		} 
+//			dataSource=new DataSource("jdbc:postgresql://packy.db.elephantsql.com:5432/pdloznxd","pdloznxdx","YSLsj01ln2il0iNuD9dtEHPPzv1gU9Dp");
+
+		}
 		catch (Exception e) {
 			System.err.println("PostgresDAOFactory.class: failed to load Postres JDBC driver\n"+e);
 			e.printStackTrace();
