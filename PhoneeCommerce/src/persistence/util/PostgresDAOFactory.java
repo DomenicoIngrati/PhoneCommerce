@@ -77,4 +77,7 @@ private static  DataSource dataSource;
 		return new AddressDaoJDBC(dataSource);
 	}
 
+	@Override
+	public PositionMapDAO getPositionMapDao()  {return new PositionMapDaoJDBC(dataSource);}
+
 }

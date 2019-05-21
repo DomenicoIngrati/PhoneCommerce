@@ -1,23 +1,17 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import model.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import model.Type;
-import model.User;
-import model.Wishlist;
-import model.Address;
-import model.Cart;
-import model.Product;
-import persistence.dao.AddressDAO;
-import persistence.dao.ProductDAO;
-import persistence.dao.UserDAO;
-import persistence.dao.WishlistDAO;
+import persistence.dao.*;
+import persistence.dao.implementation.PositionMapDaoJDBC;
 import persistence.util.DAOfactory;
 
 public class AccountService {
@@ -338,4 +332,24 @@ public class AccountService {
 		}
 		return result;
 	}
+
+    public static JsonObject getAllPositionMap() {
+
+		List<PositionMap> all = null;
+		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
+
+		PositionMapDAO dao = factory.getPositionMapDao();
+
+		all = dao.findAll();
+
+		JsonObject data = new JsonObject();
+		for(PositionMap pos : all){
+			data.addProperty("latitude", pos.getLatitude());
+			data.addProperty("longitude", pos.getLongitude());
+		}
+
+		return data;
+
+
+    }
 }

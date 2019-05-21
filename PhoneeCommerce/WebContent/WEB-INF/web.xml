@@ -72,4 +72,13 @@
     <servlet-name>Carousel</servlet-name>
     <url-pattern>/carousel</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PositionMap</servlet-name>
+    <servlet-class>controller.PositionMap</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PositionMap</servlet-name>
+    <url-pattern>/positionmap</url-pattern>
+  </servlet-mapping>
 </web-app>
