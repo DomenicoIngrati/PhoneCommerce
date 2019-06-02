@@ -333,7 +333,7 @@ public class AccountService {
 		return result;
 	}
 
-    public static JsonObject getAllPositionMap() {
+    public static ArrayList<JsonObject> getAllPositionMap() {
 
 		List<PositionMap> all = null;
 		DAOfactory factory = DAOfactory.getDAOFactory(DAOfactory.POSTGRESQL);
@@ -342,13 +342,19 @@ public class AccountService {
 
 		all = dao.findAll();
 
-		JsonObject data = new JsonObject();
+		ArrayList<JsonObject> dataArray = new ArrayList<JsonObject>();
+		JsonObject data= null;
+		
+		
 		for(PositionMap pos : all){
+			data=new JsonObject();
 			data.addProperty("latitude", pos.getLatitude());
 			data.addProperty("longitude", pos.getLongitude());
+			dataArray.add(data);
 		}
 
-		return data;
+		
+		return dataArray;
 
 
     }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class PositionMap extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,7 @@ public class PositionMap extends HttpServlet {
 		}
 		String action = request.getParameter("action");
 
-		JsonObject result = new JsonObject();
+		ArrayList<JsonObject> result = new ArrayList<JsonObject>();
 		
 		User user = (User) session.getAttribute("user");
 
@@ -51,7 +52,7 @@ public class PositionMap extends HttpServlet {
 				break;
 			}
 
-			case "RETRIVEALL":
+			case "RETRIEVEALL":
 			{
 				result = AccountService.getAllPositionMap();
 			}

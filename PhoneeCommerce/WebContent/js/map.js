@@ -1,5 +1,34 @@
 
 $( document ).ready(function() {
+	
+    // Create an icon, an object holding the latitude and longitude, and a marker:
+    var icon = new H.map.Icon('https://img.icons8.com/doodle/48/000000/marker.png');
+
+    
+	
+    $.ajax({
+        url: "positionmap?action=RETRIEVEALL",
+        type: "POST",
+        dataType: "JSON",
+        success: function(result){
+        	
+        	var array=result;
+        	
+        	
+        	var arrayLength = array.length;
+        	for (var i = 0; i < arrayLength; i++) {
+        
+        	    
+                var coords = {lat: array[i].latitude, lng: array[i].longitude},
+                marker = new H.map.Marker(coords, {icon: icon});
+                
+                map.addObject(marker);
+        	}
+        },
+        error: function(){
+            alert("Errore di richiesta al server! Riprovare.");
+        }
+    });
 
     // Initialize the platform object:
     var platform = new H.service.Platform({
@@ -15,8 +44,8 @@ $( document ).ready(function() {
         document.getElementById('mapContainer'),
         defaultLayers.normal.map,
         {
-            zoom: 10,
-            center: { lng: 13.4, lat: 52.51 }
+            zoom: 5,
+            center: { lng:12.216 , lat:41.883 }
         });
 
 
@@ -51,31 +80,17 @@ $( document ).ready(function() {
         'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
         'fill="white">H</text></svg>';
 
-    // Create an icon, an object holding the latitude and longitude, and a marker:
-    var icon = new H.map.Icon('https://img.icons8.com/ultraviolet/40/000000/marker.png'),
-        coords = {lat: 52.53075, lng: 13.3851},
-        marker = new H.map.Marker(coords, {icon: icon});
+
 
     // Add the marker to the map:
-    map.addObject(marker);// Create the parameters for the geocoding request:
-    var geocodingParams = {
-        searchText: '200 S Mathilda Ave, Sunnyvale, CA'
-    };
 
-    $.ajax({
-        url: "positionmap?action=RETRIEVEALL",
-        type: "POST",
-        dataType: "JSON",
-        success: function(result){
+    
+    
 
-        },
-        error: function(){
-            alert("Errore di richiesta al server! Riprovare.");
-        }
-    });
 
     // Define a callback function to process the geocoding response:
     var onResult = function(result) {
+    	
         var locations = result.Response.View[0].Result,
             position,
             marker;
@@ -85,9 +100,13 @@ $( document ).ready(function() {
                 lat: locations[i].Location.DisplayPosition.Latitude,
                 lng: locations[i].Location.DisplayPosition.Longitude
             };
+            
+            console.log(position);
             marker = new H.map.Marker(position);
             map.addObject(marker);
         }
+    	
+    	
     };
 
     // Get an instance of the geocoding service:

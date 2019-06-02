@@ -316,7 +316,7 @@ public class Home extends HttpServlet {
 
 	case "findus":
 	{
-		page="prova";
+		page="findus";
 		break;
 	}
 
