@@ -63,7 +63,6 @@ public class Home extends HttpServlet {
     
     request.setAttribute("brands", cats);
     
-//    Wishlist wishlist = null;
     
     HttpSession session = request.getSession();
     
@@ -220,14 +219,10 @@ public class Home extends HttpServlet {
     	if(user == null) {
     		page = "index";
     	}
-    	else //if(user.getType() == Type.Customer)
+    	else 
     	{
     		page = "address";
     		List<Address> allAddress = AccountService.getAllAddressesFromUser(user);
-//        	List<Address> allAddress = (List<Address>) session.getAttribute("allAddress");
-//        	if(allAddress == null) //PER OTTIMIZZARE, SOLO che va resettato ogni volta ch enoi aggiungiamo o eliminiamo un indirizzo altrimenti rimane sempre la stessa pagina
-//        		allAddress = AccountService.getAllAddressesFromUser(user);
-        	
         	session.setAttribute("allAddress", allAddress);
         	
     		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
@@ -239,7 +234,7 @@ public class Home extends HttpServlet {
     	if(user == null) {
     		page = "index";
     	}
-    	else //if(user.getType() == Type.Customer)
+    	else
     	{
     		page = "list";
     		request.setAttribute("wishlist", AccountService.getDefaultWishlist(user));
@@ -251,7 +246,7 @@ public class Home extends HttpServlet {
     	if(user == null) {
     		page = "index";
     	}
-    	else //if(user.getType() == Type.Customer)
+    	else 
     	{
     		page="orderCompleted";
     	}
@@ -337,8 +332,6 @@ public class Home extends HttpServlet {
     }
     
     request.setAttribute("page", "content/" + page + ".jsp");
-
-    // this servlet has to forward only to the home.jsp
     RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/home.jsp");
     dispatcher.forward(request, response);
   }

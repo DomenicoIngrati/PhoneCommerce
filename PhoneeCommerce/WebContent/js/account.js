@@ -126,8 +126,8 @@ $( document ).ready(function() {
 	$(".btn-address-delete").click(function(){
 		var id = $(this).data('id');
 		
-		console.log("ciaooooo");
-		console.log(id);
+		
+		
 		
 		
 		$.ajax({
@@ -158,13 +158,9 @@ $( document ).ready(function() {
 	
 	$('#add-address-modal').on('show.bs.modal', function (e) {
 
-		var button = $(e.relatedTarget); // Button that triggered the modal
+		var button = $(e.relatedTarget);
 		
-		var name = button.data('name'); // Extract info from data-* attributes
-		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-		
-		console.log(name);
+		var name = button.data('name'); 
 		
 		if(name=="modify")
 		{
@@ -186,7 +182,6 @@ $( document ).ready(function() {
 			    frm = $(this).serializeFormJSON();
 			    frm.id =  button.data('idaddress');
 			   
-			    console.log(frm);
 			    
 			    $.ajax({
 			        url: "address?action=UPDATE",
@@ -217,7 +212,7 @@ $( document ).ready(function() {
 				var frm = null;
 			    frm = $(this).serializeFormJSON();
 			   
-			    console.log(frm);
+			  
 			    
 			    $.ajax({
 			        url: "address?action=CREATE",
@@ -311,8 +306,8 @@ $( document ).ready(function() {
 	    e.preventDefault();
 	    var frm = $(this).serializeFormJSON();
 	    
-	    console.log(frm);
-	    console.log(JSON.stringify(frm));
+	   
+	    
 	    
 	    $.ajax({
 	        url: "account?action=signin",
@@ -324,7 +319,7 @@ $( document ).ready(function() {
 	        	
 	        	operation_alert(data, function(){
 	        		var str = data.result;
-	        		console.log(data);
+	        	
 	                if (str.search("ORGANIZER") != -1) {
 	                	
 	                		
@@ -334,11 +329,11 @@ $( document ).ready(function() {
 	               
 	                	var newData= data.comingFromCart;
 	    	        	if(newData == true){
-	    	        			console.log("oooooooooo");
+	    	        			
 	    		        		window.location.href="home?action=cartCheckout";
 	    	        	}
 	    	        	else{
-	    	        		console.log("mammita");
+	    	        	
 	    	        		window.location.href = "home?action=index";
 	    	        	}
 		                   

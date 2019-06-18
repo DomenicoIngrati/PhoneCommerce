@@ -27,7 +27,6 @@ public class AccountService {
 		if (dao.create(source)) {
 			result.addProperty("result", "SUCCESS");
 			result.addProperty("message", "You have successfully signed-up, will be redirected soon !");
-			System.err.println(source);
 			return source;
 		} else {
 			result.addProperty("result", "FAIL");
@@ -38,7 +37,7 @@ public class AccountService {
 			} else {
 				result.addProperty("reason", "Sorry, something went wrong, try again within few minutes");
 			}
-			System.err.println(source);
+			
 			return null;
 		}
 	}
@@ -88,7 +87,7 @@ public class AccountService {
 		if(dao.create(tmp)) {
 			result.addProperty("result", "SUCCESS");
 			result.addProperty("message", "Address added to your account!");
-			System.err.println(tmp);
+			
 		} else {
 			result.addProperty("result", "FAIL");
 			result.addProperty("reason", "Sorry, something went wrong, try again within few minutes!");

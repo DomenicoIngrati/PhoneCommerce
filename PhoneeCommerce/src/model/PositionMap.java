@@ -37,7 +37,6 @@ public class PositionMap {
 
     @Override
     public String toString() {
-//        return "Indirzzo [id=" + id + ", nomeecognome=" + namelastname + ", address=" + address + ", city=" + city + ", province=" + province + ", zipcode=" + zipcode + ", tel=" + tel + ", User=" + user.toString() + " ]";
         return "";
     }
 

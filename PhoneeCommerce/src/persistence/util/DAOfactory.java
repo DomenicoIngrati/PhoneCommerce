@@ -68,6 +68,5 @@ public abstract class DAOfactory {
 
 		public abstract PositionMapDAO getPositionMapDao();
 
-//		public abstract  getUtilDAO(); //???
 	
 }

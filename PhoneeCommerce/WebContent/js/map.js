@@ -55,7 +55,6 @@ $( document ).ready(function() {
     // Add event listeners:
     map.addEventListener('tap', function(evt) {
         // Log 'tap' and 'mouse' events:
-        console.log(evt.type, evt.currentPointer.type);
     });
 
     // Instantiate the default behavior, providing the mapEvents object:
@@ -63,15 +62,7 @@ $( document ).ready(function() {
     // Create the default UI:
     var ui = H.ui.UI.createDefault(map, defaultLayers , 'it-IT');
 
-    /*var mapSettings = ui.getControl('mapsettings');
-    var zoom = ui.getControl('zoom');
-    var scalebar = ui.getControl('scalebar');
-    var panorama = ui.getControl('panorama');
 
-    panorama.setAlignment('top-left');
-    mapSettings.setAlignment('top-left');
-    zoom.setAlignment('top-left');
-    scalebar.setAlignment('top-left');*/
 
     var svgMarkup = '<svg width="24" height="24" ' +
         'xmlns="http://www.w3.org/2000/svg">' +
@@ -101,7 +92,6 @@ $( document ).ready(function() {
                 lng: locations[i].Location.DisplayPosition.Longitude
             };
             
-            console.log(position);
             marker = new H.map.Marker(position);
             map.addObject(marker);
         }

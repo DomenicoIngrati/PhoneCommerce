@@ -48,7 +48,6 @@ public class ProductForImage extends HttpServlet {
 		JsonObject result = new JsonObject();
 		User user = (User) session.getAttribute("user");
 		
-		System.out.println(action);
 
 		switch (action) {
 			case "CREATE": {
@@ -71,10 +70,6 @@ public class ProductForImage extends HttpServlet {
 
 					tmp.setImage(imgbyte);
 
-//					System.out.println(Base64.getEncoder().encodeToString(tmp.getImage()));
-
-//				    System.out.println(filename);
-//					System.out.println(tmp.toString());
 					result = ProductService.createProduct(tmp);
 
 				} else {
@@ -85,7 +80,7 @@ public class ProductForImage extends HttpServlet {
 			}
 			case "updateImage": {
 
-				Part imagePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+				Part imagePart = request.getPart("file");
 				String filename = getFilename(imagePart);
 				InputStream fileContent = imagePart.getInputStream();
 
@@ -95,8 +90,6 @@ public class ProductForImage extends HttpServlet {
 				fileContent.close();
 
 				Long idproduct = Long.parseLong(request.getParameter("idproduct"));
-				System.out.println(filename);
-				System.out.println(idproduct);
 
 				result = ProductService.updateProductImage(imgbyte, idproduct);
 				break;

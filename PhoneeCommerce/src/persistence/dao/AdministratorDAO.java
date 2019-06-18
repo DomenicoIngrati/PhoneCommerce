@@ -21,8 +21,6 @@ public interface AdministratorDAO {
     
     public void putProduct(User admin, Product product);
     
-//    public void putProducts(List <Product> product);
-    
     public void deleteProduct(Product product);
     
     

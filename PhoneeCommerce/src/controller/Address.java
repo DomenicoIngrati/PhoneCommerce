@@ -26,7 +26,7 @@ public class Address extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String json = ""; // parse request in json format
+		String json = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		if (br != null) {
 			json = br.readLine();

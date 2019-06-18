@@ -140,7 +140,6 @@ $( document ).ready(function() {
 		form.append("file",$("#image-banner-img")[0].files[0]);
 		form.append("id",$("#image-banner-btn-add-banner").data('idbanner'));
 
-		console.log($("#image-banner-btn-add-banner").data('idbanner'));
 		$.ajax({
 
 			url: "carousel?action=updateimage",

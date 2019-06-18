@@ -29,7 +29,6 @@ public interface ProductCategoryDAO {
 	public List<String> findAllNames();
 	
 	public List<String> findAllNames(boolean visible);
-	
-//	public List<ProductCategory> showCategory();
+
 
 }

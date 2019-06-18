@@ -49,7 +49,7 @@ public class Carousel extends HttpServlet {
 		JsonObject result = new JsonObject();
 		User user = (User) session.getAttribute("user");
 		
-		System.out.println(action);
+		
 
 		switch (action) {
 			case "create": {
@@ -70,12 +70,8 @@ public class Carousel extends HttpServlet {
 
 					tmp.setImage(imgbyte);
 
-//					System.out.println(Base64.getEncoder().encodeToString(tmp.getImage()));
-
-//				    System.out.println(filename);
-//					System.out.println(tmp.toString());
 					result = CarouselService.createBanner(tmp);
-//					result.addProperty("result", "FAIL");
+
 				} else {
 					result.addProperty("result", "FAIL");
 					result.addProperty("message", "You are not administrator!");
@@ -90,10 +86,8 @@ public class Carousel extends HttpServlet {
 					tmp.setTitle(request.getParameter("title"));
 					tmp.setDescription(request.getParameter("description"));
 
-//					System.out.println(tmp);
 
 					result = CarouselService.updateTexts(tmp);
-//					result.addProperty("result", "FAIL");
 				} else {
 					result.addProperty("result", "FAIL");
 					result.addProperty("message", "You are not administrator!");
@@ -119,7 +113,6 @@ public class Carousel extends HttpServlet {
 					tmp.setImage(imgbyte);
 
 					result = CarouselService.updateImage(tmp);
-//					result.addProperty("result", "FAIL");
 				} else {
 					result.addProperty("result", "FAIL");
 					result.addProperty("message", "You are not administrator!");
@@ -134,7 +127,6 @@ public class Carousel extends HttpServlet {
 					long id = Long.parseLong(request.getParameter("id"));
 
 					result = CarouselService.deleteBanner(id);
-//					result.addProperty("result", "FAIL");
 				} else {
 					result.addProperty("result", "FAIL");
 					result.addProperty("message", "You are not administrator!");

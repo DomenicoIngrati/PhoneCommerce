@@ -27,10 +27,6 @@ public class UploadServlet extends HttpServlet {
         String filename = getFilename(file);
         InputStream filecontent = file.getInputStream();
 
-        System.out.println();
-        
-//        File fileimg = new File(paths.getProperty("img_products") + filename);
-//        FileUtils.copyInputStreamToFile(filecontent, fileimg);
 
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");

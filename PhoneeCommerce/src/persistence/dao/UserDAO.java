@@ -4,11 +4,11 @@ import java.util.List;
 
 import model.User;
 
-public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
+public interface UserDAO {
 	
-	 	public boolean create(User user); //Create
+	 	public boolean create(User user); 
 
-	    public User findById(long id); //Retrieve
+	    public User findById(long id);
 
 	    public User findByUsername(String username);
 
@@ -16,8 +16,8 @@ public interface UserDAO { //interfaccia pattern DAO con metodi CRUD
 	    
 	    public List<User> findAll();
 
-	    public void update(User user); //Update
+	    public void update(User user);
 
-	    public void delete(User user); //Delete
+	    public void delete(User user);
 
 }

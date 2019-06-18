@@ -44,7 +44,6 @@ public abstract class ProductService {
 			result.addProperty("result", "FAIL");
 			result.addProperty("reason", "Sorry, something went wrong!");
 		}
-		System.err.println(p);	
 
 
 		return result;
@@ -163,7 +162,7 @@ public abstract class ProductService {
 
 				result.addProperty("reason", "Sorry, something went wrong!");
 			}
-			System.err.println(p);	
+			
 			
 		} catch (JSONException e) {
 			e.printStackTrace();

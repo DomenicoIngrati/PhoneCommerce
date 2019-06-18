@@ -59,7 +59,7 @@ public class Product extends HttpServlet {
 			json = br.readLine();
 		}
 
-		System.out.println(json);
+	
 
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
@@ -67,7 +67,6 @@ public class Product extends HttpServlet {
 		JsonObject result = new JsonObject();
 		User user = (User) session.getAttribute("user");
 		
-		System.out.println(action);
 		
 
 		switch (action) {
@@ -90,64 +89,6 @@ public class Product extends HttpServlet {
 				}
 				break;
 			}
-	//		case "SUSPEND":
-	//		{
-	//			EventService eventservice = new EventService(json);
-	//			result=eventservice.suspendEvent();
-	//			break;
-	//		}
-	//		case "showCategory": {
-	//			EventService eventService2 = new EventService(json);
-	//			result = eventService2.showCategory();
-	//			break;
-	//		}
-	//		case "showTicketCategory": {
-	//			EventService service = new EventService(json);
-	//			result = service.showTicketCategory();
-	//			break;
-	//		}
-	//		case "showReviews": {
-	//			Event event = (Event) session.getAttribute("idevent");
-	//			EventService service = new EventService();
-	//			result = service.showReview(event);
-	//			break;
-	//		}
-	//		case "addReview": {
-	//			Event event = (Event) session.getAttribute("idevent");
-	//			User user = (User) session.getAttribute("user");
-	//			EventService service = new EventService();
-	//			result = service.addReview(user, event, json);
-	//			break;
-	//		}
-	//		case "showTicket": {
-	//			EventService eventservice = new EventService(json);
-	//			result = eventservice.showTicketOrganizer();
-	//			break;
-	//
-	//		}
-	//		case "showGuest":{
-	//			EventService eventService= new EventService(json);
-	//			result=eventService.showGuest();
-	//			break;
-	//
-	//		}
-	//		case "deleteguest":
-	//		{
-	//			EventService eventService= new EventService();
-	//			result=eventService.deleteGuest(json);
-	//			break;
-	//		}
-	//		case "editguest":{
-	//			EventService eventservice = new EventService();
-	//			result = eventservice.editGuest(json);
-	//			break;
-	//		}
-	//		case "updatePrice":
-	//		{
-	//			EventService eventservice= new EventService();
-	//			result=eventservice.updatePriceTicketCategory(json);
-	//			break;
-	//		}
 
 			default:
 				break;

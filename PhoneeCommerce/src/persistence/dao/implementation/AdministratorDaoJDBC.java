@@ -170,11 +170,6 @@ public class AdministratorDaoJDBC implements AdministratorDAO {
 		
 	}
 
-//	@Override
-//	public void putProducts(List<Product> product) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 
 	@Override
 	public void deleteProduct(Product product) {

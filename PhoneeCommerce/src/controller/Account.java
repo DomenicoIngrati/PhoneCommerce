@@ -34,13 +34,13 @@ public class Account extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// read the ajax request
+		
 		BufferedReader br = new BufferedReader(request.getReader());
 		String json = "";
 		if (br != null) {
 			json = br.readLine();
 		}
-		// get the action
+		
 		String action = request.getParameter("action");
 		HttpSession session=request.getSession();
 		String comingFromCart= (String) session.getAttribute("comingFromCart");

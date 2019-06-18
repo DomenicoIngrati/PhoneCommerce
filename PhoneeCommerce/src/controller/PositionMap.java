@@ -26,7 +26,7 @@ public class PositionMap extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 
-		String json = ""; // parse request in json format
+		String json = ""; 
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		if (br != null) {
 			json = br.readLine();
@@ -39,16 +39,13 @@ public class PositionMap extends HttpServlet {
 
 		switch (action) {
 			case "CREATE": {
-//				result = AccountService.addAddress(user, json);
 				break;
 			}
 			case "UPDATE": {
-//				result = AccountService.updateAddress(user, json);
 				break;
 			}
 			case "DELETE":
 			{
-//				result=AccountService.deleteAddress(user, json);
 				break;
 			}
 

@@ -90,7 +90,7 @@ $( document ).ready(function() {
 	        	    if ((str.search("SUCCESS")) != -1) {
 	        	    	$("#"+id).slideUp();
 	        	    	var deletedCategory = result.category;
-	        	    	console.log(deletedCategory);
+	        	    	
 	        	    	if(deletedCategory != null){
 	        	    		$("#"+deletedCategory).slideUp();
 	        	    	}
@@ -119,7 +119,7 @@ $( document ).ready(function() {
 	    frm.id = idproduct;
 	    frm.oldnamecategory = oldNameCategory;
 	    $('#modifyModal').modal('hide');
-	    console.log(frm);
+	 
 
 	    $.ajax({
 	        url: "product?action=UPDATE",
@@ -184,7 +184,7 @@ $( document ).ready(function() {
 		var formdata = new FormData();
 		formdata.append("idproduct", $("#submitImgModify").data("idproduct"));
 		formdata.append("file", $("#modifyProductImage")[0].files[0]);
-		// console.log($("#modifyProductImage")[0].files[0].name);
+		
 
 		$.ajax({
 			type: "POST",
@@ -204,6 +204,5 @@ $( document ).ready(function() {
 			}
 		});
 
-		// $("#modifyImgProduct").ajaxSubmit(option);
 	});
 });

@@ -7,7 +7,7 @@ public class Review {
     private Product product;
     private String title;
     private String text;
-    private int feedback; //Stelline?
+    private int feedback;
 
     public Review() {
     	this.feedback=0;

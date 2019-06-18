@@ -24,6 +24,5 @@ public interface ReviewDAO {
 
 	List<Review> findByProduct(Product p);
 
-//	public int getAVGbyId(Integer id);
 
 }

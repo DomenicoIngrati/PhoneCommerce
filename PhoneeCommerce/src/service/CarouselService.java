@@ -35,7 +35,7 @@ public class CarouselService {
 			result.addProperty("result", "FAIL");
 			result.addProperty("reason", "Sorry, something went wrong!");
 		}
-		System.err.println(c);
+		
 		return result;
 	}
 
@@ -53,7 +53,7 @@ public class CarouselService {
 			result.addProperty("result", "FAIL");
 			result.addProperty("reason", "Sorry, something went wrong!");
 		}
-		System.err.println(c);
+		
 		return result;
 
 	}
@@ -69,7 +69,7 @@ public class CarouselService {
 			result.addProperty("result", "FAIL");
 			result.addProperty("reason", "Sorry, something went wrong!");
 		}
-		System.err.println(c);
+		
 		return result;
 	}
 

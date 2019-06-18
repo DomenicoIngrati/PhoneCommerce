@@ -57,53 +57,6 @@ public class OrderDaoJDBC implements OrderDAO {
 		}
 	}
 
-//	@Override
-//	public boolean create(Order o) {
-//		Connection connection;
-//		String query;
-//		PreparedStatement statement;
-//		connection = dataSource.getConnection();
-//		
-//		try {
-//			
-//			long id = IdBroker.getId(connection);
-//			o.setId(id); 
-//			
-//		    
-//		    query = " INSERT INTO Order(date, users, total, id) VALUES (?, ?, ?, ?)";
-//		    
-//		    statement = connection.prepareStatement(query);
-//		    
-//		    statement.setDate(1, new java.sql.Date(o.getDate().getTime()));
-//		    statement.setLong(2, o.getUser().getId());
-//		    statement.setFloat(3, o.getTotal());
-//		    statement.setLong(4, o.getId());
-//		    statement.executeUpdate();
-//		    
-//		    for(Item p : o.getProducts())
-//		    {
-//		    	long idp = IdBroker.getId(connection);
-//		    	
-//		    	PreparedStatement statement2;
-//		    	String query2 = "INSERT INTO INCLUDE (product, order, id) VALUES (?, ?, ?)";
-//		    	statement2 = connection.prepareStatement(query2);
-//		    	statement2.setLong(1, p.getId());
-//		    	statement2.setLong(2, o.getId());
-//		    	statement2.setLong(3, idp);
-//		    	statement2.executeUpdate();
-//		    }
-//		    
-//		    return ok;
-//		    
-//		} catch (SQLException e) {
-//		    e.printStackTrace();
-//		} finally {
-//		    DAOUtility.close(connection);
-//		}
-//		
-//		return false;
-//		
-//	}
 	
 	
 	public boolean create(Order order) {

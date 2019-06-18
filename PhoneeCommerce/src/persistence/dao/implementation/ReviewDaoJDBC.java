@@ -256,10 +256,5 @@ public class ReviewDaoJDBC implements ReviewDAO {
 		return reviews;
 	}
 
-//	@Override
-//	public int getAVGbyId(Integer id) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
 
 }

@@ -4,15 +4,11 @@ import java.util.List;
 import model.Address;
 import model.User;
 
-public interface AddressDAO { //interfaccia pattern DAO con metodi CRUD
+public interface AddressDAO { 
 	
-	 	public boolean create(Address a); //Create
-	 	
-	    public boolean update(Address a); //Update
-
-	    public boolean delete(Address a); //Delete
-
-	    public Address findById(Long id); //Retrive
-
+	 	public boolean create(Address a); 
+	    public boolean update(Address a); 
+	    public boolean delete(Address a); 
+	    public Address findById(Long id); 
 	    public List<Address> findByUserId(User u);
 }

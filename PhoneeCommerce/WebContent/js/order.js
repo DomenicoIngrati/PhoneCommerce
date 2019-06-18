@@ -28,8 +28,6 @@ $( document ).ready(function() {
 		
 		var idOrder= $(this).data('id');
 		
-		console.log(idOrder);
-		
 		$.ajax({
 			url: "order?action=summaryOrder",
 			type: "POST",

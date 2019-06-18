@@ -37,8 +37,6 @@ public interface ProductDAO {
 	
 	public List<String> findAllNames();
 
-//	public Integer soldProduct(Event e, ProductCategory idCategory);
-
 	public void updatePriceProduct(Product product);
 	
 }

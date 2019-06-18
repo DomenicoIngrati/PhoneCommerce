@@ -37,7 +37,7 @@ $( document ).ready(function() {
 			    
 			    
 			   
-			    console.log(frm);
+
 			    
 			    $.ajax({
 			        url: "product?action=newReview",
