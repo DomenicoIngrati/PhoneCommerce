@@ -30,7 +30,7 @@
 									<div class="row">
 										<div class="col-auto"> <!-- DIV IMMAGINE -->
 											<p> <strong>Data: </strong> ${myOrder.date}</p> 
-											<p> <strong>Totale ordine: </strong> $${myOrder.total}0</p>
+											<p> <strong>Totale ordine: </strong> €${myOrder.total}0</p>
 											<p> <strong>Destinatario: </strong>${myOrder.address.namelastname}</p>
 											<p> <strong>Indirizzo: </strong>${myOrder.address.address}</p>
 										</div> 

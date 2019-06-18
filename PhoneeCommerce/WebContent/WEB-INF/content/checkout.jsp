@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
     
@@ -38,7 +38,7 @@
             
             <li class="list-group-item d-flex justify-content-between">
               <strong><span>Totale (USD)</span></strong>
-              <strong><c:out value=" $${cart.total}0" /></strong>
+              <strong><c:out value=" ‚Ç¨${cart.total}0" /></strong>
             </li>
             
            <c:choose>
@@ -69,7 +69,7 @@
           <div class="col-auto"> <!-- DIV IMMAGINE -->
 				<p> <strong>Nome e cognome: </strong><c:out value="${addressChosen.namelastname}" />  </p> 
 				<p> <strong>Indirizzo: </strong><c:out value="${addressChosen.address}" /></p>
-				<p> <strong>Citt‡: </strong><c:out value="${addressChosen.city}" />,<c:out value="${addressChosen.province}" /> ,<c:out value="${addressChosen.zipcode}" /> </p>
+				<p> <strong>Citt√†: </strong><c:out value="${addressChosen.city}" />,<c:out value="${addressChosen.province}" /> ,<c:out value="${addressChosen.zipcode}" /> </p>
 				<p> <strong>Paese: </strong>Italia </p>
 				<p> <strong>Numero di telefono: </strong><c:out value="${addressChosen.tel}" /></p>
 		  </div>  
@@ -129,7 +129,7 @@
           
           
           <hr class="mr-4">
-		  <h4 class="mb-3"><strong>Scegli una modalit‡ di spedizione</strong></h4>
+		  <h4 class="mb-3"><strong>Scegli una modalit√† di spedizione</strong></h4>
 		  
 		  <div class="d-block my-3">
               <div class="custom-control custom-radio">

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -48,15 +48,15 @@
 <!--               <span class="mr-1">
                 <del>$200</del>
               </span> -->
-              <span>$${selectedProduct.price}0</span>
+              <span>${selectedProduct.price}0â‚¬</span>
             </p>
 
-            <p class="lead font-weight-bold">Description</p>
+            <p class="lead font-weight-bold">Descrizione</p>
 
             <p>${selectedProduct.description}</p>
 
 <!-- 			<div class="input-group mb-3">
-			  <input type="text" class="form-control" placeholder="Quantità" aria-label="Quantità" aria-describedby="button-addon2">
+			  <input type="text" class="form-control" placeholder="QuantitÃ " aria-label="QuantitÃ " aria-describedby="button-addon2">
 			  <div class="input-group-append">
 			    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add to cart</button>
 			  </div>
@@ -72,7 +72,7 @@
                                 </div>
                                 
                                <div class="input-group-append" id="add-product">
-                               	<!-- Da modificare la quantità passata alla servlet. Va preso il valore contenuto in value qui sopra  -->
+                               	<!-- Da modificare la quantitÃ  passata alla servlet. Va preso il valore contenuto in value qui sopra  -->
 			    					<input class="btn btn-outline-secondary add-product-on-cart" type="button" value="Add to cart" data-id="${selectedProduct.id}" /> 
 			 				   </div>	
                             </div>
@@ -94,7 +94,7 @@
         <!--Grid column-->
         <div class="col-md-6 text-center">
 
-          <h4 class="my-4 h4">Additional information</h4>
+          <h4 class="my-4 h4">Informazioni aggiuntive</h4>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
             voluptates,

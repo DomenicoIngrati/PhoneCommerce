@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
         <div class="col-xs-12">
             <div class="text-center">
                 <i class="fa fa-search-plus pull-left icon"></i>
-                <h2>L'ordine � stato completato</h2>
+                <h2>L'ordine è stato completato</h2>
             </div>
             <hr>
             <div class="row">
@@ -29,9 +29,9 @@
                     <div class="panel panel-default height">
                         <div class="panel-heading"><strong> Pagamento </strong></div>
                         <div class="panel-body">
-                            <strong>Card Name:</strong> Visa<br>
-                            <strong>Card Number:</strong> ***** 332<br>
-                            <strong>Exp Date:</strong> 09/2020<br>
+                            <strong>Nome carta:</strong> Visa<br>
+                            <strong>Numero carta:</strong> ***** 332<br>
+                            <strong>Scadenza carta:</strong> 09/2020<br>
                         </div>
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                     <div class="panel panel-default height">
                         <div class="panel-heading"><strong>Preferenze</strong></div>
                         <div class="panel-body">
-                            <strong>Gift:</strong> No<br>
-                            <strong>Express Delivery:</strong> Yes<br>
-                            <strong>Insurance:</strong> No<br>
+                            <strong>Regalo:</strong> No<br>
+                            <strong>Consegna express:</strong> Yes<br>
+                            <strong>Assicurazione:</strong> No<br>
                             <strong>Coupon:</strong> No<br>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                 <tr>
                                     <td><strong>Nome Prodotto</strong></td>
                                     <td class="text-center"><strong>Prezzo</strong></td>
-                                    <td class="text-center"><strong>Quantit�</strong></td>
+                                    <td class="text-center"><strong>Quantità</strong></td>
                                     <td class="text-right"><strong>Totale</strong></td>
                                 </tr>
                             </thead>
@@ -92,13 +92,13 @@
                                     <td class="highrow"></td>
                                     <td class="highrow"></td>
                                     <td class="highrow text-center"><strong>Subtotale</strong></td>
-                                    <td class="highrow text-right">$<c:out value="${orderCompleted.total}" />0</td>
+                                    <td class="highrow text-right">€<c:out value="${orderCompleted.total}" />0</td>
                                 </tr>
                                 <tr>
                                     <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
                                     <td class="emptyrow"></td>
                                     <td class="emptyrow text-center"><strong>Totale</strong></td>
-                                    <td class="emptyrow text-right">$<c:out value="${orderCompleted.total}" />0</td>
+                                    <td class="emptyrow text-right">€<c:out value="${orderCompleted.total}" />0</td>
                                 </tr>
                                 
                                 
