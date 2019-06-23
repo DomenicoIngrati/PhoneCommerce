@@ -21,7 +21,7 @@ private static  DataSource dataSource;
 			//DA SOSTITUIRE CON I NOSTRI DATI
 			String url = "jdbc:postgresql://host:port/database";
 			dataSource=new DataSource("jdbc:postgresql://localhost:5432/PhoneCommerce","postgres","postgres");
-//			dataSource=new DataSource("jdbc:postgresql://packy.db.elephantsql.com:5432/pdloznxd","pdloznxdx","YSLsj01ln2il0iNuD9dtEHPPzv1gU9Dp");
+//			dataSource=new DataSource("jdbc:postgresql://packy.db.elephantsql.com:5432/pdloznxd","pdloznxd","YSLsj01ln2il0iNuD9dtEHPPzv1gU9Dp");
 
 		}
 		catch (Exception e) {
