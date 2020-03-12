@@ -1,0 +1,3 @@
+[submodule "BurgerTime"]
+	path = BurgerTime
+	url = https://github.com/DomenicoIngrati/BurgerTime
